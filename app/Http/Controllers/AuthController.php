@@ -36,6 +36,20 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
+    public function editpassword(Request $request)
+    {
+        $user=User::where('id', Auth::id())->first();
+        if (Hash($request->oldpassword) == $user->password) 
+        {
+            User::where('id', Auth::id())->update([
+                'password' => Hash($request->newpassword)
+            ]);
+            return response()->json('تم التعديل بنجاح', 200);
+        }
+        else {
+            return response()->json(['error' => 'كلمة السر غير صحية'], 401);
+        }
+    }
 
 
     public function register(Request $request)

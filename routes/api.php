@@ -19,4 +19,5 @@ Route::group([
     Route::post('me', 'AuthController@me');
 });
     Route::post('login', [AuthController::class, 'login']);
+    Route::put('editpassword', [AuthController::class, 'editpassword']);
     Route::post('register', [AuthController::class, 'register']);

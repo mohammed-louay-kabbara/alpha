@@ -38,8 +38,9 @@ class AuthController extends Controller
     }
     public function editpassword(Request $request)
     {
+      
         $user=User::where('id', Auth::id())->first();
-        if (Hash($request->oldpassword) == $user->password) 
+        if (Hash::make($request->oldpassword) == Hash::make($user->password)) 
         {
             User::where('id', Auth::id())->update([
                 'password' => Hash($request->newpassword)

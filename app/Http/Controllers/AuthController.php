@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Carbon;
+use App\Models\PasswordResetCustom;
+
 class AuthController extends Controller
 {
     /**
@@ -50,6 +54,65 @@ class AuthController extends Controller
         return response()->json(['error' => 'كلمة السر غير صحيحة'], 401);
     }
     }
+
+    
+public function sendResetCode(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email|exists:users,email'
+    ]);
+
+    // توليد رمز من 4 أرقام
+    $otp = rand(1000, 9999);
+
+    // حذف أي رموز سابقة
+    PasswordResetCustom::where('email', $request->email)->delete();
+
+    // حفظ الرمز الجديد
+    PasswordResetCustom::create([
+        'email' => $request->email,
+        'otp_code' => $otp,
+        'expires_at' => Carbon::now()->addMinutes(10),
+    ]);
+
+    // إرسال الرمز بالإيميل
+    Mail::raw("رمز إعادة تعيين كلمة المرور الخاص بك هو: $otp", function ($message) use ($request) {
+        $message->to($request->email)
+                ->subject('رمز التحقق لإعادة تعيين كلمة المرور');
+    });
+
+    return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني']);
+}
+
+
+public function verifyResetCode(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email|exists:users,email',
+        'otp_code' => 'required|digits:4',
+        'password' => 'required|confirmed|min:6'
+    ]);
+
+    $record = PasswordResetCustom::where('email', $request->email)
+        ->where('otp_code', $request->otp_code)
+        ->where('expires_at', '>=', Carbon::now())
+        ->first();
+
+    if (!$record) {
+        return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
+    }
+
+    // تحديث كلمة المرور
+    $user = User::where('email', $request->email)->first();
+    $user->update([
+        'password' => Hash::make($request->password)
+    ]);
+
+    // حذف الكود بعد الاستخدام
+    $record->delete();
+
+    return response()->json(['message' => 'تم تعيين كلمة المرور الجديدة بنجاح']);
+}
 
 
     public function register(Request $request)

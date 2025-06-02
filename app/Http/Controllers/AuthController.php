@@ -118,19 +118,15 @@ public function verifyResetCode(Request $request)
 
     $record = PasswordResetCustom::where('email', $request->email)
         ->where('otp_code', $request->otp_code)
-        ->where('expires_at', '>=', Carbon::now())
         ->first();
-
     if (!$record) {
         return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
     }
-
     // تحديث كلمة المرور
-    $user = User::where('email', $request->email)->first();
-    $user->update([
-        'password' => Hash::make($request->password)
-    ]);
-
+    // $user = User::where('email', $request->email)->first();
+    // $user->update([
+    //     'password' => Hash::make($request->password)
+    // ]);
     // حذف الكود بعد الاستخدام
     $record->delete();
 

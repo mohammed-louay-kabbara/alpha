@@ -54,6 +54,6 @@ class VerificationCodeMail extends Mailable
     public function build()
     {
         return $this->subject('رمز التحقق من البريد الإلكتروني')
-                    ->view('emails.verification-code'); 
+                    ->view('verification-code'); 
     }
 }

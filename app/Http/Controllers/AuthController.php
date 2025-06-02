@@ -113,10 +113,9 @@ public function verifyResetCode(Request $request)
     $request->validate([
         'otp_code' => 'required|digits:4',
     ]);
-
-
+     dd($record);
     $record = PasswordResetCustom::where('otp_code', $request->otp_code)->first();
-    dd($record);
+   
     if (!$record) {
         return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
     }

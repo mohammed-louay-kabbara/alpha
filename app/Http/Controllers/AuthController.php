@@ -108,28 +108,28 @@ public function sendVerificationCode(Request $request)
 }
 
 
-// public function verifyResetCode(Request $request)
-// {
-//      dd($record);
-//     $request->validate([
-//         'otp_code' => 'required|digits:4',
-//     ]);
+public function verifyResetCode(Request $request)
+{
+     dd($record);
+    $request->validate([
+        'otp_code' => 'required|digits:4',
+    ]);
     
-//     $record = PasswordResetCustom::where('otp_code', $request->otp_code)->first();
+    $record = PasswordResetCustom::where('otp_code', $request->otp_code)->first();
    
-//     // if (!$record) {
-//     //     return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
-//     // }
-//     // تحديث كلمة المرور
-//     // $user = User::where('email', $request->email)->first();
-//     // $user->update([
-//     //     'password' => Hash::make($request->password)
-//     // ]);
-//     // حذف الكود بعد الاستخدام
-//     $record->delete();
+    if (!$record) {
+        return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
+    }
+    // تحديث كلمة المرور
+    // $user = User::where('email', $request->email)->first();
+    // $user->update([
+    //     'password' => Hash::make($request->password)
+    // ]);
+    // حذف الكود بعد الاستخدام
+    $record->delete();
 
-//     return response()->json(['message' => 'تم تعيين كلمة المرور الجديدة بنجاح']);
-// }
+    return response()->json(['message' => 'تم تعيين كلمة المرور الجديدة بنجاح']);
+}
 
     public function register(Request $request)
     {

@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Carbon;
 use App\Models\PasswordResetCustom;
+use App\Mail\VerificationCodeMail;
 
 class AuthController extends Controller
 {
@@ -56,32 +57,50 @@ class AuthController extends Controller
     }
 
     
-public function sendResetCode(Request $request)
+// public function sendResetCode(Request $request)
+// {
+//     $request->validate([
+//         'email' => 'required|email|exists:users,email'
+//     ]);
+
+//     // توليد رمز من 4 أرقام
+//     $otp = rand(1000, 9999);
+
+//     // حذف أي رموز سابقة
+//     PasswordResetCustom::where('email', $request->email)->delete();
+
+//     // حفظ الرمز الجديد
+//     PasswordResetCustom::create([
+//         'email' => $request->email,
+//         'otp_code' => $otp,
+//         'expires_at' => Carbon::now()->addMinutes(10),
+//     ]);
+
+//     // إرسال الرمز بالإيميل
+//     Mail::raw("رمز إعادة تعيين كلمة المرور الخاص بك هو: $otp", function ($message) use ($request) {
+//         $message->to($request->email)
+//                 ->subject('رمز التحقق لإعادة تعيين كلمة المرور');
+//     });
+
+//     return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني']);
+// }
+
+
+public function sendVerificationCode(Request $request)
 {
+    $user = User::where('email', $request->email)->first();
+    dd($user);
     $request->validate([
-        'email' => 'required|email|exists:users,email'
+        'email' => 'required|email'
     ]);
-
-    // توليد رمز من 4 أرقام
-    $otp = rand(1000, 9999);
-
-    // حذف أي رموز سابقة
-    PasswordResetCustom::where('email', $request->email)->delete();
-
-    // حفظ الرمز الجديد
-    PasswordResetCustom::create([
+    $code = random_int(1000, 9999); // رمز مكون من 4 أرقام
+    session(['email_verification_code' => $code]);
+    Mail::to($request->email)->send(new VerificationCodeMail($code));
+    password_resets_custom::cretae([
         'email' => $request->email,
-        'otp_code' => $otp,
-        'expires_at' => Carbon::now()->addMinutes(10),
-    ]);
-
-    // إرسال الرمز بالإيميل
-    Mail::raw("رمز إعادة تعيين كلمة المرور الخاص بك هو: $otp", function ($message) use ($request) {
-        $message->to($request->email)
-                ->subject('رمز التحقق لإعادة تعيين كلمة المرور');
-    });
-
-    return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني']);
+        'otp_code' => $code,
+        'expires_at' => Carbon::now()->format('Y-m-d') ]);
+    return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني.']);
 }
 
 

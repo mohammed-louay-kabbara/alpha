@@ -21,5 +21,5 @@ Route::group([
     Route::post('login', [AuthController::class, 'login']);
     Route::put('editpassword', [AuthController::class, 'editpassword']);
     Route::post('register', [AuthController::class, 'register']);
-    Route::post('forgot-password', [AuthController::class, 'sendResetCode']);
+    Route::post('forgot-password', [AuthController::class, 'sendVerificationCode']);
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);

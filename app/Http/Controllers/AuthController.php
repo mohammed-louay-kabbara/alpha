@@ -95,7 +95,7 @@ public function sendVerificationCode(Request $request)
     $code = random_int(1000, 9999); // رمز مكون من 4 أرقام
     session(['email_verification_code' => $code]);
     Mail::to($request->email)->send(new VerificationCodeMail($code));
-    PasswordResetCustom::cretae([
+    PasswordResetCustom::create([
         'email' => $request->email,
         'otp_code' => $code,
         'expires_at' => Carbon::now()->format('Y-m-d') ]);

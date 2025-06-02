@@ -111,9 +111,7 @@ public function sendVerificationCode(Request $request)
 public function verifyResetCode(Request $request)
 {
     $request->validate([
-        'email' => 'required|email|exists:users,email',
         'otp_code' => 'required|digits:4',
-        'password' => 'required|confirmed|min:6'
     ]);
 
     $record = PasswordResetCustom::where('email', $request->email)

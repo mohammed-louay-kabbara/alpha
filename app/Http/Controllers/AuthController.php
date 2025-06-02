@@ -89,7 +89,7 @@ class AuthController extends Controller
 public function sendVerificationCode(Request $request)
 {
     $user = User::where('email', $request->email)->first();
-    dd($user);
+    if ($user) {
     $request->validate([
         'email' => 'required|email'
     ]);
@@ -101,6 +101,11 @@ public function sendVerificationCode(Request $request)
         'otp_code' => $code,
         'expires_at' => Carbon::now()->format('Y-m-d') ]);
     return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني.']);
+    }
+    else {
+         return response()->json(['message' => 'الايميل غير موجود']);
+    }
+
 }
 
 

@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-
+use App\Models\PasswordResetCustom;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Carbon;
-use App\Models\PasswordResetCustom;
 use App\Mail\VerificationCodeMail;
 
 class AuthController extends Controller
@@ -96,7 +95,7 @@ public function sendVerificationCode(Request $request)
     $code = random_int(1000, 9999); // رمز مكون من 4 أرقام
     session(['email_verification_code' => $code]);
     Mail::to($request->email)->send(new VerificationCodeMail($code));
-    password_resets_custom::cretae([
+    PasswordResetCustom::cretae([
         'email' => $request->email,
         'otp_code' => $code,
         'expires_at' => Carbon::now()->format('Y-m-d') ]);

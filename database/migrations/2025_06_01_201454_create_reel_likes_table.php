@@ -9,20 +9,17 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('reels', function (Blueprint $table) {
+        Schema::create('reel_likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
-            $table->string('media_path');
-            $table->text('description');
-            $table->integer('likes_count')->default(0);
-            $table->integer('dislikes_count')->default(0);
+            $table->string('type');
+            $table->foreignId('reels_id')->constrained('reels')->CascadeOnDelete();
             $table->timestamps();
         });
     }
 
-
     public function down(): void
     {
-        Schema::dropIfExists('reels');
+        Schema::dropIfExists('reel_likes');
     }
 };

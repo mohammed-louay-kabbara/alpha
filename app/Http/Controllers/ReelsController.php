@@ -4,60 +4,64 @@ namespace App\Http\Controllers;
 
 use App\Models\reels;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReelsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       $reels = reels::get()->orderBy('created_at', 'desc');
+       return response()->json($reels);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+        'media' => 'required|file|mimes:mp4',
+        'description' => 'nullable|string',
+    ]);
+    $path = $request->file('media')->store('reels', 'public');
+    $reel = reels::create([
+        'user_id' => Auth::id(),
+        'media_path' => $path,
+        'description' => $request->description,
+    ]);
 
-    /**
-     * Display the specified resource.
-     */
+    return response()->json($reel);
+
+    }
+    public function react(Request $request)
+    {
+        
+    } 
+
+
     public function show(reels $reels)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(reels $reels)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, reels $reels)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(reels $reels)
     {
         //

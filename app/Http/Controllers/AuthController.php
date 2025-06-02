@@ -110,7 +110,7 @@ public function sendVerificationCode(Request $request)
 
 public function verifyResetCode(Request $request)
 {
-     dd($record);
+    
     $request->validate([
         'otp_code' => 'required|digits:4',
     ]);

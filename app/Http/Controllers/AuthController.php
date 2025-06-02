@@ -110,15 +110,16 @@ public function sendVerificationCode(Request $request)
 
 public function verifyResetCode(Request $request)
 {
+     dd($record);
     $request->validate([
         'otp_code' => 'required|digits:4',
     ]);
-     dd($record);
+    
     $record = PasswordResetCustom::where('otp_code', $request->otp_code)->first();
    
-    if (!$record) {
-        return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
-    }
+    // if (!$record) {
+    //     return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
+    // }
     // تحديث كلمة المرور
     // $user = User::where('email', $request->email)->first();
     // $user->update([

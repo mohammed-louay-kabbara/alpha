@@ -37,9 +37,11 @@ class VerificationCodeMail extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'view.name',
-        );
+        // return new Content(
+        //     view: 'view.name',
+        // );
+
+             return $this->subject('رمز التحقق من البريد الإلكتروني')->view('verification-code'); 
     }
 
     /**
@@ -53,7 +55,6 @@ class VerificationCodeMail extends Mailable
     }
     public function build()
     {
-        return $this->subject('رمز التحقق من البريد الإلكتروني')
-                    ->view('verification-code'); 
+   
     }
 }

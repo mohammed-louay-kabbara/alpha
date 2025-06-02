@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('password_resets_custom', function (Blueprint $table) {
             $table->id();
             $table->string('email')->index();

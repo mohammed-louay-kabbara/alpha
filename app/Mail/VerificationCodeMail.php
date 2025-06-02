@@ -37,12 +37,14 @@ class VerificationCodeMail extends Mailable
      */
     public function content(): Content
     {
-        // return new Content(
-        //     view: 'view.name',
-        // );
-
-             return $this->subject('رمز التحقق من البريد الإلكتروني')->view('verification-code'); 
+        return new Content(
+            view: 'verification-code', // الملف resources/views/verification-code.blade.php
+            with: [
+                'code' => $this->code,
+            ]
+        );
     }
+    
 
     /**
      * Get the attachments for the message.

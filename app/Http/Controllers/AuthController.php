@@ -134,7 +134,6 @@ public function verifyResetCode(Request $request)
             'email'         => 'required|email|unique:users,email',
             'phone'         => 'required|string|max:20',
             'datebirthday'  => 'required|date',
-            'picture'       => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
             'address'       => 'required|string|max:255',
             'password'      => 'required|string|min:8', // password + password_confirmation
         ]);
@@ -146,11 +145,11 @@ public function verifyResetCode(Request $request)
             ], 422);
         }
 
-        $picturePath = null;
-    if ($request->hasFile('picture')) {
+     
+    // if ($request->hasFile('picture')) {
     
-        $picturePath = $request->file('picture')->store('profile_pictures', 'public');
-    }
+    //     $picturePath = $request->file('picture')->store('profile_pictures', 'public');
+    // }
 
       
         $user = User::create([
@@ -158,7 +157,7 @@ public function verifyResetCode(Request $request)
             'email'        => $request->email,
             'phone'        => $request->phone,
             'datebirthday' => $request->datebirthday,
-            'picture'      => $picturePath,
+            // 'picture'      => $picturePath,
             'description'  => $request->description,
             'address'      => $request->address,
             'password'     => Hash::make($request->password),

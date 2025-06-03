@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->date('datebirthday');
-            $table->string('picture');
-            $table->text('description')->nullabel();
+            $table->string('picture')->default('profile_pictures/defoult_image.jpg');
+            $table->text('description')->nullable();
             $table->integer('role')->default(2);
             $table->string('address');
             $table->timestamp('email_verified_at')->nullable();
@@ -41,9 +41,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('users');

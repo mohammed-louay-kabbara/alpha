@@ -118,16 +118,9 @@ public function verifyResetCode(Request $request)
     $record = PasswordResetCustom::where('otp_code', $request->otp_code)->first();
    
     if (!$record) {
-        return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 422);
+        return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 401);
     }
-    // تحديث كلمة المرور
-    // $user = User::where('email', $request->email)->first();
-    // $user->update([
-    //     'password' => Hash::make($request->password)
-    // ]);
-    // حذف الكود بعد الاستخدام
     $record->delete();
-
     return response()->json(['message' => 'تم تعيين كلمة المرور الجديدة بنجاح']);
 }
 

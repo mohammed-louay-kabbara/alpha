@@ -102,7 +102,7 @@ public function sendVerificationCode(Request $request)
     return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني.']);
     }
     else {
-         return response()->json(['message' => 'الايميل غير موجود']);
+         return response()->json(['message' => 'الايميل غير موجود'], 401);
     }
 
 }

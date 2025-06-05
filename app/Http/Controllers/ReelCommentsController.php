@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\reel_comments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReelCommentsController extends Controller
 {
@@ -28,7 +29,7 @@ class ReelCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        dd(Auth::id());
+    
         $request->validate([
             'message' => 'required', 
             'reels_id' => 'required',

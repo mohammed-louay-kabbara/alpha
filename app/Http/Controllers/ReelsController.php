@@ -18,7 +18,7 @@ class ReelsController extends Controller
 
     public function create()
     {
-        //
+        
     }
 
 

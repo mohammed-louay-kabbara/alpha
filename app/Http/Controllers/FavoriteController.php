@@ -13,13 +13,9 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-      $user = Auth::user();
-      $favorites = $user->favorites()->with('favoritable')->get();
+      $favorites = Auth::user()->favorites()->with('favoritable')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //

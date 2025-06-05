@@ -52,7 +52,7 @@ class ReelCommentsController extends Controller
      */
     public function show($id)
     {
-        dd($id);
+        // dd($id);
         $reel_comments= reel_comments::where('reels_id',$id)->get();
         return response()->json($reel_comments, 200);
     }

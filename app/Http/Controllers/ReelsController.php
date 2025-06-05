@@ -26,11 +26,11 @@ class ReelsController extends Controller
     {
       
     //         $request->validate([
-    //     'media' => 'required|mimes:mp4|max:10240', // 10MB كحد أقصى
+    //     'media_path' => 'required|mimes:mp4|max:10240', // 10MB كحد أقصى
     //     'description' => 'nullable|string',
     // ]);
 
-    $path = $request->file('media')->store('reels', 'public');
+    $path = $request->file('media_path')->store('reels', 'public');
 
     $reel = Reels::create([
         'user_id' => Auth::id(),

@@ -52,22 +52,16 @@ class ReelCommentsController extends Controller
      */
     public function show($id)
     {
+        dd($id);
         $reel_comments= reel_comments::where('reels_id',$id)->get();
         return response()->json($reel_comments, 200);
-        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(reel_comments $reel_comments)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, reel_comments $reel_comments)
     {
         //

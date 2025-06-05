@@ -25,7 +25,7 @@ class ReelsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'media' => 'required|file|mimes:mp4',
+        'media' => 'required|mimes:mp4|max:20480',
         'description' => 'nullable|string',
     ]);
       $path = $request->file('media')->store('reels', 'public');

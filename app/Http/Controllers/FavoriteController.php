@@ -28,7 +28,14 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        
+        Favorite::create([
+        'user_id' => Auth::id(),
+        'favoritable_type' => $request->type,
+        'favoritable_id' => $request->id ]);
+             return response()->json([
+            'status' => true,
+            'message' => 'تم الإضافة إلى السلة',
+        ], 201);
     }
 
     /**

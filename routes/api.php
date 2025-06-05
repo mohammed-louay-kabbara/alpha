@@ -4,6 +4,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
+use  App\Http\Controllers\ReelsController;
 
 
 
@@ -23,3 +24,4 @@ Route::group([
     Route::post('register', [AuthController::class, 'register']);
     Route::post('forgot-password', [AuthController::class, 'sendVerificationCode']);
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);
+    Route::resource('Reels', ReelsController::class);

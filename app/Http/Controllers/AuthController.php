@@ -128,7 +128,6 @@ public function verifyResetCode(Request $request)
     public function register(Request $request)
     {
        
-
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
             'email'         => 'required|email|unique:users,email',

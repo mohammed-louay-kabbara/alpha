@@ -28,15 +28,13 @@ class ReelsController extends Controller
         'media' => 'required|file|mimes:mp4',
         'description' => 'nullable|string',
     ]);
-    $path = $request->file('media')->store('reels', 'public');
-    $reel = reels::create([
+      $path = $request->file('media')->store('reels', 'public');
+      $reel = reels::create([
         'user_id' => Auth::id(),
         'media_path' => $path,
         'description' => $request->description,
     ]);
-
     return response()->json($reel);
-
     }
     public function react(Request $request)
     {

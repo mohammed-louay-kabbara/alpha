@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('reel_comments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
+            $table->string('message');
+            $table->foreignId('reels_id')->constrained('reels')->CascadeOnDelete();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('reel_comments');

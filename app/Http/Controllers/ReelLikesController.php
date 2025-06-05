@@ -24,11 +24,6 @@ class ReelLikesController extends Controller
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-
    
     public function store(Request $request)
     {
@@ -64,7 +59,6 @@ class ReelLikesController extends Controller
         } else {
             $reel->increment('dislikes_count');
         }
-
         return response()->json([
             'status' => true,
             'message' => 'تم التقييم بنجاح.',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\reel_likes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReelLikesController extends Controller
 {

@@ -11,8 +11,8 @@ class ReelsController extends Controller
 
     public function index()
     {
-       $reels = reels::get()->orderBy('created_at', 'desc');
-       return response()->json($reels);
+      $reels = Reels::orderBy('created_at', 'desc')->get();
+      return response()->json($reels);
     }
 
 
@@ -25,10 +25,10 @@ class ReelsController extends Controller
     public function store(Request $request)
     {
       
-    //         $request->validate([
-    //     'media_path' => 'required|mimes:mp4|max:10240', // 10MB كحد أقصى
-    //     'description' => 'nullable|string',
-    // ]);
+        $request->validate([
+        'media_path' => 'required|mimes:mp4', // 10MB كحد أقصى
+        'description' => 'nullable|string',
+    ]);
 
     $path = $request->file('media_path')->store('reels', 'public');
 

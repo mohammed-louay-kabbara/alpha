@@ -24,6 +24,7 @@ class ReelsController extends Controller
 
     public function store(Request $request)
     {
+        dd(Auth::id());
             $request->validate([
         'media' => 'required|mimes:mp4|max:10240', // 10MB كحد أقصى
         'description' => 'nullable|string',

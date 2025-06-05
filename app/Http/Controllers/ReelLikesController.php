@@ -33,28 +33,66 @@ class ReelLikesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'type' => 'required', // 10MB كحد أقصى
-        'reels_id' => 'required',]);
+            'type' => 'required|in:like,dislike', 
+            'reels_id' => 'required|exists:reels,id',
+        ]);
 
-    $reel = reel_likes::create([
-        'user_id' => Auth::id(),
-        'type' => $request->type,
-        'reels_id' => $request->reels_id,
-    ]);
-      $reel=reels::where('id',$request->reels_id)->first();
-      if ($request->type == 'like') {
-           reels::where('id',$request->reels_id)->update([
-          'likes_count' => $reel->likes_count + 1 ]);
+        // تحقق إذا كان المستخدم سجل إعجابًا أو عدم إعجاب مسبقًا
+        $existing = reel_likes::where('user_id', Auth::id())
+            ->where('reels_id', $request->reels_id)
+            ->first();
+
+        if ($existing) {
+            return response()->json([
+                'status' => false,
+                'message' => 'لقد قمت بتقييم هذا الريلز مسبقًا.',
+            ], 409);
         }
-      else {
-        reels::where('id',$request->reels_id)->update([
-        'dislikes_count' => $reel->dislikes_count + 1]);
-      }
 
-    return response()->json([
-        'status' => true,
-        'message' => 'تمت الإضافة بنجاح',
-    ], 201);
+        // إنشاء السجل الجديد
+        reel_likes::create([
+            'user_id' => Auth::id(),
+            'type' => $request->type,
+            'reels_id' => $request->reels_id,
+        ]);
+
+        // تحديث العدادات
+        $reel = reels::find($request->reels_id);
+
+        if ($request->type == 'like') {
+            $reel->increment('likes_count');
+        } else {
+            $reel->increment('dislikes_count');
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'تم التقييم بنجاح.',
+        ], 201);
+    //     $reel_like = reel_likes::where('user_');
+    //     $request->validate([
+    //     'type' => 'required', 
+    //     'reels_id' => 'required',]);
+
+    // $reel = reel_likes::create([
+    //     'user_id' => Auth::id(),
+    //     'type' => $request->type,
+    //     'reels_id' => $request->reels_id,
+    // ]);
+    //   $reel=reels::where('id',$request->reels_id)->first();
+    //   if ($request->type == 'like') {
+    //        reels::where('id',$request->reels_id)->update([
+    //       'likes_count' => $reel->likes_count + 1 ]);
+    //     }
+    //   else {
+    //     reels::where('id',$request->reels_id)->update([
+    //     'dislikes_count' => $reel->dislikes_count + 1]);
+    //   }
+
+    // return response()->json([
+    //     'status' => true,
+    //     'message' => 'تمت الإضافة بنجاح',
+    // ], 201);
         
     }
 

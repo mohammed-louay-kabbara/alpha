@@ -24,23 +24,23 @@ class ReelsController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-        'media' => 'required|mimes:mp4',
+            $request->validate([
+        'media' => 'required|mimes:mp4|max:10240', // 10MB كحد أقصى
         'description' => 'nullable|string',
     ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status'  => false,
-                'errors'  => $validator->errors(),
-            ], 422);
-        }
-      $path = $request->file('media')->store('reels', 'public');
-      $reel = reels::create([
+
+    $path = $request->file('media')->store('reels', 'public');
+
+    $reel = Reels::create([
         'user_id' => Auth::id(),
         'media_path' => $path,
         'description' => $request->description,
     ]);
-    return response()->json($reel);
+
+    return response()->json([
+        'status' => true,
+        'message' => 'تمت الإضافة بنجاح',
+    ], 201);
     }
     public function react(Request $request)
     {

@@ -10,5 +10,4 @@ class PasswordResetCustom extends Model
       protected $fillable = [
         'email', 'otp_code', 'expires_at'
     ];
-
 }

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
 use  App\Http\Controllers\ReelsController;
+use  App\Http\Controllers\ReelLikesController;
 
 
 
@@ -25,3 +26,4 @@ Route::group([
     Route::post('forgot-password', [AuthController::class, 'sendVerificationCode']);
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);
     Route::resource('reels', ReelsController::class);
+    Route::resource('reelLikes', ReelLikesController::class);

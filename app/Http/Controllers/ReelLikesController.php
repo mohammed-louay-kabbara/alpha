@@ -26,9 +26,26 @@ class ReelLikesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+   
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'type' => 'required|mimes:mp4', // 10MB كحد أقصى
+        'reels_id' => 'nullable|string',]);
+
+
+    $reel = reel_likes::create([
+        'user_id' => Auth::id(),
+        'type' => $request->type,
+        'reels_id' => $request->reels_id,
+    ]);
+
+    return response()->json([
+        'status' => true,
+        'message' => 'تمت الإضافة بنجاح',
+    ], 201);
+        
     }
 
     /**

@@ -11,7 +11,7 @@ class ReelsController extends Controller
 
     public function index()
     {
-      $reels = Reels::orderBy('created_at', 'desc')->get();
+      $reels = Reels::with('user')->orderBy('created_at', 'desc')->get();
       return response()->json($reels);
     }
 

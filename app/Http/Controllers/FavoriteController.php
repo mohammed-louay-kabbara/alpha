@@ -32,7 +32,7 @@ class FavoriteController extends Controller
         'user_id' => Auth::id(),
         'favoritable_type' => $request->type,
         'favoritable_id' => $request->id ]);
-             return response()->json([
+        return response()->json([
             'status' => true,
             'message' => 'تم الإضافة إلى السلة',
         ], 201);

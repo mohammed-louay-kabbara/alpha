@@ -44,7 +44,7 @@ class ReelsController extends Controller
 
     public function show(reels $reels)
     {
-        //
+        
     }
 
 

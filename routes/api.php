@@ -24,4 +24,4 @@ Route::group([
     Route::post('register', [AuthController::class, 'register']);
     Route::post('forgot-password', [AuthController::class, 'sendVerificationCode']);
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);
-    Route::resource('Reels', ReelsController::class);
+    Route::resource('reels', ReelsController::class);

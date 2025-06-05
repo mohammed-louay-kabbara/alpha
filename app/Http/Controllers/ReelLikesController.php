@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\reel_likes;
+use App\Models\reels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,6 +41,15 @@ class ReelLikesController extends Controller
         'type' => $request->type,
         'reels_id' => $request->reels_id,
     ]);
+      $reel=reels::where('id',$request->reels_id)->first();
+      if ($request->type == 'like') {
+           reels::where('id',$request->reels_id)->update([
+          'likes_count' => $reel->likes_count + 1 ]);
+        }
+      else {
+        reels::where('id',$request->reels_id)->update([
+        'dislikes_count' => $reel->dislikes_count + 1]);
+      }
 
     return response()->json([
         'status' => true,

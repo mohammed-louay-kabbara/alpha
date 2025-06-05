@@ -28,9 +28,10 @@ class ReelCommentsController extends Controller
      */
     public function store(Request $request)
     {
+        dd(Auth::id());
         $request->validate([
             'message' => 'required', 
-            'reels_id' => 'required|exists:reels,id',
+            'reels_id' => 'required',
         ]);
 
         // إنشاء السجل الجديد

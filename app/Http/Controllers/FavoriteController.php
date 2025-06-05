@@ -13,8 +13,11 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-      $favorites = Auth::user()->favorites()->get();
+        dd(Auth::id());
+      $user = Auth::user();
+      $favorites = $user->favorites()->with('favoritable')->get();
     }
+
 
     public function create()
     {

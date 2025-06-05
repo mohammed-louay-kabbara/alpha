@@ -13,7 +13,7 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        dd(Auth::id());
+    
       $user = Auth::user();
       $favorites = $user->favorites()->with('favoritable')->get();
     }
@@ -21,7 +21,7 @@ class FavoriteController extends Controller
 
     public function create()
     {
-        //
+
     }
 
     /**
@@ -60,7 +60,7 @@ class FavoriteController extends Controller
      */
     public function update(Request $request, favorite $favorite)
     {
-        //
+        
     }
 
     /**
@@ -68,6 +68,6 @@ class FavoriteController extends Controller
      */
     public function destroy(favorite $favorite)
     {
-        //
+        
     }
 }

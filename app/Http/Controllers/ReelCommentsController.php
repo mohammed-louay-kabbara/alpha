@@ -13,7 +13,7 @@ class ReelCommentsController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

@@ -27,3 +27,4 @@ Route::group([
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);
     Route::resource('reels', ReelsController::class);
     Route::resource('reelLikes', ReelLikesController::class);
+    Route::resource('reelComments', ReelCommentsController::class);

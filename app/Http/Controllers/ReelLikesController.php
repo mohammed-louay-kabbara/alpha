@@ -31,9 +31,8 @@ class ReelLikesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'type' => 'required|mimes:mp4', // 10MB كحد أقصى
-        'reels_id' => 'nullable|string',]);
-
+        'type' => 'required', // 10MB كحد أقصى
+        'reels_id' => 'required',]);
 
     $reel = reel_likes::create([
         'user_id' => Auth::id(),

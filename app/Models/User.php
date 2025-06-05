@@ -62,6 +62,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->getKey();
     }
+    public function reel_comment()
+    {
+     return $this->hasMany(reel_comments::class);
+    }
 
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.

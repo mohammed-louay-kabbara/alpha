@@ -9,4 +9,9 @@ class reel_comments extends Model
     protected $fillable = [
       'user_id' , 'message' , 'reels_id'
     ];
+
+    public function user()
+   {
+     return $this->belongsTo(User::class);
+   }
 }

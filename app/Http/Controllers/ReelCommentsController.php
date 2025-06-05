@@ -50,9 +50,11 @@ class ReelCommentsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(reel_comments $reel_comments)
+    public function show($id)
     {
-        //
+        $reel_comments= reel_comments::where('reels_id',$id)->get();
+        return response()->json($reel_comments, 200);
+        
     }
 
     /**

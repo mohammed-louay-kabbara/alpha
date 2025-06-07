@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Story;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,10 @@ class StoryController extends Controller
      */
     public function index()
     {
-      $stories = Story::with('user')
-            ->where('expires_at', '>', now())
-            ->orderBy('created_at', 'desc')
-            ->get();
-       return response()->json($stories);
+        $usersWithStories = User::with(['stories' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->whereHas('stories')->get();
+        return response()->json($usersWithStories);
     }
 
     /**

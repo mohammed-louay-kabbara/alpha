@@ -8,6 +8,7 @@ use  App\Http\Controllers\ReelsController;
 use  App\Http\Controllers\ReelLikesController;
 use  App\Http\Controllers\ReelCommentsController;
 use  App\Http\Controllers\FavoriteController;
+use  App\Http\Controllers\StoryController;
 
 
 
@@ -31,3 +32,4 @@ Route::group([
     Route::resource('reelLikes', ReelLikesController::class);
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);
+    Route::resource('story', StoryController::class);

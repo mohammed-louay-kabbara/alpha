@@ -10,7 +10,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // جدولة حذف الحالات بعد 24 ساعة
-        $schedule->command('stories:clean')->everyMinute(); // مثلاً كل دقيقة، عدّله لاحقًا إن أردت
+       $schedule->call(function () {
+        \App\Models\Story::where('created_at', '<', now()->subHours(24))->delete();
+    })->everyTenMinutes(); // مثلاً كل دقيقة، عدّله لاحقًا إن أردت
     }
 
     protected function commands(): void

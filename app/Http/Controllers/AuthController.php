@@ -84,6 +84,15 @@ class AuthController extends Controller
 //     return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني']);
 // }
 
+public function users(){
+    if (Auth::id()) {
+        $adr=User::where('id',Auth::id())->first();
+        $users= User::where('address',$adr->address)->get();
+        return response()->json($users, 200);
+    }
+    User::where('address',);
+}
+
 
 public function sendVerificationCode(Request $request)
 {
@@ -104,7 +113,6 @@ public function sendVerificationCode(Request $request)
     else {
          return response()->json(['message' => 'الايميل غير موجود'], 401);
     }
-
 }
 
 

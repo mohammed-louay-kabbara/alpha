@@ -36,12 +36,11 @@ class ReelLikesController extends Controller
         $existing = reel_likes::where('user_id', Auth::id())
             ->where('reels_id', $request->reels_id)
             ->first();
-
         if ($existing) {
+            $existing->delete();
             return response()->json([
-                'status' => false,
-                'message' => 'لقد قمت بتقييم هذا الريلز مسبقًا.',
-            ], 409);
+            'status' => true,
+            'message' => 'تم إلغاء الإعجاب بنجاح',], 200);
         }
 
         // إنشاء السجل الجديد
@@ -63,30 +62,7 @@ class ReelLikesController extends Controller
             'status' => true,
             'message' => 'تم التقييم بنجاح.',
         ], 201);
-    //     $reel_like = reel_likes::where('user_');
-    //     $request->validate([
-    //     'type' => 'required', 
-    //     'reels_id' => 'required',]);
-
-    // $reel = reel_likes::create([
-    //     'user_id' => Auth::id(),
-    //     'type' => $request->type,
-    //     'reels_id' => $request->reels_id,
-    // ]);
-    //   $reel=reels::where('id',$request->reels_id)->first();
-    //   if ($request->type == 'like') {
-    //        reels::where('id',$request->reels_id)->update([
-    //       'likes_count' => $reel->likes_count + 1 ]);
-    //     }
-    //   else {
-    //     reels::where('id',$request->reels_id)->update([
-    //     'dislikes_count' => $reel->dislikes_count + 1]);
-    //   }
-
-    // return response()->json([
-    //     'status' => true,
-    //     'message' => 'تمت الإضافة بنجاح',
-    // ], 201);
+  
         
     }
 

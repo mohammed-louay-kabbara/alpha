@@ -33,3 +33,10 @@ Route::group([
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);
     Route::resource('story', StoryController::class);
+    Route::get('/del', function () {
+            \App\Models\Story::where('created_at', '<', now()->subHours(24))->delete();
+            return response()->json([
+            'status' => true,
+            'message' => 'تم الإضافة إلى السلة',
+        ], 201);
+});

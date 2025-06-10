@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\product_file;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,7 +48,7 @@ class ProductController extends Controller
                 $path = $file->store('product_files', 'public');
                 $type = strpos($file->getMimeType(), 'video') !== false ? 'video' : 'image';
 
-                ProductFile::create([
+                product_file::create([
                     'product_id' => $product->id,
                     'file_path' => $path,
                     'file_type' => $type,

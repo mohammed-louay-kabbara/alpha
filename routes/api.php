@@ -9,6 +9,8 @@ use  App\Http\Controllers\ReelLikesController;
 use  App\Http\Controllers\ReelCommentsController;
 use  App\Http\Controllers\FavoriteController;
 use  App\Http\Controllers\StoryController;
+use  App\Http\Controllers\CategoryController;
+use  App\Http\Controllers\ProductController;
 
 
 
@@ -33,10 +35,5 @@ Route::group([
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);
     Route::resource('story', StoryController::class);
-    Route::get('/del', function () {
-            \App\Models\Story::where('created_at', '<', now()->subHours(24))->delete();
-            return response()->json([
-            'status' => true,
-            'message' => 'تم الإضافة إلى السلة',
-        ], 201);
-});
+    Route::resource('product', ProductController::class);
+    Route::resource('category', CategoryController::class);

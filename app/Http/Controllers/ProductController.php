@@ -25,12 +25,14 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {  
+
         $request->validate([
             'name' => 'required', 
             'price' => 'required',
             'category_id' => 'required',
             'price' => 'required',
         ]);
+
         $product=product::create([
             'user_id' => Auth::id(),
             'name'=> $request->name, 
@@ -38,7 +40,17 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'description' => $request->description
         ]);
-        return response()->json(['product_id' => $product->id], 200);
+
+        foreach ($request->files('media') as $file) {
+        $path = $file->store('product_files', 'public');
+        $type = strpos($file->getMimeType(), 'video') !== false ? 'video' : 'image';
+        ProductFile::create([
+        'product_id' => $product->id,
+        'file_path' => $path,
+        'file_type' => $type,]);}
+        
+     return response()->json(['product_id' => $product->id], 200);
+     
     }
 
 

@@ -12,12 +12,11 @@ class ProductController extends Controller
 
     public function index()
     {
-        //
+    $product = product::with('files')->orderBy('created_at', 'desc')->where('is_approved',1 )->get();
+    return response()->json($product);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
@@ -26,8 +25,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {  
-       
-
         $request->validate([
             'name' => 'required', 
             'price' => 'required',
@@ -42,12 +39,10 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'description' => $request->description
         ]);
-
         if ($request->hasFile('media')) {
             foreach ($request->file('media') as $file) {
                 $path = $file->store('product_files', 'public');
                 $type = strpos($file->getMimeType(), 'video') !== false ? 'video' : 'image';
-
                 product_file::create([
                     'product_id' => $product->id,
                     'file_path' => $path,
@@ -55,34 +50,28 @@ class ProductController extends Controller
                 ]);
             }
         }
-        
-     return response()->json(['product_id' => $product->id], 200);
-
+     return response()->json(['يرجى الانتظار لبعض الوقت من أجل معاينة الإعلان من قبل مسؤول التطبيق'], 200);
     }
 
 
     public function show(product $product)
     {
-        //
+        
     }
 
 
     public function edit(product $product)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, product $product)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(product $product)
     {
         //

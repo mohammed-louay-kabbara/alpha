@@ -25,6 +25,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {  
+        dd($request);
 
         $request->validate([
             'name' => 'required', 
@@ -40,7 +41,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'description' => $request->description
         ]);
-        
+
         if ($request->hasFile('media')) {
             foreach ($request->file('media') as $file) {
                 $path = $file->store('product_files', 'public');

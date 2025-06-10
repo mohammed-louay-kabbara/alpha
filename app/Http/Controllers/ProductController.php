@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
@@ -42,20 +40,16 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'description' => $request->description
         ]);
-        return response()->json(['product' => $product], 200);
+        return response()->json(['product_id' => $product->id], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(product $product)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(product $product)
     {
         //

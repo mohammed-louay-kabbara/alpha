@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = category::get();
+        return response()->json(['categories' => $categories], 200);
     }
 
     /**

@@ -40,17 +40,22 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'description' => $request->description
         ]);
+        
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $file) {
+                $path = $file->store('product_files', 'public');
+                $type = strpos($file->getMimeType(), 'video') !== false ? 'video' : 'image';
 
-        foreach ($request->files('media') as $file) {
-        $path = $file->store('product_files', 'public');
-        $type = strpos($file->getMimeType(), 'video') !== false ? 'video' : 'image';
-        ProductFile::create([
-        'product_id' => $product->id,
-        'file_path' => $path,
-        'file_type' => $type,]);}
+                ProductFile::create([
+                    'product_id' => $product->id,
+                    'file_path' => $path,
+                    'file_type' => $type,
+                ]);
+            }
+        }
         
      return response()->json(['product_id' => $product->id], 200);
-     
+
     }
 
 

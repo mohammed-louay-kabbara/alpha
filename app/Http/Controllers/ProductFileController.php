@@ -2,42 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
+use App\Models\product_file;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductFileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = category::get();
-        return response()->json([$categories], 200);
+        //
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         //
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-           $request->validate([
-            'name' => 'required', 
-        ]);
-        category::create([
-            'name'=> $request->name, 
-        ]);
-        return response()->json(['تم إضافة صنف جديد'], 200);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(category $category)
+    public function show(product_file $product_file)
     {
         //
     }
@@ -45,7 +42,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit(product_file $product_file)
     {
         //
     }
@@ -53,7 +50,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, category $category)
+    public function update(Request $request, product_file $product_file)
     {
         //
     }
@@ -61,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(product_file $product_file)
     {
         //
     }

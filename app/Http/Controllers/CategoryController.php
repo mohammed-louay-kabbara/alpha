@@ -28,7 +28,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+           $request->validate([
+            'name' => 'required', 
+        ]);
+        category::create([
+            'name'=> $request->name, 
+        ]);
+        return response()->json(['تم إضافة صنف جديد'], 200);
     }
 
     /**

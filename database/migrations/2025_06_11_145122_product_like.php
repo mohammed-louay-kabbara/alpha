@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
+         $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
             $table->string('type');
              $table->foreignId('product_id')->constrained('products')->CascadeOnDelete();
             $table->timestamps();

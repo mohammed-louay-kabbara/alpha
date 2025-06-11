@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
             $table->string('type');
-            $table->foreignId('reels_id')->constrained('reels')->CascadeOnDelete();
+             $table->foreignId('product_id')->constrained('products')->CascadeOnDelete();
             $table->timestamps();
         });
     }

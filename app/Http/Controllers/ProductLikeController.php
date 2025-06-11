@@ -28,6 +28,8 @@ class ProductLikeController extends Controller
      */
     public function store(Request $request)
     {
+
+
            $request->validate([
             'type' => 'required|in:like,dislike', 
             'product_id' => 'required|exists:reels,id',
@@ -45,25 +47,16 @@ class ProductLikeController extends Controller
         }
 
         // إنشاء السجل الجديد
-        reel_likes::create([
+        product_like::create([
             'user_id' => Auth::id(),
             'type' => $request->type,
             'product_id' => $request->product_id,
         ]);
 
-        // تحديث العدادات
-        $reel = reels::find($request->product_id);
-
-        if ($request->type == 'like') {
-            $reel->increment('likes_count');
-        } else {
-            $reel->increment('dislikes_count');
-        }
         return response()->json([
             'status' => true,
-            'message' => 'تم التقييم بنجاح.',
-        ], 201);
-  
+            'message' => 'تم تسجيل الإعجاب بنجاح',], 200);
+
     }
 
     /**

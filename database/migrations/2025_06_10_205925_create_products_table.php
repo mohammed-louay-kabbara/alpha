@@ -17,7 +17,6 @@ return new class extends Migration
             $table->double('price', 15, 8);
             $table->text('description');
             $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
-            
             $table->foreignId('category_id')->constrained('categories')->CascadeOnDelete();
             $table->boolean('is_approved')->default(false);
             $table->timestamps();

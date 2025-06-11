@@ -12,6 +12,7 @@ use  App\Http\Controllers\StoryController;
 use  App\Http\Controllers\CategoryController;
 use  App\Http\Controllers\ProductController;
 use  App\Http\Controllers\ProductLikeController;
+use  App\Http\Controllers\ProductCommentsController;
 
 
 
@@ -39,3 +40,4 @@ Route::group([
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('productLike', ProductLikeController::class);
+    Route::resource('ProductComments', ProductCommentsController::class);

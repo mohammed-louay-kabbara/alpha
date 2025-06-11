@@ -28,15 +28,30 @@ class ProductCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'message' => 'required', 
+            'product_id' => 'required',
+        ]);
+
+        product_comments::create([
+            'user_id' => Auth::id(),
+            'message' => $request->message,
+            'product_id' => $request->product_id,
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'تم التقييم بنجاح.',
+        ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(product_comments $product_comments)
+    public function show($id)
     {
-        //
+        $product_comments= product_comments::with('user')->where('product_id',$id)->get();
+        return response()->json($product_comments, 200);
     }
 
     /**

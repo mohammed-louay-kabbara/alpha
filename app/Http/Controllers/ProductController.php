@@ -12,7 +12,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $product = product::with('files')->withCount([
+        $product = product::with('files','user')->withCount([
         'likes' => function ($query) {
             $query->where('type', 'like');
         }

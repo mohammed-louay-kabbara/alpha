@@ -28,11 +28,9 @@ class ProductLikeController extends Controller
      */
     public function store(Request $request)
     {
-
-
            $request->validate([
-            'type' => 'required|in:like,dislike', 
-            'product_id' => 'required|exists:reels,id',
+            'type' => 'required', 
+            'product_id' => 'required',
         ]);
 
         // تحقق إذا كان المستخدم سجل إعجابًا أو عدم إعجاب مسبقًا

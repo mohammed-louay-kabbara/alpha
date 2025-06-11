@@ -18,7 +18,13 @@ class ReelsController extends Controller
 
     public function create()
     {
-        
+    }
+    public function homereels(){
+        $reels = Reels::with('user')
+            ->orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
+        return response()->json($reels);
     }
 
 

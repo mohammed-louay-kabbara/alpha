@@ -12,8 +12,18 @@ class ProductController extends Controller
 
     public function index()
     {
-    $product = product::with('files')->orderBy('created_at', 'desc')->where('is_approved',1 )->get();
-    return response()->json($product);
+        $product = product::with('files')->withCount([
+        'likes' => function ($query) {
+            $query->where('type', 'like');
+        }
+    ])
+    ->where('is_approved', 1)
+    ->orderBy('created_at', 'desc')
+    ->get();
+
+return response()->json($product);
+    // $product = product::with('files')->orderBy('created_at', 'desc')->where('is_approved',1 )->get();
+    // return response()->json($product);
     }
 
 

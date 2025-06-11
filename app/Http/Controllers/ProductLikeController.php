@@ -28,7 +28,42 @@ class ProductLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+           $request->validate([
+            'type' => 'required|in:like,dislike', 
+            'product_id' => 'required|exists:reels,id',
+        ]);
+
+        // تحقق إذا كان المستخدم سجل إعجابًا أو عدم إعجاب مسبقًا
+        $existing = product_like::where('user_id', Auth::id())
+            ->where('product_id', $request->product_id)
+            ->first();
+        if ($existing) {
+            $existing->delete();
+            return response()->json([
+            'status' => true,
+            'message' => 'تم إلغاء الإعجاب بنجاح',], 200);
+        }
+
+        // إنشاء السجل الجديد
+        reel_likes::create([
+            'user_id' => Auth::id(),
+            'type' => $request->type,
+            'product_id' => $request->product_id,
+        ]);
+
+        // تحديث العدادات
+        $reel = reels::find($request->product_id);
+
+        if ($request->type == 'like') {
+            $reel->increment('likes_count');
+        } else {
+            $reel->increment('dislikes_count');
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'تم التقييم بنجاح.',
+        ], 201);
+  
     }
 
     /**

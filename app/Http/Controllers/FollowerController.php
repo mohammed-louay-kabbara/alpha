@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $user = auth()->user();
@@ -22,9 +20,7 @@ class FollowerController extends Controller
         return response()->json($suggested);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //

@@ -42,3 +42,4 @@ Route::group([
     Route::resource('productLike', ProductLikeController::class);
     Route::resource('ProductComments', ProductCommentsController::class);
     Route::get('homereels',[ReelsController::class,'homereels']);
+    

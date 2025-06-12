@@ -12,24 +12,30 @@ class ProductController extends Controller
 
     public function index()
     {
-        $product = product::with('files','user')->withCount([
-        'likes' => function ($query) {
-            $query->where('type', 'like');
-        }
+    $product = product::with('files','user')->withCount([
+        'likes' => function ($query) {}
     ])
     ->where('is_approved', 1)
     ->orderBy('created_at', 'desc')
     ->get();
-
-return response()->json($product);
-    // $product = product::with('files')->orderBy('created_at', 'desc')->where('is_approved',1 )->get();
-    // return response()->json($product);
+    return response()->json($product);
     }
 
 
     public function create()
     {
-        //
+        
+    }
+
+     public function searchProducts(Request $request)
+    {
+        $query = $request->input('query');
+        if (strlen($query) < 1) {
+            return response()->json(['error' => 'يرجى إدخال حرف واحد على الأقل'], 400);
+        }
+
+        $products = product::where('name', 'like', "%$query%")->get();
+        return response()->json([$products]);
     }
 
 
@@ -41,7 +47,6 @@ return response()->json($product);
             'category_id' => 'required',
             'price' => 'required',
         ]);
-
         $product=product::create([
             'user_id' => Auth::id(),
             'name'=> $request->name, 

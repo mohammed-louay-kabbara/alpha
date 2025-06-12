@@ -55,43 +55,24 @@ class AuthController extends Controller
     }
     }
 
-    
-// public function sendResetCode(Request $request)
-// {
-//     $request->validate([
-//         'email' => 'required|email|exists:users,email'
-//     ]);
-
-//     // توليد رمز من 4 أرقام
-//     $otp = rand(1000, 9999);
-
-//     // حذف أي رموز سابقة
-//     PasswordResetCustom::where('email', $request->email)->delete();
-
-//     // حفظ الرمز الجديد
-//     PasswordResetCustom::create([
-//         'email' => $request->email,
-//         'otp_code' => $otp,
-//         'expires_at' => Carbon::now()->addMinutes(10),
-//     ]);
-
-//     // إرسال الرمز بالإيميل
-//     Mail::raw("رمز إعادة تعيين كلمة المرور الخاص بك هو: $otp", function ($message) use ($request) {
-//         $message->to($request->email)
-//                 ->subject('رمز التحقق لإعادة تعيين كلمة المرور');
-//     });
-
-//     return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني']);
-// }
-
-public function users(){
-    if (Auth::id()) {
-        $adr=User::where('id',Auth::id())->first();
-        $users= User::where('address',$adr->address)->get();
-        return response()->json($users, 200);
+       public function searchUsers(Request $request)
+    {
+        $query = $request->input('query');
+        if (strlen($query) < 1) {
+            return response()->json(['error' => 'يرجى إدخال حرف واحد على الأقل'], 400);
+        }
+        $users = User::where('name', 'like', "%$query%")->get();
+        return response()->json([$users]);
     }
-    User::where('address',);
-}
+
+    public function users(){
+        if (Auth::id()) {
+            $adr=User::where('id',Auth::id())->first();
+            $users= User::where('address',$adr->address)->get();
+            return response()->json($users, 200);
+        }
+        User::where('address',);
+    }
 
 
 public function sendVerificationCode(Request $request)

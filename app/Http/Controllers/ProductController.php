@@ -29,14 +29,10 @@ class ProductController extends Controller
      public function searchProducts(Request $request)
     {
         $query = $request->input('query');
-        if (strlen($query) < 1) {
-            return response()->json(['error' => 'يرجى إدخال حرف واحد على الأقل'], 400);
-        }
         $products = product::where('name', 'like', "%$query%")->get();
         return response()->json([$products]);
     }
-
-
+    
     public function store(Request $request)
     {  
         $request->validate([

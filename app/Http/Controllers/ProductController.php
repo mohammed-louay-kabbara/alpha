@@ -28,11 +28,11 @@ class ProductController extends Controller
     
      public function searchProducts(Request $request)
     {
-        $query = $request->input('query');
+        $query = $request->query;
         $products = product::where('name', 'like', "%$query%")->get();
-        return response()->json([$products]);
+        return response()->json(['products' => $products]);
     }
-    
+
     public function store(Request $request)
     {  
         $request->validate([

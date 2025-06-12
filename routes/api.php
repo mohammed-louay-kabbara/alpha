@@ -13,6 +13,7 @@ use  App\Http\Controllers\CategoryController;
 use  App\Http\Controllers\ProductController;
 use  App\Http\Controllers\ProductLikeController;
 use  App\Http\Controllers\ProductCommentsController;
+use  App\Http\Controllers\FollowerController;
 
 
 
@@ -43,4 +44,7 @@ Route::group([
     Route::post('searchProducts', [ProductController::class,'searchProducts']);
     Route::post('searchUsers', [AuthController::class,'searchUsers']);
     Route::resource('ProductComments', ProductCommentsController::class);
+
+    Route::resource('follower', FollowerController::class);
+
     Route::get('homereels',[ReelsController::class,'homereels']);

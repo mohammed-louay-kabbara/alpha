@@ -40,7 +40,7 @@ Route::group([
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('productLike', ProductLikeController::class);
-    Route::get('searchProducts', [ProductController::class,'searchProducts']);
-    Route::get('searchUsers', [AuthController::class,'searchUsers']);
+    Route::post('searchProducts', [ProductController::class,'searchProducts']);
+    Route::post('searchUsers', [AuthController::class,'searchUsers']);
     Route::resource('ProductComments', ProductCommentsController::class);
     Route::get('homereels',[ReelsController::class,'homereels']);

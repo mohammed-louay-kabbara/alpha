@@ -28,9 +28,11 @@ class ProductController extends Controller
     
      public function searchProducts(Request $request)
     {
-        dd($request->query);
-        $query = $request->get('query');
-        $products = product::where('name', 'like', "%" . $query . "%")->get();
+        $query = $request->input('query'); // ← هنا نستخدم input() للـ POST
+        if (!$query || trim($query) === '') {
+            return response()->json(['products' => []]);
+        }
+        $products = Product::where('name', 'like', '%' . $query . '%')->get();
         return response()->json(['products' => $products]);
     }
 

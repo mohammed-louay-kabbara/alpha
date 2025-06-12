@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\follower;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FollowerController extends Controller
@@ -12,7 +13,13 @@ class FollowerController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $followingIds = $user->following()->pluck('followed_id');
+        $suggested = User::where('id', '!=', $user->id)
+                        ->whereNotIn('id', $followingIds)
+                        ->take(10)
+                        ->get();
+        return response()->json($suggested);
     }
 
     /**
@@ -28,7 +35,7 @@ class FollowerController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $userIdToFollow = $request->input('user_id');
         $followerId = auth()->id();
         if ($followerId == $userIdToFollow) {

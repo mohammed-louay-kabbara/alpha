@@ -21,8 +21,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
     Relation::morphMap([
-        'reels' => App\Models\reels::class,
-        'product' => App\Models\product::class,
+        'reels' => \App\Models\reels::class,
+        'product' => \App\Models\product::class,
     ]);
     }
 }

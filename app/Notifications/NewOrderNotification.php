@@ -7,23 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
+
 class NewOrderNotification extends Notification
 {
     use Queueable;
-    protected $type;
-    protected $title;
-    protected $description;
-    protected $image;
-    protected $icon;
+    protected $fromUser;
+    protected $post;
+
 
      
-    public function __construct($type, $title, $description, $image, $icon)
+    public function __construct($type, $fromUser, $reel)
     {
-        $this->type = $type; // مثل: new_post, share, etc
-        $this->title = $title; // "يوجد منشور جديد"
-        $this->description = $description; // "في شام للتسويق الإلكتروني"
-        $this->image = $image; // رابط الصورة
-        $this->icon = $icon; // emoji أو رابط أيقونة
+        $this->fromUser = $fromUser;
+        $this->reel = $reel;
     }
 
     /**
@@ -36,9 +32,6 @@ class NewOrderNotification extends Notification
         return ['database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
@@ -54,12 +47,9 @@ class NewOrderNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
-    // ما سيتم تخزينه في جدول notifications
     public function toDatabase($notifiable)
     {
         return [
@@ -67,7 +57,6 @@ class NewOrderNotification extends Notification
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->image,
-            'icon' => $this->icon,
         ];
     }
 }

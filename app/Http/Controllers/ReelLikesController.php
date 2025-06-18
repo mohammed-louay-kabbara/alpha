@@ -6,6 +6,7 @@ use App\Models\reel_likes;
 use App\Models\reels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NewOrderNotification;
 
 class ReelLikesController extends Controller
 {
@@ -31,8 +32,6 @@ class ReelLikesController extends Controller
             'type' => 'required|in:like,dislike', 
             'reels_id' => 'required|exists:reels,id',
         ]);
-
-        // تحقق إذا كان المستخدم سجل إعجابًا أو عدم إعجاب مسبقًا
         $existing = reel_likes::where('user_id', Auth::id())
             ->where('reels_id', $request->reels_id)
             ->first();
@@ -58,7 +57,13 @@ class ReelLikesController extends Controller
         } else {
             $reel->increment('dislikes_count');
         }
-        return response()->json([
+        dd($reel->user);
+        if ($reel->user_id != Auth::id()) {
+            $postOwner = $reel->user;
+            $fromUser = Auth::user();
+            $postOwner->notify(new NewOrderNotification($fromUser, $reel));
+        }
+     return response()->json([
             'status' => true,
             'message' => 'تم التقييم بنجاح.',
         ], 201);

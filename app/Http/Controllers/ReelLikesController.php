@@ -51,7 +51,6 @@ class ReelLikesController extends Controller
 
         // تحديث العدادات
         $reel = reels::find($request->reels_id);
-        dd($reel->user);
         if ($request->type == 'like') {
             $reel->increment('likes_count');
         } else {

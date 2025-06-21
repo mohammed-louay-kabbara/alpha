@@ -131,15 +131,7 @@ public function verifyResetCode(Request $request)
                 'status'  => false,
                 'errors'  => $validator->errors(),
             ], 422);
-        }
-
-     
-    // if ($request->hasFile('picture')) {
-    
-    //     $picturePath = $request->file('picture')->store('profile_pictures', 'public');
-    // }
-
-      
+        }      
         $user = User::create([
             'name'         => $request->name,
             'email'        => $request->email,
@@ -170,6 +162,24 @@ public function verifyResetCode(Request $request)
     public function me()
     {
         return response()->json(auth()->user());
+    }
+
+    public function login_admin(Request $request){
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|string|min:6',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+    if (!$user || $user->role !=1 ) {
+      return back()->with('error', 'ليس لك صلاحية بالدخول');    
+    }
+    if (!$user || !Hash::check($request->password, $user->password)) {
+          return back()->with('error', 'بيانات الدخول غير صحيحة، حاول مرة أخرى');    
+    }
+    Auth::login($user);
+    return redirect()->intended('/dashboard');
+
     }
 
     /**

@@ -29,6 +29,7 @@ Route::group([
     Route::post('me', 'AuthController@me');
 });
     Route::post('login', [AuthController::class, 'login']);
+    // Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');
     Route::put('editpassword', [AuthController::class, 'editpassword']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('forgot-password', [AuthController::class, 'sendVerificationCode']);

@@ -48,11 +48,19 @@ class AuthController extends Controller
         $user->update([
             'password' => Hash::make($request->newpassword),
         ]);
-
         return response()->json('تم التعديل بنجاح', 200);
     } else {
         return response()->json(['error' => 'كلمة السر غير صحيحة'], 401);
     }
+    }
+
+    public function forgot_password(Request $request)
+    {
+        $user = Auth::user();
+        $user->update([
+            'password' => Hash::make($request->newpassword),
+        ]);
+        return response()->json('تم التعديل بنجاح', 200);
     }
 
        public function searchUsers(Request $request)

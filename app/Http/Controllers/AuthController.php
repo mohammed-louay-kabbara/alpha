@@ -15,6 +15,9 @@ use App\Models\PasswordResetCustom;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Carbon;
 use App\Mail\VerificationCodeMail;
+use App\Models\follower;
+use App\Models\product;
+use App\Models\reels;
 
 class AuthController extends Controller
 {
@@ -54,6 +57,19 @@ class AuthController extends Controller
     }
     }
 
+    public function info_user(Request $request){
+        $user=User::where('id',$request->user_id)->first();
+        return response()->json($user, 200);
+    }
+    public function count(Request $request){
+        if ($request->user_id) {
+        $count_follower=follower::where('followed_id',$request->user_id)->count();
+        $count_product=product::where('user_id',$request->user_id)->count();
+        $count_reels=reels::where('user_id',$request->user_id)->count();
+        return response()->json([$count_follower,$count_product,$count_reels], 200);
+        }
+
+    }
     public function forgot_password(Request $request)
     {
         $user = Auth::user();

@@ -37,6 +37,8 @@ Route::group([
     Route::post('register', [AuthController::class, 'register']);
     Route::post('forgot-password', [AuthController::class, 'sendVerificationCode']);
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);
+    Route::post('count_profile', [AuthController::class, 'count_profile']);
+    Route::post('info_user', [AuthController::class, 'info_user']);
     Route::resource('reels', ReelsController::class);
     Route::resource('reelLikes', ReelLikesController::class);
     Route::resource('reelComments', ReelCommentsController::class);

@@ -61,7 +61,7 @@ class AuthController extends Controller
         $user=User::where('id',$request->user_id)->first();
         return response()->json($user, 200);
     }
-    public function count(Request $request){
+    public function count_profile(Request $request){
         if ($request->user_id) {
         $count_follower=follower::where('followed_id',$request->user_id)->count();
         $count_product=product::where('user_id',$request->user_id)->count();

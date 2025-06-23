@@ -68,7 +68,6 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        dd($id);
         $products = product::with('files')->where('user_id',$id)->get();   
         return response()->json($products, 200);
     }

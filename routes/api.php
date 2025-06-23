@@ -28,6 +28,7 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 });
+
     Route::post('login', [AuthController::class, 'login']);
     // Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');
     Route::put('editpassword', [AuthController::class, 'editpassword']);
@@ -40,6 +41,7 @@ Route::group([
     Route::post('count_profile', [AuthController::class, 'count_profile']);
     Route::post('info_user', [AuthController::class, 'info_user']);
     Route::resource('reels', ReelsController::class);
+    Route::get('show_products/{id}',)
     Route::resource('reelLikes', ReelLikesController::class);
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);

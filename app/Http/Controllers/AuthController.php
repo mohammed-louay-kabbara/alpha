@@ -66,7 +66,10 @@ class AuthController extends Controller
         $count_follower=follower::where('followed_id',$request->user_id)->count();
         $count_product=product::where('user_id',$request->user_id)->count();
         $count_reels=reels::where('user_id',$request->user_id)->count();
-        return response()->json([$count_follower,$count_product,$count_reels], 200);
+        return response()->json([
+            'count_follower' => $count_follower, 
+            'count_product' => $count_product,
+            'count_reels' => $count_reels], 200);
         }
 
     }

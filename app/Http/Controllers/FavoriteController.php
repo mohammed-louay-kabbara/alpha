@@ -13,9 +13,17 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-      $user = Auth::user();
-      $favorites = $user->favorites()->with('favoritable')->get();
-      return response()->json($favorites, 200);
+        $user = Auth::user();
+        $favorites = $user->favorites()->with('favoritable')->get();
+        $favorites->each(function ($favorite) {
+            if ($favorite->favoritable_type === 'product' && $favorite->favoritable) {
+                $favorite->favoritable->load('files');
+            }
+        });
+        return response()->json($favorites, 200);
+    //   $user = Auth::user();
+    //   $favorites = $user->favorites()->with('favoritable')->get();
+    //   return response()->json($favorites, 200);
     }
 
 

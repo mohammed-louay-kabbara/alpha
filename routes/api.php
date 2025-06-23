@@ -41,7 +41,7 @@ Route::group([
     Route::post('count_profile', [AuthController::class, 'count_profile']);
     Route::post('info_user', [AuthController::class, 'info_user']);
     Route::resource('reels', ReelsController::class);
-    Route::get('show_products/{id}',)
+    
     Route::resource('reelLikes', ReelLikesController::class);
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);

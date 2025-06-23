@@ -66,9 +66,10 @@ class ProductController extends Controller
     }
 
 
-    public function show(product $product)
+    public function show($id)
     {
-        
+        $products = product::with('files')->where('user_id',$id)->get();   
+        return response()->json($products, 200);
     }
 
 

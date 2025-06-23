@@ -55,9 +55,10 @@ class ReelsController extends Controller
     } 
 
 
-    public function show(reels $reels)
+    public function show($id)
     {
-        
+        $reels=reels::where('user_id',$id)->get();
+        return response()->json($reels, 200);
     }
 
 

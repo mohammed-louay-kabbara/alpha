@@ -40,21 +40,21 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('dashboard') ? 'active bg-danger text-white' : '' }}"
-                        href="{{ route('dashboard') }}">
+                        href="">
                         <i class="ni ni-tv-2 text-sm opacity-10"></i>
                         <span class="nav-link-text ms-1">الصفحة الرئيسية</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('users*') ? 'active bg-danger text-white' : '' }}"
-                        href="{{ route('users.index') }}">
+                        href="">
                         <i class="ni ni-calendar-grid-58 text-sm opacity-10"></i>
                         <span class="nav-link-text ms-1">إدارة المستخدمين</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('categories*') ? 'active bg-danger text-white' : '' }}"
-                        href="{{ route('categories.index') }}">
+                        href="">
                         <i class="ni ni-credit-card text-sm opacity-10"></i>
                         <span class="nav-link-text ms-1">إدارة الأصناف</span>
                     </a>
@@ -71,7 +71,7 @@
             @yield('content')
         </div>
     </main>
-    
+
   <script src="{{asset('assets/js/core/popper.min.js')  }}"></script>
   <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>

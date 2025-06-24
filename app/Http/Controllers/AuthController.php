@@ -192,23 +192,28 @@ public function verifyResetCode(Request $request)
     }
 
     public function login_admin(Request $request){
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|string|min:6',
-    ]);
 
-    $user = User::where('email', $request->email)->first();
-    if (!$user || $user->role !=1 ) {
-      return back()->with('error', 'ليس لك صلاحية بالدخول');    
-    }
-    if (!$user || !Hash::check($request->password, $user->password)) {
-          return back()->with('error', 'بيانات الدخول غير صحيحة، حاول مرة أخرى');    
-    }
-    Auth::login($user);
-    return redirect()->intended('/dashboard');
+    $credentials = $request->only('email', 'password');
 
+        if (!$token = JWTAuth::attempt($credentials)) {
+            return redirect()->back()->with('error', 'بيانات الدخول غير صحيحة');
+        }
+
+        $user = Auth::user();
+        if ($user->role != 1) {
+            return redirect()->back()->with('error', 'ليس لديك صلاحية الدخول');
+        }
+
+        session(['jwt_token' => $token]); // تخزين التوكن في الجلسة
+
+        return redirect('/dashboard');
     }
 
+    // public function logout()
+    // {
+    //     session()->forget('jwt_token');
+    //     return redirect()->route('login');
+    // }
     /**
      * Log the user out (Invalidate the token).
      *

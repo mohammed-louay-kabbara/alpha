@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\dashboardcontroller;
 
 
 // Route::middleware(['auth'])->group(function () {
@@ -12,7 +13,8 @@ use App\Http\Controllers\AuthController;
 // });
 
 Route::middleware('jwt.session')->group(function () {
-    Route::get('/dashboard', fn() => view('dashboard'));
+    // Route::get('/dashboard', fn() => view('dashboard'));
+    Route::resource('dashboard', dashboardcontroller::class);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

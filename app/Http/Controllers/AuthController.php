@@ -194,7 +194,7 @@ public function verifyResetCode(Request $request)
     public function login_admin(Request $request){
 
     $credentials = $request->only('email', 'password');
-
+    
         if (!$token = JWTAuth::attempt($credentials)) {
             return redirect()->back()->with('error', 'بيانات الدخول غير صحيحة');
         }

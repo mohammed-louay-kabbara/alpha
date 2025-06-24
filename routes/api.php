@@ -54,6 +54,10 @@ Route::group([
     Route::post('searchUsers', [AuthController::class,'searchUsers']);
     Route::resource('ProductComments', ProductCommentsController::class);
 
+
+ 
+
+
     Route::resource('follower', FollowerController::class);
 
     Route::get('homereels',[ReelsController::class,'homereels']);

@@ -14,7 +14,7 @@ use App\Http\Controllers\dashboardcontroller;
 
 Route::middleware('jwt.session')->group(function () {
     // Route::get('/dashboard', fn() => view('dashboard'));
-    Route::resource('dashboard', dashboardcontroller::class);
+    Route::resource('dashboard', dashboardcontroller::class)->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

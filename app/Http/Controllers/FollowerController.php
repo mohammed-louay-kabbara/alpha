@@ -25,6 +25,11 @@ class FollowerController extends Controller
     {
         //
     }
+    public function getFollower()
+    {
+        $followers=follower::where('followed_id',Auth::id())->get();
+        return response()->json($followers, 200);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -58,7 +63,7 @@ class FollowerController extends Controller
      */
     public function show(follower $follower)
     {
-        //
+        
     }
 
     /**

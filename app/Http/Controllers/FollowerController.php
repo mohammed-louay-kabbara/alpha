@@ -28,7 +28,7 @@ class FollowerController extends Controller
     }
     public function getFollower()
     {
-        $followers=follower::where('followed_id',Auth::id())->get();
+        $followers=follower::with('user')->where('followed_id',Auth::id())->get();
         return response()->json($followers, 200);
     }
 

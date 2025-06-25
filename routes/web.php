@@ -6,15 +6,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardcontroller;
 
 
-// Route::middleware(['auth'])->group(function () {
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
-// });
+
 
 Route::middleware('jwt.session')->group(function () {
-    // Route::get('/dashboard', fn() => view('dashboard'));
-    Route::resource('dashboard', dashboardcontroller::class)->name('dashboard');
+    Route::resource('dashboard_admin', dashboardcontroller::class);
+     Route::resource('category_admin', CategoryController::class);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

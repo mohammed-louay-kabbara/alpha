@@ -71,7 +71,25 @@ class AuthController extends Controller
             'count_product' => $count_product,
             'count_reels' => $count_reels], 200);
         }
+    }
 
+        public function my_profile(Request $request){
+        if (Auth::id()) {
+        $user_id=Auth::id();
+        $user=User::where('id',$user_id)->first();
+        $count_follower=follower::where('followed_id',$user_id)->count();
+        $count_product=product::where('user_id',$user_id)->count();
+        $count_reels=reels::where('user_id',$user_id)->count();
+        $product=product::where('user_id',$user_id)->get();
+        $reels=reels::where('user_id',$user_id)->get();
+        return response()->json([
+            'user' => $user,
+            'count_follower' => $count_follower, 
+            'count_product' => $count_product,
+            'count_reels' => $count_reels,
+            'product' =>$product,
+            'reels'=>$reels], 200);
+        }
     }
     public function forgot_password(Request $request)
     {

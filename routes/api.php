@@ -40,6 +40,7 @@ Route::group([
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);
     Route::post('count_profile', [AuthController::class, 'count_profile']);
     Route::post('info_user', [AuthController::class, 'info_user']);
+    Route::get('my_profile', [AuthController::class, 'my_profile']);
     Route::resource('reels', ReelsController::class);
     Route::get('show_products/{id}',[ProductController::class,'show']);
     Route::get('show_reels/{id}',[ReelsController::class,'show']);

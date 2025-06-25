@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $categories = category::get();
@@ -20,7 +17,8 @@ class CategoryController extends Controller
 
     public function create()
     {
-        
+        $categories = category::get();
+        return view('category',compact('categories'));
     }
 
 
@@ -45,33 +43,25 @@ class CategoryController extends Controller
     return response()->json(['message' => 'تم إضافة صنف جديد'], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(category $category)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(category $category)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, category $category)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(category $category)
     {
         //

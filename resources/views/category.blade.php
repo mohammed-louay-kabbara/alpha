@@ -119,7 +119,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-body"><i class="fas fa-search"
                                     aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Type here...">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Type here...">
                         </div>
                     </div>
                     <ul class="navbar-nav  justify-content-end">
@@ -241,12 +241,12 @@
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
-                                <input type="text" id="searchInput" class="form-control mb-3"
-                                    placeholder="ابحث باسم المستخدم...">
+                                {{-- <input type="text" id="searchInput" class="form-control mb-3"
+                                    placeholder="ابحث باسم المستخدم..."> --}}
 
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="table-dark">
+                                    <table class="table align-items-center mb-0">
+                                        <thead class="table-dark" style="background-color: white">
                                             <tr>
                                                 <th>#</th>
                                                 <th>الاسم</th>

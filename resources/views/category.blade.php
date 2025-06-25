@@ -244,17 +244,17 @@
                                 {{-- <input type="text" id="searchInput" class="form-control mb-3"
                                     placeholder="ابحث باسم المستخدم..."> --}}
 
-                                <div class="table-responsive">
-                                    <table class="table align-items-center mb-0">
+                                <div class="table-responsive" >
+                                    <table class="table align-items-center mb-0" style="background-color: white">
                                         <thead class="table-dark" style="background-color: white">
-                                            <tr>
+                                            <tr style="background-color: white">
                                                 <th>#</th>
                                                 <th>الاسم</th>
                                                 <th>البريد الإلكتروني</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-                                            <tr>
+                                            <tr> 
                                                 <td>1</td>
                                                 <td>أحمد علي</td>
                                                 <td>ahmed@example.com</td>

@@ -10,13 +10,21 @@ use App\Http\Controllers\CategoryController;
 
 
 Route::middleware('jwt.session')->group(function () {
-    Route::resource('dashboard_admin', dashboardcontroller::class);
+    Route::resource('dashboard_admin', dashboardcontroller::class)->names([
+    'index' => 'dashboard_admin.index',
+    'create' => 'dashboard_admin.create',
+    'store' => 'dashboard_admin.store',
+    'show' => 'dashboard_admin.show',
+    'edit' => 'dashboard_admin.edit',
+    'update' => 'dashboard_admin.update',
+    'destroy' => 'dashboard_admin.destroy',
+]);
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
     Route::resource('category_admin', CategoryController::class);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
    Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');
-   
+
 Route::get('/login', function () {
     return view('sign-in');
 })->name('login');

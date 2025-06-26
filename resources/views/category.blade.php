@@ -261,7 +261,9 @@
                                                     <td>{{ $c->name }}</td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button type="button" class="btn btn-success">
+                                                            <button type="button" class="btn btn-success"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#editCategoryModal">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
                                                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -287,9 +289,53 @@
                                                                 </button>
                                                             </form>
                                                         </div>
-
                                                     </td>
                                                 </tr>
+                                                <div class="modal fade" id="editCategoryModal" tabindex="-1"
+                                                    aria-labelledby="editCategoryLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+
+                                                            <form method="POST"
+                                                                action="{{ route('category_admin.store') }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editCategoryLabel">
+                                                                        إضافة صنف جديد</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="إغلاق"></button>
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="name" style="color: black"
+                                                                            class="form-label">اسم الصنف</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="name" name="name" required>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="image" style="color: black"
+                                                                            class="form-label">صورة الصنف</label>
+                                                                        <input type="file" class="form-control"
+                                                                            id="image" name="image"
+                                                                            accept="image/*" required>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">إغلاق</button>
+                                                                    <button type="submit"
+                                                                        style="background-color: #F62C20; color:white"
+                                                                        class="btn btn">إضافة</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endforeach
 
 

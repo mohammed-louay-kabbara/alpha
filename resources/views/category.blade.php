@@ -300,9 +300,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('category_admin.store') }}" enctype="multipart/form-data">
                     @csrf
-
                     <div class="modal-header">
                         <h5 class="modal-title" id="addCategoryLabel">إضافة صنف جديد</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -324,15 +323,14 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                        <button type="submit" style="background-color: #F62C20" class="btn btn">إضافة</button>
+                        <button type="submit" style="background-color: #F62C20; color:white" class="btn btn">إضافة</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 
-    <div class="fixed-plugin">
+    {{-- <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
             <i class="fa fa-cog py-2"> </i>
         </a>
@@ -420,7 +418,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!--   Core JS Files   -->
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>

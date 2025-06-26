@@ -259,7 +259,7 @@
                                         <tbody id="tableBody">
                                             @foreach ($users as $c)
                                                 <tr>
-                                                    <td><img src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"
+                                                    <td><img width="100px" src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"
                                                             alt="" srcset=""></td>
                                                     <td>{{ $c->name }}</td>
                                                     <td>{{ $c->phone }}</td>

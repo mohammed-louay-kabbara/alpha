@@ -263,7 +263,7 @@
                                                         <div class="d-flex gap-2">
                                                             <button type="button" class="btn btn-success"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#editCategoryModal">
+                                                                data-bs-target="#editCategoryModal{{ $c->id }}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
                                                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -291,7 +291,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="editCategoryModal" tabindex="-1"
+                                                <div class="modal fade" id="editCategoryModal{{ $c->id }}" tabindex="-1"
                                                     aria-labelledby="editCategoryLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">

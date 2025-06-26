@@ -278,7 +278,7 @@
                                                             </svg>
                                                         </button> --}}
                                                         <form
-                                                            action="{{ route('categories.destroy', $category->id) }}"
+                                                            action="{{ route('category_admin.destroy', $category->id) }}"
                                                             method="POST"
                                                             onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
                                                             @csrf

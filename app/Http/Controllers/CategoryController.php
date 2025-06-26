@@ -60,8 +60,9 @@ class CategoryController extends Controller
     }
 
 
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $category=category::where('id',$id)->first();
         // حذف الصورة من storage
         if ($category->image && Storage::exists($category->image)) {
             Storage::delete($category->image);

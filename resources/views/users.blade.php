@@ -126,7 +126,7 @@
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-                           
+
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
@@ -270,9 +270,9 @@
                                                     <td>
                                                         @if ($c->role == 2)
                                                             مستخدم
+                                                        @else
+                                                            أدمن
                                                         @endif
-                                                    @else
-                                                        أدمن
                                                     </td>
 
                                                     <td>

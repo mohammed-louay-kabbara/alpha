@@ -28,7 +28,7 @@ class CategoryController extends Controller
             'name' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // تحقق من الصورة
         ]);
-        
+
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('category_images', 'public');
@@ -55,12 +55,19 @@ class CategoryController extends Controller
 
     public function update(Request $request, category $category)
     {
-        //
+        $categor->update(['name'=> $request->name]);
+        return back();
     }
 
 
-    public function destroy(category $category)
+    public function destroy(Category $category)
     {
-        //
+        // حذف الصورة من storage
+        if ($category->image && Storage::exists($category->image)) {
+            Storage::delete($category->image);
+        }
+        // حذف الصنف من قاعدة البيانات
+        $category->delete();
+        return back();
     }
 }

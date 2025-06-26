@@ -125,7 +125,7 @@
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <button
-                                class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center"
+                                class="btn btn rounded-circle d-flex align-items-center justify-content-center"
                                 style="width: 40px; height: 40px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">

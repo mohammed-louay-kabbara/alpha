@@ -302,7 +302,7 @@
                                                                 @csrf
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="editCategoryLabel">
-                                                                        إضافة صنف جديد</h5>
+                                                                        تعديل الصنف</h5>
                                                                     <button type="button" class="btn-close"
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="إغلاق"></button>
@@ -313,15 +313,8 @@
                                                                         <label for="name" style="color: black"
                                                                             class="form-label">اسم الصنف</label>
                                                                         <input type="text" class="form-control"
-                                                                            id="name" name="name" required>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="image" style="color: black"
-                                                                            class="form-label">صورة الصنف</label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="image" name="image"
-                                                                            accept="image/*" required>
+                                                                            id="name" name="name"
+                                                                            value="{{ $c->name }}" required>
                                                                     </div>
                                                                 </div>
 
@@ -330,7 +323,7 @@
                                                                         data-bs-dismiss="modal">إغلاق</button>
                                                                     <button type="submit"
                                                                         style="background-color: #F62C20; color:white"
-                                                                        class="btn btn">إضافة</button>
+                                                                        class="btn btn">حفظ</button>
                                                                 </div>
                                                             </form>
                                                         </div>

@@ -121,15 +121,15 @@
                             <span class="input-group-text text-body"><i class="fas fa-search"
                                     aria-hidden="true"></i></span>
                             <input type="text" id="searchInput" class="form-control" placeholder="Type here...">
-                            <button class="btn rounded-circle d-flex align-items-center justify-content-center"
-                                style="width: 40px; height: 40px; background-color: white;">
-                                <i class="bi bi-plus" style="font-size: 1.2rem; color: black;"></i>
-                            </button>
+
                         </div>
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-
+                            <button class="btn rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 40px; height: 40px; background-color: white;">
+                                <i class="bi bi-plus" style="font-size: 1.2rem; color: black;"></i>
+                            </button>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">

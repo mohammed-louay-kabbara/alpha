@@ -311,12 +311,12 @@
 
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">اسم الصنف</label>
+                            <label for="name" style="color: black" class="form-label">اسم الصنف</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="image" class="form-label">صورة الصنف</label>
+                            <label for="image" style="color: black" class="form-label">صورة الصنف</label>
                             <input type="file" class="form-control" id="image" name="image"
                                 accept="image/*" required>
                         </div>
@@ -324,7 +324,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                        <button type="submit" class="btn btn-primary">إضافة</button>
+                        <button type="submit" style="background-color: #F62C20" class="btn btn">إضافة</button>
                     </div>
                 </form>
 

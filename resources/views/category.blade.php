@@ -127,7 +127,8 @@
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <button class="btn rounded-circle d-flex align-items-center justify-content-center"
-                                style="width: 40px; height: 40px; background-color: white;">
+                                style="width: 40px; height: 40px; background-color: white;" data-bs-toggle="modal"
+                                data-bs-target="#addCategoryModal">
                                 <i class="bi bi-plus" style="font-size: 1.2rem; color: black;"></i>
                             </button>
                         </li>
@@ -294,6 +295,43 @@
 
         </div>
     </main>
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addCategoryLabel">إضافة صنف جديد</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="إغلاق"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">اسم الصنف</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">صورة الصنف</label>
+                            <input type="file" class="form-control" id="image" name="image"
+                                accept="image/*" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="submit" class="btn btn-primary">إضافة</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
     <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
             <i class="fa fa-cog py-2"> </i>
@@ -388,6 +426,7 @@
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

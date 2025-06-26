@@ -24,23 +24,20 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-    $request->validate([
-        'name' => 'required',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // تحقق من الصورة
-    ]);
-
-    // حفظ الصورة إن وجدت
-    $imagePath = null;
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('category_images', 'public');
-    }
-
-    category::create([
-        'name'  => $request->name,
-        'image' => $imagePath,
-    ]);
-
-    return response()->json(['message' => 'تم إضافة صنف جديد'], 200);
+        $request->validate([
+            'name' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // تحقق من الصورة
+        ]);
+        
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('category_images', 'public');
+        }
+        category::create([
+            'name'  => $request->name,
+            'image' => $imagePath,
+        ]);
+        return back();
     }
 
 

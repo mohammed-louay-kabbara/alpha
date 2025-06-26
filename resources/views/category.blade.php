@@ -253,7 +253,7 @@
                                         <tbody id="tableBody">
                                             @foreach ($categories as $c)
                                                 <tr>
-                                                    <td><img src="{{ asset('assets/storage/' . $c->image) }}"
+                                                    <td><img src="{{ asset('http://alphaword.sy/storage/' . $c->image) }}"
                                                             alt="" srcset=""></td>
                                                     <td>{{ $c->name }}</td>
                                                     <td>

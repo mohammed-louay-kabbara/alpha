@@ -73,24 +73,39 @@ class AuthController extends Controller
         }
     }
 
-        public function my_profile(Request $request){
+        public function my_profile(){
         if (Auth::id()) {
         $user_id=Auth::id();
         $user=User::where('id',$user_id)->first();
         $count_follower=follower::where('followed_id',$user_id)->count();
         $count_product=product::where('user_id',$user_id)->count();
         $count_reels=reels::where('user_id',$user_id)->count();
-        $product=product::where('user_id',$user_id)->get();
-        $reels=reels::where('user_id',$user_id)->get();
         return response()->json([
             'user' => $user,
             'count_follower' => $count_follower, 
             'count_product' => $count_product,
             'count_reels' => $count_reels,
-            'product' =>$product,
-            'reels'=>$reels], 200);
+        ], 200);
         }
     }
+
+    public function my_products()
+    {
+        $user_id=Auth::id();
+        $product=product::where('user_id',$user_id)->get();
+        return response()->json([
+            'product' =>$product,
+        ], 200);
+    }
+
+    public function my_reels(){
+        $user_id=Auth::id();
+        $reels=reels::where('user_id',$user_id)->get();
+        return response()->json([
+            'reels'=>$reels
+        ], 200);
+    }
+
     public function forgot_password(Request $request)
     {
         $user = Auth::user();
@@ -145,7 +160,6 @@ public function sendVerificationCode(Request $request)
 
 public function verifyResetCode(Request $request)
 {
-    
     $request->validate([
         'otp_code' => 'required|digits:4',
     ]);
@@ -161,7 +175,6 @@ public function verifyResetCode(Request $request)
 
     public function register(Request $request)
     {
-       
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
             'email'         => 'required|email|unique:users,email',

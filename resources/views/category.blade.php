@@ -297,9 +297,10 @@
                                                         <div class="modal-content">
 
                                                             <form method="POST"
-                                                                action="{{ route('category_admin.store') }}"
+                                                                action="{{ route('category_admin.update', $c->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
+                                                                @method('PUT')
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="editCategoryLabel">
                                                                         تعديل الصنف</h5>

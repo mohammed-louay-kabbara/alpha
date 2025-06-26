@@ -47,21 +47,22 @@ class CategoryController extends Controller
     }
 
 
-    public function edit(category $category)
+    public function edit($id)
     {
-        //
+        
     }
 
 
-    public function update(Request $request, category $category)
+    public function update(Request $request, $id)
     {
-        $categor->update(['name'=> $request->name]);
+        category::where('id',$id)->update(['name' => $request->name]);
         return back();
     }
 
 
     public function destroy($id)
     {
+
         $category=category::where('id',$id)->first();
         // حذف الصورة من storage
         if ($category->image && Storage::exists($category->image)) {
@@ -70,5 +71,6 @@ class CategoryController extends Controller
         // حذف الصنف من قاعدة البيانات
         $category->delete();
         return back();
+
     }
 }

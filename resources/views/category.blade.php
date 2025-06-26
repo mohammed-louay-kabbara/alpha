@@ -260,7 +260,7 @@
                                                             alt="" srcset=""></td>
                                                     <td>{{ $c->name }}</td>
                                                     <td>
-                                                        <div class="flex">
+                                                        <div class="d-flex gap-2">
                                                             <button type="button" class="btn btn-success">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"

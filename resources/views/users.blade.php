@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="../pages/tables.html">
+                    <a class="nav-link active" href="../pages/tables.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../pages/billing.html">
+                    <a class="nav-link" href="../pages/billing.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-credit-card text-dark text-sm opacity-10"></i>
@@ -111,9 +111,9 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
                                 href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Category</li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Users</li>
                     </ol>
-                    <h6 class="font-weight-bolder text-white mb-0">Category</h6>
+                    <h6 class="font-weight-bolder text-white mb-0">User</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -126,11 +126,7 @@
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-                            <button class="btn rounded-circle d-flex align-items-center justify-content-center"
-                                style="width: 40px; height: 40px; background-color: white;" data-bs-toggle="modal"
-                                data-bs-target="#addCategoryModal">
-                                <i class="bi bi-plus" style="font-size: 1.2rem; color: black;"></i>
-                            </button>
+                           
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
@@ -240,7 +236,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>إدارة الأصناف</h6>
+                            <h6>إدارة المستخدمين</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -249,16 +245,36 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">الصورة</th>
-                                                <th scope="col">اسم الصنف</th>
+                                                <th scope="col">اسم المستخدم</th>
+                                                <th scope="col">رقم الهاتف</th>
+                                                <th scope="col">الإيميل</th>
+                                                <th scope="col"> تاريخ الميلاد</th>
+
+                                                <th scope="col"> العنوان</th>
+                                                <th scope="col">الوصف </th>
+                                                <th scope="col">صلاحيات</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-                                            @foreach ($categories as $c)
+                                            @foreach ($users as $c)
                                                 <tr>
-                                                    <td><img src="{{ asset('http://alphaword.sy/storage/' . $c->image) }}"
+                                                    <td><img src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"
                                                             alt="" srcset=""></td>
                                                     <td>{{ $c->name }}</td>
+                                                    <td>{{ $c->phone }}</td>
+                                                    <td>{{ $c->email }}</td>
+                                                    <td>{{ $c->datebirthday }}</td>
+                                                    <td>{{ $c->address }}</td>
+                                                    <td>{{ $c->description }}</td>
+                                                    <td>
+                                                        @if ($c->role == 2)
+                                                            مستخدم
+                                                        @endif
+                                                    @else
+                                                        أدمن
+                                                    </td>
+
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <button type="button" class="btn btn-success"
@@ -291,8 +307,9 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="editCategoryModal{{ $c->id }}" tabindex="-1"
-                                                    aria-labelledby="editCategoryLabel" aria-hidden="true">
+                                                <div class="modal fade" id="editCategoryModal{{ $c->id }}"
+                                                    tabindex="-1" aria-labelledby="editCategoryLabel"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form method="POST"
@@ -345,43 +362,6 @@
 
         </div>
     </main>
-    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form method="POST" action="{{ route('category_admin.store') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addCategoryLabel">إضافة صنف جديد</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="إغلاق"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="name" style="color: black" class="form-label">اسم الصنف</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="image" style="color: black" class="form-label">صورة الصنف</label>
-                            <input type="file" class="form-control" id="image" name="image"
-                                accept="image/*" required>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                        <button type="submit" style="background-color: #F62C20; color:white"
-                            class="btn btn">إضافة</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
     <!--   Core JS Files   -->
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>

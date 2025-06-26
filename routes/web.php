@@ -17,10 +17,11 @@ Route::middleware('jwt.session')->group(function () {
     'show' => 'dashboard_admin.show',
     'edit' => 'dashboard_admin.edit',
     'update' => 'dashboard_admin.update',
-    'destroy' => 'dashboard_admin.destroy',
-]);
+    'destroy' => 'dashboard_admin.destroy',]);
+    
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
     Route::resource('category_admin', CategoryController::class);
+    Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
    Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');

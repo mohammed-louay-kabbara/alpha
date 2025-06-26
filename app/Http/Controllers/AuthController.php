@@ -43,6 +43,14 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
+
+    public function getusers()
+    {
+        $users=User::get();
+        return view('users',compact('users'));
+    }
+
+
     public function editpassword(Request $request)
     {
      $user = Auth::user(); // أو User::find(Auth::id());

@@ -211,8 +211,7 @@ public function verifyResetCode(Request $request)
 
     public function login_admin(Request $request){
 
-    $credentials = $request->only('email', 'password');
-    
+        $credentials = $request->only('email', 'password');
         if (!$token = JWTAuth::attempt($credentials)) {
             return redirect()->back()->with('error', 'بيانات الدخول غير صحيحة');
         }
@@ -224,7 +223,7 @@ public function verifyResetCode(Request $request)
 
         session(['jwt_token' => $token]); // تخزين التوكن في الجلسة
 
-        return redirect('/dashboard');
+        return redirect('/dashboard_admin');
     }
 
     // public function logout()

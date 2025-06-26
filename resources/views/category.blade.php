@@ -242,12 +242,12 @@
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <div class="table-responsive" >
-                                    <table class="table align-items-center mb-0" style="background-color: white">
-                                        <thead class="table-dark" style="background-color: white">
-                                            <tr style="background-color: white">
-                                                <th>#</th>
-                                                <th>الاسم</th>
-                                                <th>البريد الإلكتروني</th>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">الاسم</th>
+                                                <th scope="col">البريد الإلكتروني</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">

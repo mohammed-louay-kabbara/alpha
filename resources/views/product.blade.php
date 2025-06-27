@@ -269,7 +269,7 @@
                                             {{ $i = 1 }}
                                             @foreach ($products as $c)
                                                 <tr>
-                                                    <td>{{ $i++ }}</td>
+                                                    <td>{{ $c->is_approvede }}</td>
                                                     <td>{{ $c->name }}</td>
                                                     <td>{{ $c->price }}</td>
                                                     <td>{{ $c->description }}</td>

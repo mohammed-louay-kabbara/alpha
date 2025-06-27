@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardcontroller;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 
 

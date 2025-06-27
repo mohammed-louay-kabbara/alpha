@@ -254,7 +254,6 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
                                                 <th scope="col"> اسم المنتج</th>
                                                 <th scope="col"> السعر</th>
                                                 <th scope="col">الوصف</th>
@@ -269,7 +268,6 @@
 
                                             @foreach ($products as $c)
                                                 <tr>
-                                                    <td>{{ $i=1; $i++ }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn"
                                                             data-bs-toggle="modal"

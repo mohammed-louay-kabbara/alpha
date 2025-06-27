@@ -46,33 +46,16 @@ class CategoryController extends Controller
         //
     }
 
-
     public function edit($id)
     {
         
     }
-
 
     public function update(Request $request, $id)
     {
         category::where('id',$id)->update(['name' => $request->name]);
         return back();
     }
-
-
-    // public function destroy($id)
-    // {
-
-    //     $category=category::where('id',$id)->first();
-    //     // حذف الصورة من storage
-    //     if ($category->image && Storage::exists($category->image)) {
-    //         Storage::delete($category->image);
-    //     }
-    //     // حذف الصنف من قاعدة البيانات
-    //     $category->delete();
-    //     return back();
-    // }
-
         public function destroy($id)
         {
             $category = category::findOrFail($id);

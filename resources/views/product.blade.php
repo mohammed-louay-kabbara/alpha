@@ -252,12 +252,6 @@
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        $table->string('');
-                                        $table->double('', 15, 8);
-                                        $table->text('');
-                                        $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
-                                        $table->foreignId('category_id')->constrained('categories')->CascadeOnDelete();
-                                        $table->boolean('is_approved')->default(false);
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -283,10 +277,9 @@
                                                     <td>{{ $c->user->phone }}</td>
                                                     <td>{{ $c->category->name }}</td>
                                                     <td>
-                                                        @if ($c->is_approvede == 0)
+                                                        @if ($c->is_approvede == false)
                                                             غير موافق عليه
-                                                        @else
-                                                            تمت الموافقة عليه
+                                                        @else  تمت الموافقة عليه
                                                         @endif
                                                     </td>
                                                     <td>

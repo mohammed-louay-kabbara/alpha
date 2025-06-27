@@ -269,7 +269,7 @@
                                             {{ $i = 1 }}
                                             @foreach ($products as $c)
                                                 <tr>
-                                                    <td>{{ $c->is_approvede }}</td>
+                                                    <td>{{ $i++ }}</td>
                                                     <td>{{ $c->name }}</td>
                                                     <td>{{ $c->price }}</td>
                                                     <td>{{ $c->description }}</td>
@@ -277,7 +277,8 @@
                                                     <td>{{ $c->user->phone }}</td>
                                                     <td>{{ $c->category->name }}</td>
                                                     <td>
-                                                        @if ($c->is_approvede)
+                                                        
+                                                        @if ($c->is_approved)
                                                             تمت الموافقة عليه
                                                         @else
                                                             غير موافق عليه

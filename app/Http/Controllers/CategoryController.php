@@ -60,17 +60,29 @@ class CategoryController extends Controller
     }
 
 
-    public function destroy($id)
-    {
+    // public function destroy($id)
+    // {
 
-        $category=category::where('id',$id)->first();
-        // حذف الصورة من storage
-        if ($category->image && Storage::exists($category->image)) {
-            Storage::delete($category->image);
+    //     $category=category::where('id',$id)->first();
+    //     // حذف الصورة من storage
+    //     if ($category->image && Storage::exists($category->image)) {
+    //         Storage::delete($category->image);
+    //     }
+    //     // حذف الصنف من قاعدة البيانات
+    //     $category->delete();
+    //     return back();
+    // }
+
+        public function destroy($id)
+        {
+            $category = category::findOrFail($id);
+            // حذف الصورة من storage/public
+            if ($category->image && Storage::disk('public')->exists($category->image)) {
+                Storage::disk('public')->delete($category->image);
+            }
+            // حذف الصنف من قاعدة البيانات
+            $category->delete();
+            return back()->with('success', 'تم حذف الصنف بنجاح');
         }
-        // حذف الصنف من قاعدة البيانات
-        $category->delete();
-        return back();
 
-    }
 }

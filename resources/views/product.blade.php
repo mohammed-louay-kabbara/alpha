@@ -266,7 +266,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-                                            {{ $i=1; }}
+                                            {{ $i = 1 }}
                                             @foreach ($products as $c)
                                                 <tr>
                                                     <td>{{ $i++ }}</td>
@@ -277,9 +277,10 @@
                                                     <td>{{ $c->user->phone }}</td>
                                                     <td>{{ $c->category->name }}</td>
                                                     <td>
-                                                        @if ($c->is_approvede == false)
+                                                        @if ($c->is_approvede)
+                                                            تمت الموافقة عليه
+                                                        @else
                                                             غير موافق عليه
-                                                        @else  تمت الموافقة عليه
                                                         @endif
                                                     </td>
                                                     <td>

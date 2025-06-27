@@ -23,7 +23,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        
+        $products=product::with(['user','files'])->get();
+        return view('product',compact('products'));
     }
     
      public function searchProducts(Request $request)

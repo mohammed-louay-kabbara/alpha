@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../pages/tables.html">
+                    <a class="nav-link" href="../pages/tables.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="../pages/virtual-reality.html">
+                    <a class="nav-link active" href="../pages/virtual-reality.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-app text-dark text-sm opacity-10"></i>
@@ -116,9 +116,9 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
                                 href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Users</li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Products</li>
                     </ol>
-                    <h6 class="font-weight-bolder text-white mb-0">User</h6>
+                    <h6 class="font-weight-bolder text-white mb-0">Product</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -252,39 +252,43 @@
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">
+                                        $table->string('');
+                                        $table->double('', 15, 8);
+                                        $table->text('');
+                                        $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
+                                        $table->foreignId('category_id')->constrained('categories')->CascadeOnDelete();
+                                        $table->boolean('is_approved')->default(false);
                                         <thead>
                                             <tr>
-                                                <th scope="col">الصورة</th>
-                                                <th scope="col">اسم المستخدم</th>
-                                                <th scope="col">رقم الهاتف</th>
-                                                <th scope="col">الإيميل</th>
-                                                <th scope="col"> تاريخ الميلاد</th>
-                                                <th scope="col"> العنوان</th>
-                                                <th scope="col">الوصف </th>
-                                                <th scope="col">صلاحيات</th>
+                                                <th scope="col">#</th>
+                                                <th scope="col"> اسم المنتج</th>
+                                                <th scope="col"> السعر</th>
+                                                <th scope="col">الوصف</th>
+                                                <th scope="col"> اسم المتخدم</th>
+                                                <th scope="col"> رقم الهاتف</th>
+                                                <th scope="col">نوع المنتج </th>
+                                                <th scope="col">الحالة</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-                                            @foreach ($users as $c)
+                                            {{ $i=1; }}
+                                            @foreach ($products as $c)
                                                 <tr>
-                                                    <td><img width="75px"
-                                                            src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"alt=""
-                                                            srcset=""></td>
+                                                    <td>{{ $i++ }}</td>
                                                     <td>{{ $c->name }}</td>
-                                                    <td>{{ $c->phone }}</td>
-                                                    <td>{{ $c->email }}</td>
-                                                    <td>{{ $c->datebirthday }}</td>
-                                                    <td>{{ $c->address }}</td>
+                                                    <td>{{ $c->price }}</td>
                                                     <td>{{ $c->description }}</td>
+                                                    <td>{{ $c->user->name }}</td>
+                                                    <td>{{ $c->user->phone }}</td>
+                                                    <td>{{ $c->category->name }}</td>
                                                     <td>
-                                                        @if ($c->role == 2)
-                                                            User
+                                                        @if ($c->is_approvede == 0)
+                                                            غير موافق عليه
                                                         @else
-                                                            Admin
+                                                            تمت الموافقة عليه
                                                         @endif
                                                     </td>
-
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <form action="{{ route('user_delete', $c->id) }}"

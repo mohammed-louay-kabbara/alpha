@@ -269,7 +269,7 @@
 
                                             @foreach ($products as $c)
                                                 <tr>
-                                                    <td>{{ $i++ }}</td>
+                                                    <td>{{ $i=1; $i++ }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn"
                                                             data-bs-toggle="modal"

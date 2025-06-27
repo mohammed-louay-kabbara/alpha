@@ -237,11 +237,8 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0">
                             <h6>إدارة المستخدمين</h6>
-                            <div class="alert alert-secondary" role="alert">
-                                A simple secondary alert—check it out!
-                            </div>
                             @if (session('success'))
-                                <div class="alert alert-danger" role="alert">
+                                <div cclass="alert alert-secondary" role="alert">
                                     {{ session('success') }}
                                 </div>
                             @endif

@@ -8,8 +8,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 
 
-
-
 Route::middleware('jwt.session')->group(function () {
     Route::resource('dashboard_admin', dashboardcontroller::class)->names([
     'index' => 'dashboard_admin.index',
@@ -26,6 +24,10 @@ Route::middleware('jwt.session')->group(function () {
     Route::get('/products_admin', [ProductController::class, 'create'])->name('products_admin');
     ROute::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/api/product/files/{id}', function ($id) {
+    $product = App\Models\product::with('files')->findOrFail($id);
+    return response()->json($product->files);
+});
 });
 
    Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');

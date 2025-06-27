@@ -269,8 +269,7 @@
                                             @foreach ($products as $c)
                                                 <tr>
                                                     <td>
-                                                        <button type="button" class="btn btn"
-                                                            data-bs-toggle="modal"
+                                                        <button type="button" class="btn btn" data-bs-toggle="modal"
                                                             data-bs-target="#editCategoryModal{{ $c->id }}">
                                                             {{ $c->name }}
                                                         </button>
@@ -310,21 +309,9 @@
                                                 <div class="modal fade" id="editCategoryModal{{ $c->id }}"
                                                     tabindex="-1" aria-labelledby="editCategoryLabel"
                                                     aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            @foreach ($c->files as $f)
-                                                                @if ($f->file_type == 'image')
-                                                                    <img src="{{ asset('http://alphaword.sy/storage/' . $f->file_path) }}"
-                                                                        alt="" srcset="">
-                                                                @else
-                                                                    <video class="w-100" controls>
-                                                                        <source
-                                                                            src="{{ asset('http://alphaword.sy/storage/' . $f->file_path) }}"
-                                                                            type="video/mp4">
-                                                                        متصفحك لا يدعم تشغيل الفيديو.
-                                                                    </video>
-                                                                @endif
-                                                            @endforeach
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content p-3" id="modalContent">
+                                                            <!-- سيتم تعبئة الصور والفيديو هنا -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -378,6 +365,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+
+    <script>
+        function showFiles(productId) {
+            fetch(`/api/product/files/${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let html = '';
+                    data.forEach(file => {
+                        if (file.file_type === 'image') {
+                            html += `<img src="/storage/${file.file_path}" class="img-fluid mb-2" />`;
+                        } else {
+                            html += `
+                            <video class="w-100 mb-2" controls>
+                                <source src="/storage/${file.file_path}" type="video/mp4">
+                            </video>
+                        `;
+                        }
+                    });
+                    document.getElementById('modalContent').innerHTML = html;
+                });
+        }
+    </script>
+
 </body>
 
 </html>

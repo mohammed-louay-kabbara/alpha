@@ -293,11 +293,16 @@ public function verifyResetCode(Request $request)
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        if ($user->picture && Storage::disk('public')->exists($user->picture)) {
+        if ($user->picture=="profile_pictures/defoult_image.jpg") {
+            $user->delete();
+        return back()->with('success', 'تم حذف الصنف بنجاح');
+        }
+        elseif ($user->picture && Storage::disk('public')->exists($user->picture)) {
             Storage::disk('public')->delete($user->picture);
+            $user->delete();
+        return back()->with('success', 'تم حذف الصنف بنجاح');
         }
         
-        $user->delete();
-        return back()->with('success', 'تم حذف الصنف بنجاح');
+
         }
 }

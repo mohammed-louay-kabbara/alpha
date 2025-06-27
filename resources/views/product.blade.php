@@ -313,7 +313,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             @foreach ($c->files as $f)
-                                                                @if ($file_type == 'image')
+                                                                @if ($f->file_type == 'image')
                                                                     <img src="{{ asset('http://alphaword.sy/storage/' . $f->file_path) }}"
                                                                         alt="" srcset="">
                                                                 @else

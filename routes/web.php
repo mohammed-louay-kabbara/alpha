@@ -25,9 +25,9 @@ Route::middleware('jwt.session')->group(function () {
     ROute::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-   Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');
 
-Route::get('/login', function () {
-    return view('sign-in');
-})->name('login');
+   Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');
+    Route::get('/login', function () {
+        return view('sign-in');
+    })->name('login');
 

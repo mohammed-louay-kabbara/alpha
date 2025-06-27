@@ -286,7 +286,7 @@
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <form
-                                                                action="{{ route('category_admin.destroy', $c->id) }}"
+                                                                action="{{ route('user_delete', $c->id) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
                                                                 @csrf

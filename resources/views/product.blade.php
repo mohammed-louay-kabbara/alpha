@@ -269,7 +269,7 @@
                                             @foreach ($products as $c)
                                                 <tr>
                                                     <td>
-                                                        <button type="button" class="btn btn" data-bs-toggle="modal"
+                                                        <button type="button"  onclick="showFiles({{ $c->id }})" class="btn btn" data-bs-toggle="modal"
                                                             data-bs-target="#editCategoryModal{{ $c->id }}">
                                                             {{ $c->name }}
                                                         </button>

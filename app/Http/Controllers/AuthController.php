@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -46,14 +46,14 @@ class AuthController extends Controller
 
     public function getusers()
     {
-        $users=User::get();
+        $users=user::get();
         return view('users',compact('users'));
     }
 
 
     public function editpassword(Request $request)
     {
-     $user = Auth::user(); // أو User::find(Auth::id());
+     $user = Auth::user(); // أو user::find(Auth::id());
 
     if (Hash::check($request->oldpassword, $user->password)) {
         $user->update([
@@ -66,7 +66,7 @@ class AuthController extends Controller
     }
 
     public function info_user(Request $request){
-        $user=User::where('id',$request->user_id)->first();
+        $user=user::where('id',$request->user_id)->first();
         return response()->json($user, 200);
     }
     public function count_profile(Request $request){
@@ -84,7 +84,7 @@ class AuthController extends Controller
         public function my_profile(){
         if (Auth::id()) {
         $user_id=Auth::id();
-        $user=User::where('id',$user_id)->first();
+        $user=user::where('id',$user_id)->first();
         $count_follower=follower::where('followed_id',$user_id)->count();
         $count_product=product::where('user_id',$user_id)->count();
         $count_reels=reels::where('user_id',$user_id)->count();
@@ -123,29 +123,29 @@ class AuthController extends Controller
         return response()->json('تم التعديل بنجاح', 200);
     }
 
-       public function searchUsers(Request $request)
+       public function searchusers(Request $request)
     {
         $query = $request->input('query');
         if (strlen($query) < 1) {
             return response()->json(['error' => 'يرجى إدخال حرف واحد على الأقل'], 400);
         }
-        $users = User::where('name', 'like', "%$query%")->get();
+        $users = user::where('name', 'like', "%$query%")->get();
         return response()->json([$users]);
     }
 
     public function users(){
         if (Auth::id()) {
-            $adr=User::where('id',Auth::id())->first();
-            $users= User::where('address',$adr->address)->get();
+            $adr=user::where('id',Auth::id())->first();
+            $users= user::where('address',$adr->address)->get();
             return response()->json($users, 200);
         }
-        User::where('address',);
+        user::where('address',);
     }
 
 
 public function sendVerificationCode(Request $request)
 {
-    $user = User::where('email', $request->email)->first();
+    $user = user::where('email', $request->email)->first();
     if ($user) {
     $request->validate([
         'email' => 'required|email'
@@ -198,7 +198,7 @@ public function verifyResetCode(Request $request)
                 'errors'  => $validator->errors(),
             ], 422);
         }      
-        $user = User::create([
+        $user = user::create([
             'name'         => $request->name,
             'email'        => $request->email,
             'phone'        => $request->phone,
@@ -210,18 +210,18 @@ public function verifyResetCode(Request $request)
         ]);
          
       JWTAuth::factory()->setTTL(43200); // 30 يوم
-      $token = JWTAuth::fromUser($user);
+      $token = JWTAuth::fromuser($user);
 
         return response()->json([
             'status' => true,
-            'message' => 'User registered successfully',
+            'message' => 'user registered successfully',
             'user' => $user,
             'token' => $token,
         ]);
     }
 
     /**
-     * Get the authenticated User.
+     * Get the authenticated user.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -290,4 +290,14 @@ public function verifyResetCode(Request $request)
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->picture && Storage::disk('public')->exists($user->picture)) {
+            Storage::disk('public')->delete($user->picture);
+        }
+        
+        $user->delete();
+        return back()->with('success', 'تم حذف الصنف بنجاح');
+        }
 }

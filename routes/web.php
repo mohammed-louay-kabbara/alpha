@@ -22,6 +22,7 @@ Route::middleware('jwt.session')->group(function () {
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
     Route::resource('category_admin', CategoryController::class);
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');
+    ROute::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
    Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');

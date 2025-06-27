@@ -237,6 +237,14 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0">
                             <h6>إدارة المستخدمين</h6>
+                            <div class="alert alert-secondary" role="alert">
+                                A simple secondary alert—check it out!
+                            </div>
+                            @if (session('success'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -249,7 +257,6 @@
                                                 <th scope="col">رقم الهاتف</th>
                                                 <th scope="col">الإيميل</th>
                                                 <th scope="col"> تاريخ الميلاد</th>
-
                                                 <th scope="col"> العنوان</th>
                                                 <th scope="col">الوصف </th>
                                                 <th scope="col">صلاحيات</th>
@@ -308,7 +315,6 @@
                 </div>
             </div>
         </div>
-
         </div>
     </main>
     <!--   Core JS Files   -->

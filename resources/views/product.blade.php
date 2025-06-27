@@ -266,18 +266,23 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-                                            {{ $i = 1 }}
+
                                             @foreach ($products as $c)
                                                 <tr>
                                                     <td>{{ $i++ }}</td>
-                                                    <td>{{ $c->name }}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editCategoryModal{{ $c->id }}">
+                                                            {{ $c->name }}
+                                                        </button>
+                                                    </td>
                                                     <td>{{ $c->price }}</td>
                                                     <td>{{ $c->description }}</td>
                                                     <td>{{ $c->user->name }}</td>
                                                     <td>{{ $c->user->phone }}</td>
                                                     <td>{{ $c->category->name }}</td>
                                                     <td>
-                                                        
                                                         @if ($c->is_approved)
                                                             تمت الموافقة عليه
                                                         @else
@@ -304,6 +309,27 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <div class="modal fade" id="editCategoryModal{{ $c->id }}"
+                                                    tabindex="-1" aria-labelledby="editCategoryLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            @foreach ($files as $f)
+                                                                @if ($file_type == 'image')
+                                                                    <img src="{{ asset('http://alphaword.sy/storage/' . $f->file_path) }}"
+                                                                        alt="" srcset="">
+                                                                @else
+                                                                    <video class="w-100" controls>
+                                                                        <source
+                                                                            src="{{ asset('http://alphaword.sy/storage/' . $f->file_path) }}"
+                                                                            type="video/mp4">
+                                                                        متصفحك لا يدعم تشغيل الفيديو.
+                                                                    </video>
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endforeach
                                         </tbody>
                                     </table>

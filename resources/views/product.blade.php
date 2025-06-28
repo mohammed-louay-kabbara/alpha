@@ -270,7 +270,7 @@
                                                 <tr>
                                                     <td>
                                                         <button type="button"  onclick="showFiles({{ $c->id }})" class="btn btn" data-bs-toggle="modal"
-                                                            data-bs-target="#editCategoryModal{{ $c->id }}">
+                                                            data-bs-target="#editCategoryModal">
                                                             {{ $c->name }}
                                                         </button>
                                                     </td>
@@ -306,7 +306,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="editCategoryModal{{ $c->id }}"
+                                                <div class="modal fade" id="editCategoryModal"
                                                     tabindex="-1" aria-labelledby="editCategoryLabel"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">

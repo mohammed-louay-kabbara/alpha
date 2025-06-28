@@ -256,12 +256,12 @@
                         <div class="card-body px-0 pt-0 pb-2">
                             <form method="GET" action="{{ route('filterproduct') }}">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="filter" id="all"
+                                    <input class="" type="radio" name="filter" id="all"
                                         value="all" checked onchange="this.form.submit()">
                                     <label class="form-check-label" for="all">الكل</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="filter" id="not_approved"
+                                    <input class="" type="radio" name="filter" id="not_approved"
                                         value="0" onchange="this.form.submit()">
                                     <label class="form-check-label" for="not_approved">لم يوافق عليه</label>
                                 </div>

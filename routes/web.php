@@ -22,6 +22,8 @@ Route::middleware('jwt.session')->group(function () {
     Route::resource('category_admin', CategoryController::class);
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');
     Route::get('/products_admin', [ProductController::class, 'create'])->name('products_admin');
+    Route::delete('delete_product',[ProductController::class, 'destroy'])->name('delete_product');
+    Route::get('accepted_product/{id}',[ProductController::class, 'edit'])->name('accepted_product');
     ROute::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/api/product/files/{id}', function ($id) {

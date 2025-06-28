@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Models\product_file;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-
     public function index()
     {
     $product = product::with('files','user')->withCount([
@@ -74,9 +74,10 @@ class ProductController extends Controller
     }
 
 
-    public function edit(product $product)
+    public function edit($id)
     {
-        
+        product::where('id',$id)->update(['is_approved',true]);
+        return back();
     }
 
 
@@ -86,8 +87,23 @@ class ProductController extends Controller
     }
 
 
-    public function destroy(product $product)
+    public function destroy($id)
     {
-        
+        $product=product::with('files')->where('id',$id)->first();
+        // حذف كل الصور والفيديوهات المرتبطة بالمنتج
+        foreach ($product->files as $file) {
+            // حذف الملف من storage
+            if (Storage::disk('public')->exists($file->file_path)) {
+                Storage::disk('public')->delete($file->file_path);
+            }
+
+            // حذف السطر من جدول product_files
+            $file->delete();
+        }
+
+        // حذف المنتج نفسه
+        $product->delete();
+
+        return response()->json(['message' => 'تم حذف المنتج مع صوره بنجاح'], 200);
     }
 }

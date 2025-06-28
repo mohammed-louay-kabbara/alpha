@@ -17,7 +17,6 @@ Route::middleware('jwt.session')->group(function () {
     'edit' => 'dashboard_admin.edit',
     'update' => 'dashboard_admin.update',
     'destroy' => 'dashboard_admin.destroy',]);
-    
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
     Route::resource('category_admin', CategoryController::class);
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');

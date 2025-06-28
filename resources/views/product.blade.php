@@ -305,7 +305,8 @@
                                                                     </svg>
                                                                 </button>
                                                             </form>
-                                                            <a href="{{ route('accepted_product', $c->id) }}" class="btn btn-success">
+                                                            @if ($c->is_approved)
+                                                                    <a href="{{ route('accepted_product', $c->id) }}" class="btn btn-success">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="currentColor"
                                                                     class="bi bi-check2-square" viewBox="0 0 16 16">
@@ -315,6 +316,8 @@
                                                                         d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0" />
                                                                 </svg>
                                                             </a>
+                                                            @endif
+                                                        
                                                         </div>
                                                     </td>
                                                 </tr>

@@ -76,7 +76,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        product::where('id',$id)->update(['is_approved',true]);
+        product::where('id',$id)->update(['is_approved',1]);
         return back();
     }
 

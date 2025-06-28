@@ -269,7 +269,9 @@
                                             @foreach ($products as $c)
                                                 <tr>
                                                     <td>
-                                                        <button type="button"  onclick="showFiles({{ $c->id }})" class="btn btn" data-bs-toggle="modal"
+                                                        <button type="button"
+                                                            onclick="showFiles({{ $c->id }})" class="btn btn"
+                                                            data-bs-toggle="modal"
                                                             data-bs-target="#editCategoryModal">
                                                             {{ $c->name }}
                                                         </button>
@@ -306,9 +308,8 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="editCategoryModal"
-                                                    tabindex="-1" aria-labelledby="editCategoryLabel"
-                                                    aria-hidden="true">
+                                                <div class="modal fade" id="editCategoryModal" tabindex="-1"
+                                                    aria-labelledby="editCategoryLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content p-3" id="modalContent">
                                                             <!-- سيتم تعبئة الصور والفيديو هنا -->
@@ -366,7 +367,7 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 
-    <script>
+    {{-- <script>
         function showFiles(productId) {
             fetch(`/api/product/files/${productId}`)
                 .then(response => response.json())
@@ -386,7 +387,41 @@
                     document.getElementById('modalContent').innerHTML = html;
                 });
         }
+    </script> --}}
+
+    <script>
+        function showFiles(productId) {
+            fetch(`/api/product/files/${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let html = '';
+
+                    if (data.length === 0) {
+                        html = `<div class="alert alert-info text-center">لا يوجد ملفات لعرضها</div>`;
+                    } else {
+                        data.forEach(file => {
+                            if (file.file_type === 'image') {
+                                html += `<img src="/storage/${file.file_path}" class="img-fluid mb-2" />`;
+                            } else {
+                                html += `
+                                <video class="w-100 mb-2" controls>
+                                    <source src="/storage/${file.file_path}" type="video/mp4">
+                                </video>
+                            `;
+                            }
+                        });
+                    }
+
+                    document.getElementById('modalContent').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error("حدث خطأ:", error);
+                    document.getElementById('modalContent').innerHTML =
+                        `<div class="alert alert-danger text-center">فشل في تحميل الملفات</div>`;
+                });
+        }
     </script>
+
 
 </body>
 

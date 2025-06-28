@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/img/alpha3.png') }}">
+    <link href="https://demos.creative-tim.com/argon-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="https://demos.creative-tim.com/argon-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
+
     <title>
         Alpha
     </title>
@@ -306,10 +309,13 @@
                                                                 </button>
                                                             </form>
                                                             @if ($c->is_approved == 0)
-                                                                <a href="{{ route('accepted_product', $c->id) }}" class="btn btn-success">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                        height="16" fill="currentColor"
-                                                                        class="bi bi-check2-square" viewBox="0 0 16 16">
+                                                                <a href="{{ route('accepted_product', $c->id) }}"
+                                                                    class="btn btn-success">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16" height="16"
+                                                                        fill="currentColor"
+                                                                        class="bi bi-check2-square"
+                                                                        viewBox="0 0 16 16">
                                                                         <path
                                                                             d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5z" />
                                                                         <path

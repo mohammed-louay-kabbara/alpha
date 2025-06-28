@@ -26,10 +26,19 @@ class ProductController extends Controller
         $products=product::with(['user','category'])->get();
         return view('product',compact('products'));
     }
+    public function filterproduct(Request $request)
+    {
+        if ($request->filter === '0') {
+            $products = Product::where('is_approved', 0)->get();
+        } else {
+            $products = product::with(['user','category'])->get();
+        }
+        return view('product', compact('products'));
+    }
     
      public function searchProducts(Request $request)
     {
-        $query = $request->input('query'); // ← هنا نستخدم input() للـ POST
+        $query = $request->input('query'); 
         if (!$query || trim($query) === '') {
             return response()->json(['products' => []]);
         }

@@ -244,12 +244,25 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>إدارة المستخدمين</h6>
+                            <form method="GET" action="{{ route('filterproduct') }}">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="filter" id="all"
+                                        value="all" checked onchange="this.form.submit()">
+                                    <label class="form-check-label" for="all">الكل</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="filter" id="not_approved"
+                                        value="0" onchange="this.form.submit()">
+                                    <label class="form-check-label" for="not_approved">لم يوافق عليه</label>
+                                </div>
+                            </form>
+                            <h6>إدارة المنتجات</h6>
                             @if (session('success'))
                                 <div cclass="alert alert-secondary" role="alert">
                                     {{ session('success') }}
                                 </div>
                             @endif
+
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -293,7 +306,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <form action="{{ route('user_delete', $c->id) }}"
+                                                            <form action="{{ route('delete_product', $c->id) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
                                                                 @csrf

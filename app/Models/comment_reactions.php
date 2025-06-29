@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class comment_reactions extends Model
 {
-    protected $fillable = ['commentable', 'reaction' , 'user_id'];
+    protected $fillable = ['commentable_type','commentable_id', 'reaction' , 'user_id'];
 }

@@ -14,6 +14,7 @@ use  App\Http\Controllers\ProductController;
 use  App\Http\Controllers\ProductLikeController;
 use  App\Http\Controllers\ProductCommentsController;
 use  App\Http\Controllers\FollowerController;
+use  App\Http\Controllers\CommentReactionsController;
 
 
 

@@ -39,6 +39,7 @@ Route::group([
     Route::post('count_profile', [AuthController::class, 'count_profile']);
     Route::post('info_user', [AuthController::class, 'info_user']);
     Route::get('my_profile', [AuthController::class, 'my_profile']);
+    Route::resource('commentReactions',CommentReactionsController::class);
     Route::get('my_products', [AuthController::class, 'my_products']);
     Route::get('my_reels', [AuthController::class, 'my_reels']);
     Route::resource('reels', ReelsController::class);

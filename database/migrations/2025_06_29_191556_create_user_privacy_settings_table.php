@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('user_privacy_settings', function (Blueprint $table) {
             $table->id();
-                $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->enum('followers_visibility', ['everyone', 'only_me'])->default('everyone');
             $table->enum('profile_visibility', ['everyone', 'followers'])->default('everyone');
@@ -22,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-    
+
     public function down(): void
     {
         Schema::dropIfExists('user_privacy_settings');

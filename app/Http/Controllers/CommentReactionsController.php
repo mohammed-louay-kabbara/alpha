@@ -37,8 +37,7 @@ class CommentReactionsController extends Controller
         $comment_reactions=comment_reactions::where('user_id',Auth::id())
             ->where('commentable_type',$request->type)
             ->where('commentable_id',$request->type_id)->first();
-        dd($comment_reactions);
-        if ($comment_reactions) {
+        if ($comment_reactions == null ) {
         comment_reactions::create([
             'user_id' => Auth::id(),
             'commentable_type' => $request->type,
@@ -46,6 +45,10 @@ class CommentReactionsController extends Controller
             'reaction' => $request->reaction
         ]);
         return response()->json(['تم إضافة تفاعلك'], 200);
+        }
+        else {
+            $comment_reactions->delete();
+            return response()->json(['تم حذف تفاعلك'], 200);
         }
 
     }

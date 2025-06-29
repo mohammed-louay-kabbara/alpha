@@ -11,7 +11,7 @@ class PrivacySettingController extends Controller
 
     public function index()
     {
-        $PrivacySetting=UserPrivacySetting::where(Auth::id())->first();
+        $PrivacySetting=UserPrivacySetting::where('user_id',Auth::id())->first();
          return response()->json([$PrivacySetting], 200);
     }
 

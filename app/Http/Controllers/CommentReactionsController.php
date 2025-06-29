@@ -30,8 +30,8 @@ class CommentReactionsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'commentable_type' => 'required',
-            'commentable_id' => 'required',
+            'type' => 'required',
+            'type_id' => 'required',
             'reaction' => 'required',
         ]);
         $comment_reactions=comment_reactions::where('user_id',Auth::id())

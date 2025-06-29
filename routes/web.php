@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardcontroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CommentReactionsController;
 
 
 Route::middleware('jwt.session')->group(function () {
@@ -26,8 +27,9 @@ Route::middleware('jwt.session')->group(function () {
     Route::get('/filterproduct', [ProductController::class, 'filterproduct'])->name('filterproduct');
     Route::delete('delete_product/{id}',[ProductController::class, 'destroy'])->name('delete_product');
     Route::get('accepted_product/{id}', [ProductController::class, 'edit'])->name('accepted_product');
-    ROute::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');
+    Route::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('commentReactions',CommentReactionsController::class);
     Route::get('/api/product/files/{id}', function ($id) {
     $product = App\Models\product::with('files')->findOrFail($id);
     return response()->json($product->files);

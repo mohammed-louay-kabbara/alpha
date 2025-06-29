@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\comment_reactions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentReactionsController extends Controller
 {
@@ -28,7 +29,25 @@ class CommentReactionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'commentable_type' => 'required',
+            'commentable_id' => 'required',
+            'reaction' => 'required',
+        ]);
+        $comment_reactions=comment_reactions::where('user_id',Auth::id())
+            ->where('commentable_type',$request->type)
+            ->where('commentable_id',$request->type_id)->first();
+        dd($comment_reactions);
+        if ($comment_reactions) {
+        comment_reactions::create([
+            'user_id' => Auth::id(),
+            'commentable_type' => $request->type,
+            'commentable_id' => $request->type_id,
+            'reaction' => $request->reaction
+        ]);
+        return response()->json(['تم إضافة تفاعلك'], 200);
+        }
+
     }
 
     /**

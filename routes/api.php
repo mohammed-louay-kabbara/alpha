@@ -15,6 +15,7 @@ use  App\Http\Controllers\ProductLikeController;
 use  App\Http\Controllers\ProductCommentsController;
 use  App\Http\Controllers\FollowerController;
 use  App\Http\Controllers\CommentReactionsController;
+use  App\Http\Controllers\PrivacySettingController;
 
 
 
@@ -46,6 +47,11 @@ Route::group([
     Route::resource('reels', ReelsController::class);
     Route::get('show_products/{id}',[ProductController::class,'show']);
     Route::get('show_reels/{id}',[ReelsController::class,'show']);
+    Route::resource('PrivacySetting', PrivacySettingController::class);
+    Route::get('profilevisibility',[PrivacySettingController::class,'profilevisibility']);
+    Route::get('commentpermission',[PrivacySettingController::class,'commentpermission']);
+    Route::get('reactionvisibility',[PrivacySettingController::class,'reactionvisibility']);
+    
     Route::resource('reelLikes', ReelLikesController::class);
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);

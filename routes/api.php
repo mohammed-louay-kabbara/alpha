@@ -51,7 +51,6 @@ Route::group([
     Route::post('profilevisibility',[PrivacySettingController::class,'profilevisibility']);
     Route::post('commentpermission',[PrivacySettingController::class,'commentpermission']);
     Route::post('reactionvisibility',[PrivacySettingController::class,'reactionvisibility']);
-
     Route::resource('reelLikes', ReelLikesController::class);
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);

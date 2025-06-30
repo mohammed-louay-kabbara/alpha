@@ -77,6 +77,7 @@ class FollowerController extends Controller
 
     public function destroy(Request $request)
     {
+        dd(Auth::id());
         $follower=follower::where('follower_id',$request->follower_id)
             ->where('followed_id',Auth::id())->first();
         if ($follower) {
@@ -84,7 +85,7 @@ class FollowerController extends Controller
             return response()->json(['تم إلغاء المتابعة'], 200);
         }
         else {
-            return response()->json(['لست صديقه'], 200);
+            return response()->json(['لست صديقه'], 403);
         }
     }
 }

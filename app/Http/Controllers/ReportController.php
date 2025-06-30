@@ -31,8 +31,8 @@ class ReportController extends Controller
     {
         report::create([
             'user_id' => Auth::id(),
-            'report_typeable_type' => $report->report_typeable_type,
-            'report_typeable_id' => $report->report_typeable_id
+            'report_typeable_type' => $request->report_typeable_type,
+            'report_typeable_id' => $request->report_typeable_id
         ]);
         return response()->json(['تمت إرسال بلاغك إلى الادمن'], 200);
     }

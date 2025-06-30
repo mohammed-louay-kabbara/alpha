@@ -22,7 +22,6 @@ use  App\Http\Controllers\ReportController;
 
 
 Route::group([
-
     'middleware' => 'api',
     'prefix' => 'auth'
 

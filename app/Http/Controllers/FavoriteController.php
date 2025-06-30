@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $user = Auth::user();
@@ -32,11 +30,12 @@ class FavoriteController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
+        $Favorite=Favorite::where('user_id',Auth::id())
+        ->where('favoritable_type',$request->type)->where('favoritable_id' , $request->id)->first();
+        if ($Favorite == null) {
         Favorite::create([
         'user_id' => Auth::id(),
         'favoritable_type' => $request->type,
@@ -45,11 +44,17 @@ class FavoriteController extends Controller
             'status' => true,
             'message' => 'تم الإضافة إلى السلة',
         ], 201);
+        } 
+        else {
+            $Favorite->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'تم حذفه من سلة',
+            ], 201);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(favorite $favorite)
     {
         //

@@ -88,6 +88,6 @@ class FollowerController extends Controller
      */
     public function destroy(follower $follower)
     {
-        //
+        
     }
 }

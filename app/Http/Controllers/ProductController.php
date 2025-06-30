@@ -46,6 +46,21 @@ class ProductController extends Controller
         return response()->json(['products' => $products]);
     }
 
+    public function sold(Request $request)
+    {
+        $product=product::where('id',$request->product_id)->first();
+        if($product->is_sold == 0)
+        {
+            $product->update(['is_sold'=> 1]);
+        }
+
+        else {
+            $product->update(['is_sold'=> 0]);
+        }
+
+        return response()->json(['تم تعديل المنتج'], 200);
+    }
+
     public function store(Request $request)
     {  
         $request->validate([

@@ -19,13 +19,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->CascadeOnDelete();
             $table->foreignId('category_id')->constrained('categories')->CascadeOnDelete();
             $table->boolean('is_approved')->default(false);
+             $table->boolean('is_sold')->default(false);
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('products');

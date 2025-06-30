@@ -80,14 +80,14 @@ class FollowerController extends Controller
      */
     public function update(Request $request, follower $follower)
     {
-        //
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(follower $follower)
+
+    public function destroy($id)
     {
-        
+        follower::where('follower_id',$request->follower_id)
+        ->where('followed_id',Auth::id())->delete();
+        return response()->json(['تم إلغاء المتابعة'], 200);
     }
 }

@@ -80,12 +80,13 @@ class FollowerController extends Controller
      
         $follower=follower::where('follower_id',$request->follower_id)
             ->where('followed_id',Auth::id())->first();
-        if ($follower) {
-            $follower->delete();
-            return response()->json(['تم إلغاء المتابعة'], 200);
+        if ($follower == null) {
+                   return response()->json(['لست صديقه'], 403);
+
         }
         else {
-            return response()->json(['لست صديقه'], 403);
+            $follower->delete();
+            return response()->json(['تم إلغاء المتابعة'], 200);
         }
     }
 }

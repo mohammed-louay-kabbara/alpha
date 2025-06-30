@@ -65,5 +65,5 @@ Route::group([
     Route::resource('ProductComments', ProductCommentsController::class);
     Route::resource('follower', FollowerController::class);
     Route::get('getFollower', [FollowerController::class,'getFollower']);
-     Route::delete('deletefollower', [FollowerController::class,'destroy']);
+     Route::delete('deletefollower', [FollowerController::class,'deleteFollower']);
     Route::get('homereels',[ReelsController::class,'homereels']);

@@ -74,19 +74,22 @@ class FollowerController extends Controller
         
     }
 
-
-    public function destroy(Request $request)
+    public function deleteFollower(Request $request)
     {
-     
         $follower=follower::where('follower_id',$request->follower_id)
             ->where('followed_id',Auth::id())->first();
         if ($follower == null) {
-                   return response()->json(['لست صديقه'], 403);
-
+            return response()->json(['لست صديقه'], 403);
         }
         else {
             $follower->delete();
             return response()->json(['تم إلغاء المتابعة'], 200);
         }
+    }
+
+
+
+    public function destroy(Request $request)
+    {
     }
 }

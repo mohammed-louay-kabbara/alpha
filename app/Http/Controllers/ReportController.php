@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\report;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -28,7 +29,12 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        report::create([
+            'user_id' => Auth::id(),
+            'report_typeable_type' => $report->report_typeable_type,
+            'report_typeable_id' => $report->report_typeable_id
+        ]);
+        return response()->json(['تمت إرسال بلاغك إلى الادمن'], 200);
     }
 
     /**

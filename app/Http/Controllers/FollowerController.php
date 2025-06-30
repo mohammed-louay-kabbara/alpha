@@ -32,9 +32,6 @@ class FollowerController extends Controller
         return response()->json($followers, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
@@ -59,32 +56,26 @@ class FollowerController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(follower $follower)
     {
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(follower $follower)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, follower $follower)
     {
         
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         follower::where('follower_id',$request->follower_id)
         ->where('followed_id',Auth::id())->delete();

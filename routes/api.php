@@ -16,6 +16,7 @@ use  App\Http\Controllers\ProductCommentsController;
 use  App\Http\Controllers\FollowerController;
 use  App\Http\Controllers\CommentReactionsController;
 use  App\Http\Controllers\PrivacySettingController;
+use  App\Http\Controllers\ReportController;
 
 
 
@@ -45,6 +46,7 @@ Route::group([
     Route::get('my_products', [AuthController::class, 'my_products']);
     Route::get('my_reels', [AuthController::class, 'my_reels']);
     Route::resource('reels', ReelsController::class);
+    Route::resource('Report', ReportController::class);
     Route::get('show_products/{id}',[ProductController::class,'show']);
     Route::post('product_sold',[ProductController::class,'sold']);
     Route::get('show_reels/{id}',[ReelsController::class,'show']);

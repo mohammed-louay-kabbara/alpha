@@ -120,7 +120,6 @@ class ProductController extends Controller
             if (Storage::disk('public')->exists($file->file_path)) {
                 Storage::disk('public')->delete($file->file_path);
             }
-
             // حذف السطر من جدول product_files
             $file->delete();
         }

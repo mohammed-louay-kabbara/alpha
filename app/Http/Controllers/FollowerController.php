@@ -77,7 +77,7 @@ class FollowerController extends Controller
 
     public function destroy(Request $request)
     {
-        dd(Auth::id());
+     
         $follower=follower::where('follower_id',$request->follower_id)
             ->where('followed_id',Auth::id())->first();
         if ($follower) {

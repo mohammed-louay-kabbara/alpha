@@ -23,8 +23,18 @@ class ProductController extends Controller
 
     public function create()
     {
-        $products=product::with(['user','category'])->get();
-        return view('product',compact('products'));
+        // $products=product::with(['user','category'])->get();
+        // return view('product',compact('products'));
+        $query = product::with(['user','category'])->query();
+        if ($request->has('approved')) {
+            $query->where('is_approved', $request->approved);
+        }
+        $products = $query->get();
+        if ($request->ajax()) {
+            return view('partials.products_table', compact('products'))->render();
+        }
+        return view('product', compact('products'));
+
     }
     public function filterproduct(Request $request)
     {

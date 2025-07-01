@@ -125,8 +125,19 @@ class AuthController extends Controller
 
        public function searchusers(Request $request)
     {
-    if (Auth::check()) {
+        $query = $request->input('query');
+        if (strlen($query) < 1) {
+            return response()->json(['error' => 'يرجى إدخال حرف واحد على الأقل'], 400);
+        }
+        $users = user::where('name', 'like', "%$query%")->get();
+        return response()->json([$users]);
+    }
+
+    public function users()
+    {
+         if (Auth::check()) {
         $user = Auth::user();
+
         // استرجاع المستخدمين في نفس العنوان ما عدا نفسه
         $users = User::where('address', $user->address)
                      ->where('id', '!=', $user->id)
@@ -142,13 +153,13 @@ class AuthController extends Controller
                 'user' => [
                     'id' => $u->id,
                     'name' => $u->name,
-                    'picture' => $u->picture, // تأكد أن هذا العمود موجود في جدول users
+                    'image' => $u->image, // تأكد أن هذا العمود موجود في جدول users
                 ],
                 'mutual_friends' => $common->take(3)->map(function ($friend) {
                     return [
                         'id' => $friend->id,
                         'name' => $friend->name,
-                        'picture' => $friend->picture,
+                        'image' => $friend->image,
                     ];
                 }),
                 'mutual_count' => $common->count(),
@@ -160,44 +171,6 @@ class AuthController extends Controller
 
     return response()->json(['message' => 'Unauthorized'], 401);
     }
-    
-
-/*if (Auth::check()) {
-    $user = Auth::user();
-    $users = User::where('address', $user->address)
-                 ->where('id', '!=', $user->id)
-                 ->get();
-
-    $suggested = [];
-
-    foreach ($users as $u) {
-        // الحصول على الأصدقاء المشتركين بين المستخدم الحالي والمستخدم المقترح
-        $common = $user->followings->intersect($u->followings);
-
-        // تحميل بيانات المستخدمين المشتركين (الاسم، الصورة ...)
-        // $common->load('profile'); // إذا كان عندك علاقة Profile، أو احذفها إذا الحقول في جدول users نفسه
-
-        $suggested[] = [
-            'user' => $u,
-            'mutual_friends' => $common->take(3)->map(function ($friend) {
-                return [
-                    'id' => $friend->id,
-                    'name' => $friend->name,
-                    'picture' => $friend->picture ?? null, // غيّر image حسب اسم العمود في جدول users
-                ];
-            }),
-            'mutual_count' => $common->count(),
-        ];
-    }
-    return response()->json($suggested, 200);
-    }
-        // if (Auth::id()) {
-        //     $adr=user::where('id',Auth::id())->first();
-        //     $users= user::where('address',$adr->address)->get();
-        //     return response()->json($users, 200);
-        // }
-        */
-    
 
 
 public function sendVerificationCode(Request $request)

@@ -21,7 +21,7 @@ class ProductController extends Controller
     return response()->json($product);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $query = Product::with(['user', 'category']);
         if ($request->has('approved')) {

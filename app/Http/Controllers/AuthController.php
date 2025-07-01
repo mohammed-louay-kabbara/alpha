@@ -134,12 +134,33 @@ class AuthController extends Controller
     }
 
     public function users(){
-        if (Auth::id()) {
-            $adr=user::where('id',Auth::id())->first();
-            $users= user::where('address',$adr->address)->get();
-            return response()->json($users, 200);
+
+            if (Auth::check()) {
+        $user = Auth::user();
+        // استرجاع من بنفس العنوان
+        $users = User::where('address', $user->address)
+                     ->where('id', '!=', $user->id) // لا يشمل نفسه
+                     ->get();
+        $suggested = [];
+        foreach ($users as $u) {
+            // الأصدقاء المشتركون بين المستخدم الحالي والمستخدم المقترح
+            $common = $user->followings->intersect($u->followings);
+            $suggested[] = [
+                'user' => $u,
+                'mutual_friends' => $common->take(3), // مثلاً أول 3 أصدقاء فقط
+                'mutual_count' => $common->count(),
+            ];
         }
-        user::where('address',);
+
+        return response()->json($suggested, 200);
+    }
+
+    return response()->json([], 401);
+        // if (Auth::id()) {
+        //     $adr=user::where('id',Auth::id())->first();
+        //     $users= user::where('address',$adr->address)->get();
+        //     return response()->json($users, 200);
+        // }
     }
 
 

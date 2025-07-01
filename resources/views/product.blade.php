@@ -30,6 +30,12 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+    .custom-select:focus {
+        border-color: #F62C20;
+        box-shadow: 0 0 0 0.25rem rgba(246, 44, 32, 0.25); /* تأثير جميل عند التركيز */
+    }
+</style>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -256,8 +262,8 @@
                         <div class="card-body px-0 pt-0 pb-2">
 
                             <form method="GET" action="{{ route('filterproduct') }}">
-                                <select class="form-select" name="filter" multiple
-                                    aria-label="multiple select example" style="color: #F62C20;">
+                                <select class="form-select custom-select" name="filter" multiple
+                                    aria-label="multiple select example">
                                     <option value="0">الكل</option>
                                     <option value="1">لم يوافق عليه</option>
                                 </select>

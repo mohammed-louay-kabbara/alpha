@@ -254,7 +254,20 @@
 
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
-                            <form method="GET" action="{{ route('filterproduct') }}">
+
+                            <div class="d-flex gap-4 justify-content-start align-items-center">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="filter" id="all"
+                                        value="all" checked>
+                                    <label class="form-check-label" for="all">الكل</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="filter" id="not_approved"
+                                        value="0">
+                                    <label class="form-check-label" for="not_approved">لم يوافق عليه</label>
+                                </div>
+                            </div>
+                            {{-- <form method="GET" action="{{ route('filterproduct') }}">
                                 <div class="form-check form-check-inline">
                                     <input class="" type="radio" name="filter" id="all"
                                         value="all" checked onchange="this.form.submit()">
@@ -265,7 +278,7 @@
                                         value="0" onchange="this.form.submit()">
                                     <label class="form-check-label" for="not_approved">لم يوافق عليه</label>
                                 </div>
-                            </form>
+                            </form> --}}
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">
@@ -399,27 +412,21 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 
-    {{-- <script>
-        function showFiles(productId) {
-            fetch(`/api/product/files/${productId}`)
-                .then(response => response.json())
-                .then(data => {
-                    let html = '';
-                    data.forEach(file => {
-                        if (file.file_type === 'image') {
-                            html += `<img src="/storage/${file.file_path}" class="img-fluid mb-2" />`;
-                        } else {
-                            html += `
-                            <video class="w-100 mb-2" controls>
-                                <source src="/storage/${file.file_path}" type="video/mp4">
-                            </video>
-                        `;
-                        }
-                    });
-                    document.getElementById('modalContent').innerHTML = html;
-                });
-        }
-    </script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('input[name="filter"]').on('change', function() {
+            let value = $(this).val();
+
+            $.ajax({
+                url: value === 'all' ? '/products' : `/products?approved=${value}`,
+                method: 'GET',
+                success: function(response) {
+                    $('#productTable').html(response); // تأكد أن المنتجات تُعرض داخل هذا الـ div
+                }
+            });
+        });
+    </script>
+
 
     <script>
         function showFiles(productId) {

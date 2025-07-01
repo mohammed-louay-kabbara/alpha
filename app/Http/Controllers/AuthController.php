@@ -125,31 +125,42 @@ class AuthController extends Controller
 
        public function searchusers(Request $request)
     {
-        $query = $request->input('query');
-        if (strlen($query) < 1) {
-            return response()->json(['error' => 'يرجى إدخال حرف واحد على الأقل'], 400);
-        }
-        $users = user::where('name', 'like', "%$query%")->get();
-        return response()->json([$users]);
-    }
-
-    public function users(){
-            $user = Auth::user();
+if (Auth::check()) {
+        $user = Auth::user();
+        // استرجاع المستخدمين في نفس العنوان ما عدا نفسه
         $users = User::where('address', $user->address)
-                    ->where('id', '!=', $user->id)
-                    ->get();
+                     ->where('id', '!=', $user->id)
+                     ->get();
+
         $suggested = [];
+
         foreach ($users as $u) {
-            $mutual = $user->followings->intersect($u->followings);
+            // استرجاع الأصدقاء المشتركين
+            $common = $user->followings->intersect($u->followings);
 
             $suggested[] = [
-                'userinfo' => $u->name,
-                'mutual_friends' => $mutual,
-                'mutual_count' => $mutual->count(),
+                'user' => [
+                    'id' => $u->id,
+                    'name' => $u->name,
+                    'image' => $u->image, // تأكد أن هذا العمود موجود في جدول users
+                ],
+                'mutual_friends' => $common->take(3)->map(function ($friend) {
+                    return [
+                        'id' => $friend->id,
+                        'name' => $friend->name,
+                        'image' => $friend->image,
+                    ];
+                }),
+                'mutual_count' => $common->count(),
             ];
+        }
+
+        return response()->json($suggested, 200);
+    }
+
+    return response()->json(['message' => 'Unauthorized'], 401);
     }
     
-    return response()->json($suggested, 200);
 
 /*if (Auth::check()) {
     $user = Auth::user();
@@ -186,7 +197,7 @@ class AuthController extends Controller
         //     return response()->json($users, 200);
         // }
         */
-    }
+    
 
 
 public function sendVerificationCode(Request $request)

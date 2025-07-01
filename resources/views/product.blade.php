@@ -255,30 +255,12 @@
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
 
-                            <div class="d-flex gap-4 justify-content-start align-items-center">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="filter" id="all"
-                                        value="all" checked>
-                                    <label class="form-check-label" for="all">الكل</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="filter" id="not_approved"
-                                        value="0">
-                                    <label class="form-check-label" for="not_approved">لم يوافق عليه</label>
-                                </div>
-                            </div>
-                            {{-- <form method="GET" action="{{ route('filterproduct') }}">
-                                <div class="form-check form-check-inline">
-                                    <input class="" type="radio" name="filter" id="all"
-                                        value="all" checked onchange="this.form.submit()">
-                                    <label class="form-check-label" for="all">الكل</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="" type="radio" name="filter" id="not_approved"
-                                        value="0" onchange="this.form.submit()">
-                                    <label class="form-check-label" for="not_approved">لم يوافق عليه</label>
-                                </div>
-                            </form> --}}
+                            <form method="GET" action="{{ route('filterproduct') }}">
+                                <select class="form-select" multiple aria-label="multiple select example">
+                                    <option value="1">الكل</option>
+                                    <option value="2">لم يوافق عليه</option>
+                                </select>
+                            </form>
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">

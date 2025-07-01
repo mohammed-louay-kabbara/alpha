@@ -135,27 +135,35 @@ class AuthController extends Controller
 
     public function users(){
 
-            if (Auth::check()) {
-        $user = Auth::user();
-        // استرجاع من بنفس العنوان
-        $users = User::where('address', $user->address)
-                     ->where('id', '!=', $user->id) // لا يشمل نفسه
-                     ->get();
-        $suggested = [];
-        foreach ($users as $u) {
-            // الأصدقاء المشتركون بين المستخدم الحالي والمستخدم المقترح
-            $common = $user->followings->intersect($u->followings);
-            $suggested[] = [
-                'user' => $u,
-                'mutual_friends' => $common->take(3), // مثلاً أول 3 أصدقاء فقط
-                'mutual_count' => $common->count(),
-            ];
-        }
+if (Auth::check()) {
+    $user = Auth::user();
+    $users = User::where('address', $user->address)
+                 ->where('id', '!=', $user->id)
+                 ->get();
 
-        return response()->json($suggested, 200);
+    $suggested = [];
+
+    foreach ($users as $u) {
+        // الحصول على الأصدقاء المشتركين بين المستخدم الحالي والمستخدم المقترح
+        $common = $user->followings->intersect($u->followings);
+
+        // تحميل بيانات المستخدمين المشتركين (الاسم، الصورة ...)
+        $common->load('profile'); // إذا كان عندك علاقة Profile، أو احذفها إذا الحقول في جدول users نفسه
+
+        $suggested[] = [
+            'user' => $u,
+            'mutual_friends' => $common->take(3)->map(function ($friend) {
+                return [
+                    'id' => $friend->id,
+                    'name' => $friend->name,
+                    'picture' => $friend->picture ?? null, // غيّر image حسب اسم العمود في جدول users
+                ];
+            }),
+            'mutual_count' => $common->count(),
+        ];
     }
-
-    return response()->json([], 401);
+    return response()->json($suggested, 200);
+    }
         // if (Auth::id()) {
         //     $adr=user::where('id',Auth::id())->first();
         //     $users= user::where('address',$adr->address)->get();

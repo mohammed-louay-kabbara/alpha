@@ -267,6 +267,7 @@
                                     <option value="0">الكل</option>
                                     <option value="1">لم يوافق عليه</option>
                                 </select>
+                                <button type="submit">فرز</button>
                             </form>
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">

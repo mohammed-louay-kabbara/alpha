@@ -148,7 +148,8 @@ class AuthController extends Controller
                 'mutual_count' => $mutual->count(),
             ];
     }
-
+    
+    return response()->json($suggested, 200);
 
 /*if (Auth::check()) {
     $user = Auth::user();

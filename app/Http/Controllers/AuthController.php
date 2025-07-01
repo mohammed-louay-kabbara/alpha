@@ -125,7 +125,7 @@ class AuthController extends Controller
 
        public function searchusers(Request $request)
     {
-if (Auth::check()) {
+    if (Auth::check()) {
         $user = Auth::user();
         // استرجاع المستخدمين في نفس العنوان ما عدا نفسه
         $users = User::where('address', $user->address)
@@ -142,13 +142,13 @@ if (Auth::check()) {
                 'user' => [
                     'id' => $u->id,
                     'name' => $u->name,
-                    'image' => $u->image, // تأكد أن هذا العمود موجود في جدول users
+                    'picture' => $u->picture, // تأكد أن هذا العمود موجود في جدول users
                 ],
                 'mutual_friends' => $common->take(3)->map(function ($friend) {
                     return [
                         'id' => $friend->id,
                         'name' => $friend->name,
-                        'image' => $friend->image,
+                        'picture' => $friend->picture,
                     ];
                 }),
                 'mutual_count' => $common->count(),

@@ -134,8 +134,23 @@ class AuthController extends Controller
     }
 
     public function users(){
+            $user = Auth::user();
+        $users = User::where('address', $user->address)
+                    ->where('id', '!=', $user->id)
+                    ->get();
+        $suggested = [];
+        foreach ($users as $u) {
+            $mutual = $user->followings->intersect($u->followings);
 
-if (Auth::check()) {
+            $suggested[] = [
+                'userinfo' => $u->name,
+                'mutual_friends' => $mutual,
+                'mutual_count' => $mutual->count(),
+            ];
+    }
+
+
+/*if (Auth::check()) {
     $user = Auth::user();
     $users = User::where('address', $user->address)
                  ->where('id', '!=', $user->id)
@@ -169,6 +184,7 @@ if (Auth::check()) {
         //     $users= user::where('address',$adr->address)->get();
         //     return response()->json($users, 200);
         // }
+        */
     }
 
 

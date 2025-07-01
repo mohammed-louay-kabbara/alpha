@@ -148,7 +148,7 @@ if (Auth::check()) {
         $common = $user->followings->intersect($u->followings);
 
         // تحميل بيانات المستخدمين المشتركين (الاسم، الصورة ...)
-        $common->load('user'); // إذا كان عندك علاقة Profile، أو احذفها إذا الحقول في جدول users نفسه
+        // $common->load('profile'); // إذا كان عندك علاقة Profile، أو احذفها إذا الحقول في جدول users نفسه
 
         $suggested[] = [
             'user' => $u,

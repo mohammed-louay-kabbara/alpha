@@ -256,9 +256,10 @@
                         <div class="card-body px-0 pt-0 pb-2">
 
                             <form method="GET" action="{{ route('filterproduct') }}">
-                                <select class="form-select" multiple aria-label="multiple select example">
-                                    <option value="1">الكل</option>
-                                    <option value="2">لم يوافق عليه</option>
+                                <select class="form-select" name="filter" multiple
+                                    aria-label="multiple select example" style="color: #F62C20;">
+                                    <option value="0">الكل</option>
+                                    <option value="1">لم يوافق عليه</option>
                                 </select>
                             </form>
                             <div class="table-responsive p-0">

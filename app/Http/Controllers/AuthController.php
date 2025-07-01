@@ -135,41 +135,42 @@ class AuthController extends Controller
 
     public function users()
     {
-         if (Auth::check()) {
-        $user = Auth::user();
+         $authUser = Auth::user();
 
-        // استرجاع المستخدمين في نفس العنوان ما عدا نفسه
-        $users = User::where('address', $user->address)
-                     ->where('id', '!=', $user->id)
-                     ->get();
+    // اجلب كل المستخدمين ما عدا نفسه
+    $users = User::where('id', '!=', $authUser->id)->get();
 
-        $suggested = [];
+    // اجلب قائمة من يتابعهم المستخدم الحالي (IDs فقط)
+    $authFollowingIds = $authUser->followings->pluck('followed_id');
 
-        foreach ($users as $u) {
-            // استرجاع الأصدقاء المشتركين
-            $common = $user->followings->intersect($u->followings);
+    $result = [];
 
-            $suggested[] = [
-                'user' => [
-                    'id' => $u->id,
-                    'name' => $u->name,
-                    'image' => $u->image, // تأكد أن هذا العمود موجود في جدول users
-                ],
-                'mutual_friends' => $common->take(3)->map(function ($friend) {
-                    return [
-                        'id' => $friend->id,
-                        'name' => $friend->name,
-                        'image' => $friend->image,
-                    ];
-                }),
-                'mutual_count' => $common->count(),
-            ];
-        }
+    foreach ($users as $user) {
+        // اجلب من يتابعهم هذا المستخدم
+        $userFollowingIds = $user->followings->pluck('followed_id');
 
-        return response()->json($suggested, 200);
+        // تقاطع بين من تتابعهم أنت ومن يتابعهم هو = أصدقاء مشتركين
+        $mutualIds = $authFollowingIds->intersect($userFollowingIds);
+
+        // اجلب بيانات الأصدقاء المشتركين
+        $mutualFriends = User::whereIn('id', $mutualIds)->get();
+
+        $result[] = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'picture' => $user->picture,
+            'mutual_count' => $mutualFriends->count(),
+            'mutual_friends' => $mutualFriends->map(function ($mf) {
+                return [
+                    'id' => $mf->id,
+                    'name' => $mf->name,
+                    'picture' => $mf->picture,
+                ];
+            }),
+        ];
     }
 
-    return response()->json(['message' => 'Unauthorized'], 401);
+    return response()->json($result, 200);
     }
 
 

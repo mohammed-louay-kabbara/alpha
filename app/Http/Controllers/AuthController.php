@@ -126,7 +126,7 @@ class AuthController extends Controller
        public function searchusers(Request $request)
     {
 if (Auth::check()) {
-        $user = auth()->user();
+        $user = Auth::user();
         // استرجاع المستخدمين في نفس العنوان ما عدا نفسه
         $users = User::where('address', $user->address)
                      ->where('id', '!=', $user->id)

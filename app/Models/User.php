@@ -50,7 +50,10 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-       
+       public function followings()
+{
+    return $this->hasMany(Follower::class, 'follower_id');
+}
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -64,27 +67,17 @@ class User extends Authenticatable implements JWTSubject
     {
       return $this->hasMany(Story::class);
     }   
-// الأشخاص الذين أتابعهم
-public function followings()
-{
-    return $this->belongsToMany(User::class, 'followers', 'follower_id', 'followed_id');
-}
 
-// الأشخاص الذين يتابعونني
-public function followers()
-{
-    return $this->belongsToMany(User::class, 'followers', 'followed_id', 'follower_id');
-}
 
-    // public function followers()
-    // {
-    //     return $this->hasMany(Follower::class, 'followed_id');
-    // }
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'followed_id');
+    }
 
-    // public function following()
-    // {
-    //     return $this->hasMany(Follower::class, 'follower_id');
-    // }
+    public function following()
+    {
+        return $this->hasMany(Follower::class, 'follower_id');
+    }
 
     public function reel_comment()
     {

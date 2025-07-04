@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +24,7 @@
 
 <body class="g-sidenav-show   bg-gray-100">
     <div class="min-height-300 bg-dark position-absolute w-100"></div>
- <aside
+    <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
         id="sidenav-main">
         <div class="sidenav-header">
@@ -43,7 +44,8 @@
                     <a class="nav-link active" href="{{ route('dashboard_admin.index') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="ni ni-tv-2 text-dark text-sm opacity-10" fill="currentColor"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                class="ni ni-tv-2 text-dark text-sm opacity-10" fill="currentColor"
                                 class="bi bi-house-door" viewBox="0 0 16 16">
                                 <path
                                     d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
@@ -68,8 +70,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('categories_admin') }}">
                         <div class="border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="ni ni-tv-2 text-dark text-sm opacity-10" width="20" height="20" fill="#F62C20"
-                                class="bi bi-card-checklist" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ni ni-tv-2 text-dark text-sm opacity-10"
+                                width="20" height="20" fill="#F62C20" class="bi bi-card-checklist"
+                                viewBox="0 0 16 16">
                                 <path
                                     d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
                                 <path
@@ -102,10 +105,10 @@
                                 <path
                                     d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" />
                             </svg>
-                                  
+
                         </div>
                         <span class="nav-link-text mr-24">إدارة الإعلانات </span>
-              
+
                     </a>
                 </li>
 
@@ -113,8 +116,8 @@
                     <a class="nav-link" href="{{ route('reels') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                fill="#F62C20" class="bi bi-camera-reels" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"
+                                class="bi bi-camera-reels" viewBox="0 0 16 16">
                                 <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0M1 3a2 2 0 1 0 4 0 2 2 0 0 0-4 0" />
                                 <path
                                     d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm6 8.73V7.27l-3.5 1.555v4.35zM1 8v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1" />
@@ -147,7 +150,6 @@
                         <div class="input-group">
                             <span class="input-group-text text-body"><i class="fas fa-search"
                                     aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Type here...">
                         </div>
                     </div>
                     <ul class="navbar-nav  justify-content-end">
@@ -385,45 +387,20 @@
                     <div class="card card-carousel overflow-hidden h-100 p-0">
                         <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
                             <div class="carousel-inner border-radius-lg h-100">
+                                @foreach ($advertisements as $a )
                                 <div class="carousel-item h-100 active"
-                                    style="background-image: url('../assets/img/carousel-1.jpg');
-                  background-size: cover;">
+                                    style="background-image: url('{{ asset('http://alphaword.sy/storage/' . $a->image) }}');
+                                          background-size: cover;">
                                     <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                                         <div
                                             class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                                             <i class="ni ni-camera-compact text-dark opacity-10"></i>
                                         </div>
-                                        <h5 class="text-white mb-1">Get started with Argon</h5>
-                                        <p>There’s nothing I really wanted to do in life that I wasn’t able to get good
-                                            at.</p>
+                                        {{-- <h5 class="text-white mb-1">Get started with Argon</h5> --}}
+                                        <p>{{ $c->publishing_end }}</p>
                                     </div>
                                 </div>
-                                <div class="carousel-item h-100"
-                                    style="background-image: url('../assets/img/carousel-2.jpg');
-                 background-size: cover;">
-                                    <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                        <div
-                                            class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                            <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                                        </div>
-                                        <h5 class="text-white mb-1">Faster way to create web pages</h5>
-                                        <p>That’s my skill. I’m not really specifically talented at anything except for
-                                            the ability to learn.</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item h-100"
-                                    style="background-image: url('../assets/img/carousel-3.jpg');
-                  background-size: cover;">
-                                    <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                        <div
-                                            class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                            <i class="ni ni-trophy text-dark opacity-10"></i>
-                                        </div>
-                                        <h5 class="text-white mb-1">Share with us your design tips!</h5>
-                                        <p>Don’t be afraid to be wrong because you can’t learn anything from a
-                                            compliment.</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <button class="carousel-control-prev w-5 me-3" type="button"
                                 data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

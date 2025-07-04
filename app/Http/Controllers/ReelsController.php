@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\reels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ReelsController extends Controller
 {
@@ -83,7 +84,7 @@ class ReelsController extends Controller
         if ($reels->media_path && Storage::disk('public')->exists($reels->media_path)) {
             Storage::disk('public')->delete($reels->media_path);
         }
-        
+
         $reels->delete();
         return back()->with('success', 'تم حذف الصنف بنجاح');
     }

@@ -273,7 +273,7 @@
                                                     <td>
                                                         <button class="btn btn-outline-primary btn-sm"
                                                             data-bs-toggle="modal" data-bs-target="#reelModal"
-                                                            data-video="{{ asset('storage/' . $reel->video_path) }}">
+                                                            data-video="{{ asset('storage/' . $c->video_path) }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor"
                                                                 class="bi bi-file-play" viewBox="0 0 16 16">

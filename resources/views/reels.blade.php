@@ -273,7 +273,7 @@
                                                     <td>
                                                         <button class="btn btn-outline-primary btn-sm"
                                                             data-bs-toggle="modal" data-bs-target="#reelModal"
-                                                            data-video="{{ asset('storage/' . $c->video_path) }}">
+                                                            data-video="{{ asset('storage/' . $c->media_path) }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor"
                                                                 class="bi bi-file-play" viewBox="0 0 16 16">
@@ -284,8 +284,8 @@
                                                             </svg>
                                                         </button>
                                                     </td>
-                                                    <td>{{  $c->user->name }}</td>
-                                                     <td>{{ $c->user->phone }}</td>
+                                                    <td>{{ $c->user->name }}</td>
+                                                    <td>{{ $c->user->phone }}</td>
                                                     <td>{{ $c->description }}</td>
                                                     <td>{{ $c->created_at }}</td>
                                                     <td>
@@ -378,6 +378,26 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        const modal = document.getElementById('reelModal');
+        const video = document.getElementById('reelVideo');
+        const source = document.getElementById('videoSource');
+
+        modal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const videoUrl = button.getAttribute('data-video');
+
+            source.src = videoUrl;
+            video.load(); // يبدأ تحميل الفيديو عند الفتح
+        });
+
+        modal.addEventListener('hidden.bs.modal', function() {
+            video.pause();
+            video.currentTime = 0;
+            source.src = '';
+        });
+    </script>
 </body>
 
 </html>

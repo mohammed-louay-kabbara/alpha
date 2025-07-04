@@ -262,12 +262,12 @@
                         <div class="card-body px-0 pt-0 pb-2">
 
                             <form method="GET" action="{{ route('filterproduct') }}">
-                                <select class="form-select custom-select" name="filter" multiple
+                                <select class="form-select custom-select" style="height: 50%; width: 50%;" name="filter" multiple
                                     aria-label="multiple select example">
-                                    <option value="0">الكل</option>
-                                    <option value="1">لم يوافق عليه</option>
+                                    <option value="1">الكل</option>
+                                    <option value="0">لم يوافق عليه</option>
                                 </select>
-                                <button type="submit">فرز</button>
+                                <button type="submit" class="btn btn" style="background-color: #F62C20">فرز</button>
                             </form>
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">

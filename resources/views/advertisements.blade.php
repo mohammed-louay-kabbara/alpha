@@ -108,7 +108,7 @@
                             </svg>
                                   
                         </div>
-                        <span class="nav-link-text " style="margin-right: 100px">إدارة الإعلانات </span>
+                        <span class="nav-link-text mr-24">إدارة الإعلانات </span>
               
                     </a>
                 </li>

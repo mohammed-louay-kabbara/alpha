@@ -198,7 +198,7 @@
                                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                                                 </svg></button>
                                                             <form
-                                                                action="{{ route('category_admin.destroy', $c->id) }}"
+                                                                action="{{ route('advertisement.destroy', $c->id) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
                                                                 @csrf
@@ -222,25 +222,31 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form method="POST"
-                                                                action="{{ route('category_admin.update', $c->id) }}"
+                                                                action="{{ route('advertisement.update', $c->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="editCategoryLabel">
-                                                                        تعديل الصنف</h5>
+                                                                        تعديل الاعلان</h5>
                                                                     <button type="button" class="btn-close"
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="إغلاق"></button>
                                                                 </div>
-
                                                                 <div class="modal-body">
                                                                     <div class="mb-3">
+                                                                        <label for="description" style="color: black"
+                                                                            class="form-label">وصف الاعلان</label>
+                                                                        <textarea class="form-control" name="description" required>
+                                                                             {{ $c->description }}
+                                                                        </textarea>
+                                                                    </div>
+                                                                    <div class="mb-3">
                                                                         <label for="name" style="color: black"
-                                                                            class="form-label">اسم الصنف</label>
+                                                                            class="form-label"> تاريخ الانتهاء</label>
                                                                         <input type="text" class="form-control"
-                                                                            id="name" name="name"
-                                                                            value="{{ $c->name }}" required>
+                                                                            id="name" name="publishing_end"
+                                                                            value="{{ \Carbon\Carbon::parse($c->publishing_end)->format('Y-m-d') }}" required>
                                                                     </div>
                                                                 </div>
 
@@ -288,7 +294,7 @@
                         <div class="mb-3">
                             <label for="image" style="color: black" class="form-label">صورة الاعلان</label>
                             <input type="file" class="form-control" id="image" name="image"
-                            accept="image/*" required>
+                                accept="image/*" required>
                         </div>
                         <div class="mb-3">
                             <label for="name" style="color: black" class="form-label">وصف</label>
@@ -296,7 +302,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="name" style="color: black" class="form-label">تاريخ الانتهاء</label>
-                            <input type="date" name="publishing_end" id="">
+                            <input type="date" class="form-control" name="publishing_end" id="">
                         </div>
                     </div>
 

@@ -48,14 +48,24 @@ class AdvertisementController extends Controller
     }
 
 
-    public function update(Request $request, advertisement $advertisement)
+    public function update(Request $request, $id)
     {
-        //
+        advertisement::where('id',$id)->update([
+            'description' => $request->description,
+            'publishing_end' => $request->publishing_end
+        ]);
+        return back();
     }
 
 
     public function destroy($id)
     {
+            $advertisement = advertisement::findOrFail($id);
+            if ($advertisement->image && Storage::disk('public')->exists($advertisement->image)) {
+                Storage::disk('public')->delete($advertisement->image);
+            }
+            $advertisement->delete();
+            return back()->with('success', 'تم حذف الصنف بنجاح');
         
     }
 }

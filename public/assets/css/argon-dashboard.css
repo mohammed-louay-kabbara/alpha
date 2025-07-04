@@ -4747,7 +4747,7 @@ fieldset:disabled .btn {
   color: var(--bs-nav-link-color);
   background: none;
   border: 0;
-  margin-right: 100rem;
+  align-items: center;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 

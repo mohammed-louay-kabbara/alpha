@@ -6,17 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/img/alpha3.png') }}">
-    <link href="https://demos.creative-tim.com/argon-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="https://demos.creative-tim.com/argon-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
-
     <title>
         Alpha
     </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--     Fonts and icons     -->
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') }}" rel="stylesheet" />
@@ -60,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../pages/tables.html">
+                    <a class="nav-link " href="../pages/tables.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
@@ -87,7 +79,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="../pages/rtl.html">
+                    <a class="nav-link active" href="../pages/rtl.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-world-2 text-dark text-sm opacity-10"></i>
@@ -97,7 +89,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="../pages/profile.html">
+                    <a class="nav-link " href="../pages/profile.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
@@ -119,9 +111,9 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
                                 href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Reels</li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">advertisements</li>
                     </ol>
-                    <h6 class="font-weight-bolder text-white mb-0">Reel</h6>
+                    <h6 class="font-weight-bolder text-white mb-0">advertisement</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -134,7 +126,11 @@
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-
+                            <button class="btn rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 40px; height: 40px; background-color: white;" data-bs-toggle="modal"
+                                data-bs-target="#addCategoryModal">
+                                <i class="bi bi-plus" style="font-size: 1.2rem; color: black;"></i>
+                            </button>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
@@ -155,84 +151,6 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-bell cursor-pointer"></i>
                             </a>
-                            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
-                                aria-labelledby="dropdownMenuButton">
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="my-auto">
-                                                <img src="assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">
-                                                    <span class="font-weight-bold">New message</span> from Laur
-                                                </h6>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    <i class="fa fa-clock me-1"></i>
-                                                    13 minutes ago
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="my-auto">
-                                                <img src="../assets/img/small-logos/logo-spotify.svg"
-                                                    class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">
-                                                    <span class="font-weight-bold">New album</span> by Travis Scott
-                                                </h6>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    <i class="fa fa-clock me-1"></i>
-                                                    1 day
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                                <svg width="12px" height="12px" viewBox="0 0 43 36"
-                                                    version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>credit-card</title>
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                        fill-rule="evenodd">
-                                                        <g transform="translate(-2169.000000, -745.000000)"
-                                                            fill="#FFFFFF" fill-rule="nonzero">
-                                                            <g transform="translate(1716.000000, 291.000000)">
-                                                                <g transform="translate(453.000000, 454.000000)">
-                                                                    <path class="color-background"
-                                                                        d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                                        opacity="0.593633743"></path>
-                                                                    <path class="color-background"
-                                                                        d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                                                    </path>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </svg>
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">
-                                                    Payment successfully completed
-                                                </h6>
-                                                <p class="text-xs text-secondary mb-0">
-                                                    <i class="fa fa-clock me-1"></i>
-                                                    2 days
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -244,13 +162,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-
-                            <h6>إدارة الريلز</h6>
-                            @if (session('success'))
-                                <div cclass="alert alert-secondary" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+                            <h6>إدارة الأصناف</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -258,39 +170,35 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">الفيديو</th>
-                                                <th scope="col"> اسم المستخدم</th>
-                                                <th scope="col"> رقم الهاتف</th>
+                                                <th scope="col">الصورة</th>
                                                 <th scope="col">الوصف</th>
-                                                <th scope="col">تاريخ النشر</th>
+                                                <th scope="col">تاريخ الانتهاء</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-
-                                            @foreach ($reels as $c)
+                                            @foreach ($advertisement as $c)
                                                 <tr>
-                                                    <td>
-                                                        <button class="btn btn-outline-primary btn-sm"
-                                                            data-bs-toggle="modal" data-bs-target="#reelModal"
-                                                            data-video="{{ asset('storage/' . $c->media_path) }}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                height="16" fill="currentColor"
-                                                                class="bi bi-file-play" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M6 10.117V5.883a.5.5 0 0 1 .757-.429l3.528 2.117a.5.5 0 0 1 0 .858l-3.528 2.117a.5.5 0 0 1-.757-.43z" />
-                                                                <path
-                                                                    d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1" />
-                                                            </svg>
-                                                        </button>
-                                                    </td>
-                                                    <td>{{ $c->user->name }}</td>
-                                                    <td>{{ $c->user->phone }}</td>
+                                                    <td><img width="75px"
+                                                            src="{{ asset('http://alphaword.sy/storage/' . $c->image) }}"
+                                                            alt="" srcset=""></td>
                                                     <td>{{ $c->description }}</td>
-                                                    <td>{{ $c->created_at }}</td>
+                                                    <td>{{ $c->publishing_end }}</td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <form action="{{ route('delete_reel', $c->id) }}"
+                                                            <button type="button" class="btn btn-success"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#editCategoryModal{{ $c->id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                                </svg></button>
+                                                            <form
+                                                                action="{{ route('category_admin.destroy', $c->id) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
                                                                 @csrf
@@ -308,27 +216,48 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="reelModal" tabindex="-1"
-                                                    aria-labelledby="reelModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal fade" id="editCategoryModal{{ $c->id }}"
+                                                    tabindex="-1" aria-labelledby="editCategoryLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">عرض الفيديو</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" style="color:black"
-                                                                    aria-label="إغلاق"></button>
-                                                            </div>
-                                                            <div class="modal-body text-center">
-                                                                <video id="reelVideo" class="w-100 " style="height: 50%" controls>
-                                                                    <source id="videoSource" src=""
-                                                                        type="video/mp4">
-                                                                    متصفحك لا يدعم عرض الفيديو.
-                                                                </video>
-                                                            </div>
+                                                            <form method="POST"
+                                                                action="{{ route('category_admin.update', $c->id) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editCategoryLabel">
+                                                                        تعديل الصنف</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="إغلاق"></button>
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="name" style="color: black"
+                                                                            class="form-label">اسم الصنف</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="name" name="name"
+                                                                            value="{{ $c->name }}" required>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">إغلاق</button>
+                                                                    <button type="submit"
+                                                                        style="background-color: #F62C20; color:white"
+                                                                        class="btn btn">حفظ</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endforeach
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -339,8 +268,49 @@
                 </div>
             </div>
         </div>
+
         </div>
     </main>
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form method="POST" action="{{ route('advertisement.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addCategoryLabel">إضافة إعلان جديد</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="إغلاق"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="image" style="color: black" class="form-label">صورة الاعلان</label>
+                            <input type="file" class="form-control" id="image" name="image"
+                            accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" style="color: black" class="form-label">وصف</label>
+                            <textarea name="description" class="form-control" id="" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" style="color: black" class="form-label">تاريخ الانتهاء</label>
+                            <input type="date" name="publishing_end" id="">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="submit" style="background-color: #F62C20; color:white"
+                            class="btn btn">إضافة</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <!--   Core JS Files   -->
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -367,37 +337,11 @@
             });
         });
     </script>
+
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        const modal = document.getElementById('reelModal');
-        const video = document.getElementById('reelVideo');
-        const source = document.getElementById('videoSource');
-
-        modal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const videoUrl = button.getAttribute('data-video');
-
-            source.src = videoUrl;
-            video.load(); // يبدأ تحميل الفيديو عند الفتح
-        });
-
-        modal.addEventListener('hidden.bs.modal', function() {
-            video.pause();
-            video.currentTime = 0;
-            source.src = '';
-        });
-    </script>
 </body>
 
 </html>

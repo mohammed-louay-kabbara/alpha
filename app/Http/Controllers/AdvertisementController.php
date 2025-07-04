@@ -10,13 +10,13 @@ class AdvertisementController extends Controller
 
     public function index()
     {
-        
+        $advertisement= advertisement::get();
+        return view('advertisements',compact('advertisement'));
     }
 
     public function create()
     {
-       $advertisement= advertisement::get();
-        return view('advertisement',compact('advertisement'));
+
     }
 
 
@@ -32,6 +32,7 @@ class AdvertisementController extends Controller
             'description' => $request->description,
             'publishing_end' => $request->publishing_end
         ]);
+        return back();
     }
 
 
@@ -53,8 +54,8 @@ class AdvertisementController extends Controller
     }
 
 
-    public function destroy(advertisement $advertisement)
+    public function destroy($id)
     {
-        //
+        
     }
 }

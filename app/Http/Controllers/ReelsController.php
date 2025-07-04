@@ -21,7 +21,7 @@ class ReelsController extends Controller
         $reels = Reels::with('user')->orderBy('created_at', 'desc')->get();
         return view('reels',compact('reels'));
     }
-    
+
     public function homereels(){
         $reels = Reels::with('user')
             ->orderBy('created_at', 'desc')
@@ -76,8 +76,15 @@ class ReelsController extends Controller
     }
 
 
-    public function destroy(reels $reels)
+    public function destroy($id)
     {
-        //
+        $reels = reels::findOrFail($id);
+            // حذف الصورة من storage/public
+        if ($reels->media_path && Storage::disk('public')->exists($reels->media_path)) {
+            Storage::disk('public')->delete($reels->media_path);
+        }
+        
+        $reels->delete();
+        return back()->with('success', 'تم حذف الصنف بنجاح');
     }
 }

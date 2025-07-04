@@ -62,7 +62,6 @@ Route::group([
     Route::resource('productLike', ProductLikeController::class);
     Route::post('searchProducts', [ProductController::class,'searchProducts']);
     Route::post('searchUsers', [AuthController::class,'searchUsers']);
-
     Route::resource('ProductComments', ProductCommentsController::class);
     Route::resource('follower', FollowerController::class);
     Route::get('getFollower', [FollowerController::class,'getFollower']);

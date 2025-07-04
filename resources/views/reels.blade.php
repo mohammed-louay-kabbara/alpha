@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../pages/virtual-reality.html">
+                    <a class="nav-link " href="../pages/virtual-reality.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-app text-dark text-sm opacity-10"></i>
@@ -97,7 +97,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="../pages/profile.html">
+                    <a class="nav-link active" href="../pages/profile.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
@@ -290,7 +290,7 @@
                                                     <td>{{ $c->created_at }}</td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <form action="{{ route('delete_product', $c->id) }}"
+                                                            <form action="{{ route('delete_reel', $c->id) }}"
                                                                 method="POST"
                                                                 onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
                                                                 @csrf
@@ -315,11 +315,11 @@
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title">عرض الفيديو</h5>
                                                                 <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal"
+                                                                    data-bs-dismiss="modal" style="color:black"
                                                                     aria-label="إغلاق"></button>
                                                             </div>
                                                             <div class="modal-body text-center">
-                                                                <video id="reelVideo" class="w-100" controls>
+                                                                <video id="reelVideo" class="w-100 h-52" controls>
                                                                     <source id="videoSource" src=""
                                                                         type="video/mp4">
                                                                     متصفحك لا يدعم عرض الفيديو.

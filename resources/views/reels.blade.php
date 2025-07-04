@@ -30,22 +30,6 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        /* تغيير لون التحديد عند النقر (focus) */
-        #customSelect:focus {
-            border-color: #F62C20 !important;
-            box-shadow: 0 0 0 0.25rem rgba(246, 44, 32, 0.25) !important;
-        }
-        /* تغيير لون الخيارات المحددة */
-        #customSelect option:checked {
-            background-color: #F62C20 !important;
-            color: white !important;
-        }
-        /* تغيير لون الخلفية عند تمرير الماوس */
-        #customSelect option:hover {
-            background-color: #f8d7da !important;
-        }
-    </style>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -261,7 +245,7 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0">
 
-                            <h6>إدارة المنتجات</h6>
+                            <h6>إدارة الريلز</h6>
                             @if (session('success'))
                                 <div cclass="alert alert-secondary" role="alert">
                                     {{ session('success') }}
@@ -269,55 +253,41 @@
                             @endif
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
-                            <form method="GET" action="{{ route('filterproduct') }}">
-                                <select id="customSelect" class=""
-                                    style="height: 50%; width: 50%; padding: 10px" name="filter" multiple
-                                    aria-label="multiple select example">
-                                    <option value="1">الكل</option>
-                                    <option value="0">لم يوافق عليه</option>
-                                </select>
-                                <button type="submit" class="btn btn"
-                                    style="background-color: #F62C20; color:white">فرز</button>
-                            </form>
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col"> اسم المنتج</th>
-                                                <th scope="col"> السعر</th>
-                                                <th scope="col">الوصف</th>
-                                                <th scope="col"> اسم المتخدم</th>
+                                                <th scope="col">الفيديو</th>
+                                                <th scope="col"> اسم المستخدم</th>
                                                 <th scope="col"> رقم الهاتف</th>
-                                                <th scope="col">نوع المنتج </th>
-                                                <th scope="col">الحالة</th>
+                                                <th scope="col">الوصف</th>
+                                                <th scope="col">تاريخ النشر</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
 
-                                            @foreach ($products as $c)
+                                            @foreach ($reels as $c)
                                                 <tr>
                                                     <td>
-                                                        <button type="button"
-                                                            onclick="showFiles({{ $c->id }})" class="btn btn"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#editCategoryModal">
-                                                            {{ $c->name }}
+                                                        <button class="btn btn-outline-primary btn-sm"
+                                                            data-bs-toggle="modal" data-bs-target="#reelModal"
+                                                            data-video="{{ asset('storage/' . $reel->video_path) }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-file-play" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M6 10.117V5.883a.5.5 0 0 1 .757-.429l3.528 2.117a.5.5 0 0 1 0 .858l-3.528 2.117a.5.5 0 0 1-.757-.43z" />
+                                                                <path
+                                                                    d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1" />
+                                                            </svg>
                                                         </button>
                                                     </td>
-                                                    <td>{{ $c->price }}</td>
+                                                    <td>{{  $c->user->name }}</td>
+                                                     <td>{{ $c->user->phone }}</td>
                                                     <td>{{ $c->description }}</td>
-                                                    <td>{{ $c->user->name }}</td>
-                                                    <td>{{ $c->user->phone }}</td>
-                                                    <td>{{ $c->category->name }}</td>
-                                                    <td>
-                                                        @if ($c->is_approved)
-                                                            تمت الموافقة عليه
-                                                        @else
-                                                            غير موافق عليه
-                                                        @endif
-                                                    </td>
+                                                    <td>{{ $c->created_at }}</td>
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <form action="{{ route('delete_product', $c->id) }}"
@@ -335,29 +305,26 @@
                                                                     </svg>
                                                                 </button>
                                                             </form>
-                                                            @if ($c->is_approved == 0)
-                                                                <a href="{{ route('accepted_product', $c->id) }}"
-                                                                    class="btn btn-success">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor"
-                                                                        class="bi bi-check2-square"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5z" />
-                                                                        <path
-                                                                            d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0" />
-                                                                    </svg>
-                                                                </a>
-                                                            @endif
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="editCategoryModal" tabindex="-1"
-                                                    aria-labelledby="editCategoryLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content p-3" id="modalContent">
-                                                            <!-- سيتم تعبئة الصور والفيديو هنا -->
+                                                <div class="modal fade" id="reelModal" tabindex="-1"
+                                                    aria-labelledby="reelModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">عرض الفيديو</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="إغلاق"></button>
+                                                            </div>
+                                                            <div class="modal-body text-center">
+                                                                <video id="reelVideo" class="w-100" controls>
+                                                                    <source id="videoSource" src=""
+                                                                        type="video/mp4">
+                                                                    متصفحك لا يدعم عرض الفيديو.
+                                                                </video>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -400,7 +367,6 @@
             });
         });
     </script>
-
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
@@ -411,57 +377,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $('input[name="filter"]').on('change', function() {
-            let value = $(this).val();
-
-            $.ajax({
-                url: value === 'all' ? '/products' : `/products?approved=${value}`,
-                method: 'GET',
-                success: function(response) {
-                    $('#productTable').html(response); // تأكد أن المنتجات تُعرض داخل هذا الـ div
-                }
-            });
-        });
-    </script>
-
-
-    <script>
-        function showFiles(productId) {
-            fetch(`/api/product/files/${productId}`)
-                .then(response => response.json())
-                .then(data => {
-                    let html = '';
-
-                    if (data.length === 0) {
-                        html = `<div class="alert alert-info text-center">لا يوجد ملفات لعرضها</div>`;
-                    } else {
-                        data.forEach(file => {
-                            if (file.file_type === 'image') {
-                                html += `<img src="/storage/${file.file_path}" class="img-fluid mb-2" />`;
-                            } else {
-                                html += `
-                                <video class="w-100 mb-2" controls>
-                                    <source src="/storage/${file.file_path}" type="video/mp4">
-                                </video>
-                            `;
-                            }
-                        });
-                    }
-
-                    document.getElementById('modalContent').innerHTML = html;
-                })
-                .catch(error => {
-                    console.error("حدث خطأ:", error);
-                    document.getElementById('modalContent').innerHTML =
-                        `<div class="alert alert-danger text-center">فشل في تحميل الملفات</div>`;
-                });
-        }
-    </script>
-
-
 </body>
 
 </html>

@@ -18,7 +18,10 @@ class ReelsController extends Controller
 
     public function create()
     {
+        $reels = Reels::with('user')->orderBy('created_at', 'desc')->get();
+        return view('reels',compact('reels'));
     }
+    
     public function homereels(){
         $reels = Reels::with('user')
             ->orderBy('created_at', 'desc')
@@ -53,7 +56,6 @@ class ReelsController extends Controller
     {
         
     } 
-
 
     public function show($id)
     {

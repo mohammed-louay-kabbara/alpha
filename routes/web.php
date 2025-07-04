@@ -22,6 +22,7 @@ Route::middleware('jwt.session')->group(function () {
     'destroy' => 'dashboard_admin.destroy',]);
 
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
+    Route::get('reels',[ReelsController::class,'create'])->name('reels');
     Route::resource('category_admin', CategoryController::class);
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');
     Route::get('/products_admin', [ProductController::class, 'create'])->name('products_admin');

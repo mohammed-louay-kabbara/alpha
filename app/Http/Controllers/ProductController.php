@@ -100,21 +100,15 @@ class ProductController extends Controller
         $products = product::with('files')->where('user_id',$id)->get();   
         return response()->json($products, 200);
     }
-
-
     public function edit($id)
     {
         product::where('id',$id)->update(['is_approved'=> 1]);
         return back();
     }
-
-
     public function update(Request $request, product $product)
     {
         //
     }
-
-
     public function destroy($id)
     {
         $product=product::with('files')->where('id',$id)->first();
@@ -124,13 +118,10 @@ class ProductController extends Controller
             if (Storage::disk('public')->exists($file->file_path)) {
                 Storage::disk('public')->delete($file->file_path);
             }
-            // حذف السطر من جدول product_files
             $file->delete();
         }
-
-        // حذف المنتج نفسه
         $product->delete();
 
-        return response()->json(['message' => 'تم حذف المنتج مع صوره بنجاح'], 200);
+        return back();
     }
 }

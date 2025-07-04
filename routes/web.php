@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentReactionsController;
 use App\Http\Controllers\PrivacySettingController;
+use App\Http\Controllers\ReelsController;
 
 
 Route::middleware('jwt.session')->group(function () {

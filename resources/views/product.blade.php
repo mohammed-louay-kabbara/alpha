@@ -31,11 +31,25 @@
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-    .custom-select:focus {
-        border-color: #F62C20;
-        box-shadow: 0 0 0 0.25rem rgba(246, 44, 32, 0.25); /* تأثير جميل عند التركيز */
-    }
-</style>
+
+
+        /* تغيير لون التحديد عند النقر (focus) */
+        #customSelect:focus {
+            border-color: #F62C20 !important;
+            box-shadow: 0 0 0 0.25rem rgba(246, 44, 32, 0.25) !important;
+        }
+
+        /* تغيير لون الخيارات المحددة */
+        #customSelect option:checked {
+            background-color: #F62C20 !important;
+            color: white !important;
+        }
+
+        /* تغيير لون الخلفية عند تمرير الماوس */
+        #customSelect option:hover {
+            background-color: #f8d7da !important;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -261,13 +275,23 @@
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
 
-                            <form method="GET" action="{{ route('filterproduct') }}">
+                            {{-- <form method="GET" action="{{ route('filterproduct') }}">
                                 <select class="form-select custom-select" style="height: 50%; width: 50%;" name="filter" multiple
                                     aria-label="multiple select example">
                                     <option value="1">الكل</option>
                                     <option value="0">لم يوافق عليه</option>
                                 </select>
                                 <button type="submit" class="btn btn" style="background-color: #F62C20">فرز</button>
+                            </form> --}}
+                            <form method="GET" action="{{ route('filterproduct') }}">
+                                <select id="customSelect" class="form-select custom-select"
+                                    style="height: 50%; width: 50%;" name="filter" multiple
+                                    aria-label="multiple select example">
+                                    <option value="1">الكل</option>
+                                    <option value="0">لم يوافق عليه</option>
+                                </select>
+                                <button type="submit" class="btn btn"
+                                    style="background-color: #F62C20; color:white">فرز</button>
                             </form>
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">

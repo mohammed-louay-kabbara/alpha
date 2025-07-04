@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentReactionsController;
 use App\Http\Controllers\PrivacySettingController;
 use App\Http\Controllers\ReelsController;
+use App\Http\Controllers\AdvertisementController;
 
 
 Route::middleware('jwt.session')->group(function () {

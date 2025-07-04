@@ -4726,7 +4726,7 @@ fieldset:disabled .btn {
 }
 
 .nav {
-  --bs-nav-link-padding-x: 1rem;
+  --bs-nav-link-padding-x: 10rem;
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-link-color);
@@ -4747,7 +4747,7 @@ fieldset:disabled .btn {
   color: var(--bs-nav-link-color);
   background: none;
   border: 0;
-  align-items: center;
+  
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
@@ -4935,7 +4935,7 @@ fieldset:disabled .btn {
 }
 
 .navbar-nav {
-  --bs-nav-link-padding-x: 0;
+  --bs-nav-link-padding-x: 5rem;
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-navbar-color);

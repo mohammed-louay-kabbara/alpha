@@ -98,7 +98,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ route('advertisement.index') }}">
-                        <div>
+                        <div class="text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-badge-ad" viewBox="0 0 16 16">
                                 <path

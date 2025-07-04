@@ -397,7 +397,7 @@
                                             <i class="ni ni-camera-compact text-dark opacity-10"></i>
                                         </div>
                                         {{-- <h5 class="text-white mb-1">Get started with Argon</h5> --}}
-                                        <p>{{ $c->publishing_end }}</p>
+                                        <p>{{ $a->publishing_end }}</p>
                                     </div>
                                 </div>
                                 @endforeach

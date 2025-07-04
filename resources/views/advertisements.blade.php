@@ -70,8 +70,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('categories_admin') }}">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <div>
                             <svg xmlns="http://www.w3.org/2000/svg" class="ni ni-tv-2 text-dark text-sm opacity-10" width="500px" height="500px" fill="currentColor"
                                 class="bi bi-card-checklist" viewBox="0 0 16 16">
                                 <path

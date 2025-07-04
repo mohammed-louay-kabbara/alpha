@@ -31,20 +31,16 @@
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-
-
         /* تغيير لون التحديد عند النقر (focus) */
         #customSelect:focus {
             border-color: #F62C20 !important;
             box-shadow: 0 0 0 0.25rem rgba(246, 44, 32, 0.25) !important;
         }
-
         /* تغيير لون الخيارات المحددة */
         #customSelect option:checked {
             background-color: #F62C20 !important;
             color: white !important;
         }
-
         /* تغيير لون الخلفية عند تمرير الماوس */
         #customSelect option:hover {
             background-color: #f8d7da !important;
@@ -284,7 +280,7 @@
                                 <button type="submit" class="btn btn" style="background-color: #F62C20">فرز</button>
                             </form> --}}
                             <form method="GET" action="{{ route('filterproduct') }}">
-                                <select id="customSelect" class="form-select custom-select"
+                                <select id="customSelect" class=""
                                     style="height: 50%; width: 50%;" name="filter" multiple
                                     aria-label="multiple select example">
                                     <option value="1">الكل</option>

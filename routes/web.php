@@ -25,7 +25,14 @@ Route::middleware('jwt.session')->group(function () {
 
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
     Route::get('reels',[ReelsController::class,'create'])->name('reels');
-    Route::resource('advertisement',AdvertisementController::class);
+    Route::resource('advertisement',AdvertisementController::class)->names([
+    'index' => 'advertisement.index',
+    'create' => 'advertisement.create',
+    'store' => 'advertisement.store',
+    'show' => 'advertisement.show',
+    'edit' => 'advertisement.edit',
+    'update' => 'advertisement.update',
+    'destroy' => 'advertisement.destroy',]);
     Route::delete('delete_reel/{id}', [ReelsController::class,'destroy'])->name('delete_reel');
     Route::resource('category_admin', CategoryController::class);
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');

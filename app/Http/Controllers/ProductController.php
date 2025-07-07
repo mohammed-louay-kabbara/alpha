@@ -23,8 +23,10 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-        $products = Product::with(['user', 'category'])->get();;
-        return view('product',compact('products'));
+        $products = Product::with(['user', 'category'])
+                        ->withCount('likes') // هذا سيضيف عمود likes_count
+                        ->get();
+        return view('product', compact('products'));
     }
     public function filterproduct(Request $request)
     {

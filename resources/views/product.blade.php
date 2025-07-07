@@ -327,6 +327,7 @@
                                                 <th scope="col"> اسم المتخدم</th>
                                                 <th scope="col"> رقم الهاتف</th>
                                                 <th scope="col">نوع المنتج </th>
+                                                <th scope="col">عدد التفاعلات</th>
                                                 <th scope="col">الحالة</th>
                                                 <th scope="col"></th>
                                             </tr>
@@ -348,6 +349,7 @@
                                                     <td>{{ $c->user->name }}</td>
                                                     <td>{{ $c->user->phone }}</td>
                                                     <td>{{ $c->category->name }}</td>
+                                                    <td>{{ $c->likes_count  }}</td>
                                                     <td>
                                                         @if ($c->is_approved)
                                                             تمت الموافقة عليه

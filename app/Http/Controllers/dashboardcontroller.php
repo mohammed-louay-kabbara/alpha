@@ -18,7 +18,7 @@ class dashboardcontroller extends Controller
     {
         $topAddresses = User::select('address', DB::raw('COUNT(*) as user_countad'))
             ->groupBy('address')
-            ->orderByDesc('user_count')
+            ->orderByDesc('user_countad')
             ->get();
         $user_count=User::where('role',2)->count();
         $products_count=product::where('is_approved',1)->count();

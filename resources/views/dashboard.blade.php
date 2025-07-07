@@ -92,7 +92,7 @@
                                     d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1m9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zm0-10a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM2 9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2zm7 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2zM0 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.354.854a.5.5 0 1 0-.708-.708L3 3.793l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0z" />
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">إدارة المنتجات</span>
+                        <span class="nav-link-text ms-1">إدارة المنشورات والمحتوى</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -295,13 +295,13 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">عدد المنتجات</p>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">عدد المنشورات والمحتوى</p>
                                         <h5 class="font-weight-bolder">
                                             {{ $products_count }}
                                         </h5>
                                         <p class="mb-0">
                                             <span class="text-success text-sm font-weight-bolder"></span>
-                                            عدد المنتجات الموجودة في تطبيق
+                                            عدد المنشورات والمحتوى الموجودة في تطبيق
                                         </p>
                                     </div>
                                 </div>
@@ -351,7 +351,7 @@
                                             {{ $products_Notallowed_count }}
                                         </h5>
                                         <p class="mb-0">
-                                            عدد المنتجات التي بحال انتظار الموافقة
+                                            عدد المنشورات والمحتوى التي بحال انتظار الموافقة
                                         </p>
                                     </div>
                                 </div>
@@ -418,7 +418,7 @@
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-lg-7 mb-lg-0 mb-4">
+                {{-- <div class="col-lg-7 mb-lg-0 mb-4">
                     <div class="card ">
                         <div class="card-header pb-0 p-3">
                             <div class="d-flex justify-content-between">
@@ -556,7 +556,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-5">
                     <div class="card">
                         <div class="card-header pb-0 p-3">
@@ -584,7 +584,7 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer pt-3  ">
+            {{-- <footer class="footer pt-3  ">
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 mb-lg-0 mb-4">
@@ -621,7 +621,7 @@
                         </div>
                     </div>
                 </div>
-            </footer>
+            </footer> --}}
         </div>
     </main>
     <div class="fixed-plugin">

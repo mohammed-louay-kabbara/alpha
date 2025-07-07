@@ -31,7 +31,7 @@
 
 <body class="g-sidenav-show   bg-gray-100">
     <div class="min-height-300 bg-dark position-absolute w-100"></div>
- <aside
+    <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
         id="sidenav-main">
         <div class="sidenav-header">
@@ -48,10 +48,11 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard_admin.index') }}">
+                    <a class="nav-link active" href="{{ route('dashboard_admin.index') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="ni ni-tv-2 text-dark text-sm opacity-10" fill="currentColor"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                class="ni ni-tv-2 text-dark text-sm opacity-10" fill="currentColor"
                                 class="bi bi-house-door" viewBox="0 0 16 16">
                                 <path
                                     d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
@@ -61,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('users_admin') }}">
+                    <a class="nav-link " href="{{ route('users_admin') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"
@@ -76,8 +77,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('categories_admin') }}">
                         <div class="border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="ni ni-tv-2 text-dark text-sm opacity-10" width="20" height="20" fill="#F62C20"
-                                class="bi bi-card-checklist" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ni ni-tv-2 text-dark text-sm opacity-10"
+                                width="20" height="20" fill="#F62C20" class="bi bi-card-checklist"
+                                viewBox="0 0 16 16">
                                 <path
                                     d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
                                 <path
@@ -97,11 +99,11 @@
                                     d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1m9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zm0-10a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM2 9a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2zm7 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2zM0 2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.354.854a.5.5 0 1 0-.708-.708L3 3.793l-.646-.647a.5.5 0 1 0-.708.708l1 1a.5.5 0 0 0 .708 0z" />
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">إدارة المنتجات</span>
+                        <span class="nav-link-text ms-1">إدارة المنشورات والمحتوى</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('advertisement.index') }}">
+                    <a class="nav-link " href="{{ route('advertisement.index') }}">
                         <div class="border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"
                                 class="bi bi-badge-ad" viewBox="0 0 16 16">
@@ -110,10 +112,10 @@
                                 <path
                                     d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" />
                             </svg>
-                                  
+
                         </div>
                         <span class="nav-link-text mr-24">إدارة الإعلانات </span>
-              
+
                     </a>
                 </li>
 
@@ -121,8 +123,8 @@
                     <a class="nav-link" href="{{ route('reels') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                fill="#F62C20" class="bi bi-camera-reels" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"
+                                class="bi bi-camera-reels" viewBox="0 0 16 16">
                                 <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0M1 3a2 2 0 1 0 4 0 2 2 0 0 0-4 0" />
                                 <path
                                     d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm6 8.73V7.27l-3.5 1.555v4.35zM1 8v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1" />
@@ -282,62 +284,63 @@
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">الصورة</th>
-                                                <th scope="col">اسم المستخدم</th>
-                                                <th scope="col">رقم الهاتف</th>
-                                                <th scope="col">الإيميل</th>
-                                                <th scope="col"> تاريخ الميلاد</th>
-                                                <th scope="col"> العنوان</th>
-                                                <th scope="col">الوصف </th>
-                                                <th scope="col">صلاحيات</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tableBody">
-                                            @foreach ($users as $c)
+                                        <table id="userTable" class="table">
+                                            <thead>
                                                 <tr>
-                                                    <td><img width="75px"
-                                                            src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"alt=""
-                                                            srcset=""></td>
-                                                    <td>{{ $c->name }}</td>
-                                                    <td>{{ $c->phone }}</td>
-                                                    <td>{{ $c->email }}</td>
-                                                    <td>{{ $c->datebirthday }}</td>
-                                                    <td>{{ $c->address }}</td>
-                                                    <td>{{ $c->description }}</td>
-                                                    <td>
-                                                        @if ($c->role == 2)
-                                                            User
-                                                        @else
-                                                            Admin
-                                                        @endif
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="d-flex gap-2">
-                                                            <form action="{{ route('user_delete', $c->id) }}"
-                                                                method="POST"
-                                                                onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor" class="bi bi-trash3"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
-                                                                    </svg>
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </td>
+                                                    <th>الصورة</th>
+                                                    <th onclick="sortTable(1)">اسم المستخدم</th>
+                                                    <th onclick="sortTable(2)">رقم الهاتف</th>
+                                                    <th onclick="sortTable(3)">الإيميل</th>
+                                                    <th onclick="sortTable(4)">تاريخ الميلاد</th>
+                                                    <th onclick="sortTable(5)">العنوان</th>
+                                                    <th>الوصف</th>
+                                                    <th>الصلاحيات</th>
+                                                    <th></th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody id="tableBody">
+                                                @foreach ($users as $c)
+                                                    <tr>
+                                                        <td><img width="75px"
+                                                                src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"alt=""
+                                                                srcset=""></td>
+                                                        <td>{{ $c->name }}</td>
+                                                        <td>{{ $c->phone }}</td>
+                                                        <td>{{ $c->email }}</td>
+                                                        <td>{{ $c->datebirthday }}</td>
+                                                        <td>{{ $c->address }}</td>
+                                                        <td>{{ $c->description }}</td>
+                                                        <td>
+                                                            @if ($c->role == 2)
+                                                                User
+                                                            @else
+                                                                Admin
+                                                            @endif
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="d-flex gap-2">
+                                                                <form action="{{ route('user_delete', $c->id) }}"
+                                                                    method="POST"
+                                                                    onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="16" height="16"
+                                                                            fill="currentColor" class="bi bi-trash3"
+                                                                            viewBox="0 0 16 16">
+                                                                            <path
+                                                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                 </div>
                             </div>
 
@@ -374,6 +377,34 @@
             });
         });
     </script>
+
+    <script>
+        function sortTable(columnIndex) {
+            const table = document.getElementById("userTable");
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            const asc = !table.dataset.sortAsc || table.dataset.sortAsc === "false";
+            table.dataset.sortAsc = asc;
+
+            rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].textContent.trim().toLowerCase();
+                const cellB = b.cells[columnIndex].textContent.trim().toLowerCase();
+
+                return asc ?
+                    cellA.localeCompare(cellB, 'ar', {
+                        numeric: true
+                    }) :
+                    cellB.localeCompare(cellA, 'ar', {
+                        numeric: true
+                    });
+            });
+
+            // إعادة ترتيب الصفوف
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

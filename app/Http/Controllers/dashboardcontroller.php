@@ -7,6 +7,7 @@ use App\Models\product;
 use App\Models\User;
 use App\Models\advertisement;
 use App\Models\category;
+    use Illuminate\Support\Facades\DB;
 
 class dashboardcontroller extends Controller
 {
@@ -15,6 +16,10 @@ class dashboardcontroller extends Controller
      */
     public function index()
     {
+        $topAddresses = User::select('address', DB::raw('COUNT(*) as user_countad'))
+            ->groupBy('address')
+            ->orderByDesc('user_count')
+            ->get();
         $user_count=User::where('role',2)->count();
         $products_count=product::where('is_approved',1)->count();
         $category_count=category::count();
@@ -24,8 +29,10 @@ class dashboardcontroller extends Controller
         'products_count',
         'category_count',
         'products_Notallowed_count',
+        'topAddresses',
         'advertisements'));
     }
+
 
     /**
      * Show the form for creating a new resource.

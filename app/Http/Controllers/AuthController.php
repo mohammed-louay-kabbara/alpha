@@ -28,11 +28,7 @@ class AuthController extends Controller
      */
 
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function login()
     {
         $credentials = request(['email', 'password']);
@@ -234,7 +230,6 @@ public function verifyResetCode(Request $request)
             'email'        => $request->email,
             'phone'        => $request->phone,
             'datebirthday' => $request->datebirthday,
-            // 'picture'      => $picturePath,
             'description'  => $request->description,
             'address'      => $request->address,
             'password'     => Hash::make($request->password),
@@ -258,7 +253,37 @@ public function verifyResetCode(Request $request)
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $user=User::where('id',Auth::id())->first();
+        return view('editprofile',compact('user'));
+    }
+
+    public function editprofile_admin(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'name'          => 'required|string|max:255',
+            'email'         => 'required|email|unique:users,email',
+            'phone'         => 'required|string|max:20',
+            'datebirthday'  => 'required|date',
+            'address'       => 'required|string|max:255',
+            'password'      => 'required|string|min:8', // password + password_confirmation
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'status'  => false,
+                'errors'  => $validator->errors(),
+            ], 422);
+        }      
+        $user = User::where('id',Auth::id())->update([
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'phone'        => $request->phone,
+            'datebirthday' => $request->datebirthday,
+            'description'  => $request->description,
+            'address'      => $request->address,
+            'password'     => Hash::make($request->password),
+        ]);
+        return back();
     }
 
     public function login_admin(Request $request){
@@ -267,7 +292,6 @@ public function verifyResetCode(Request $request)
         if (!$token = JWTAuth::attempt($credentials)) {
             return redirect()->back()->with('error', 'بيانات الدخول غير صحيحة');
         }
-
         $user = Auth::user();
         if ($user->role != 1) {
             return redirect()->back()->with('error', 'ليس لديك صلاحية الدخول');
@@ -291,7 +315,6 @@ public function verifyResetCode(Request $request)
     public function logout()
     {
         auth()->logout();
-
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -306,13 +329,6 @@ public function verifyResetCode(Request $request)
         return $this->respondWithToken(auth()->refresh());
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     protected function respondWithToken($token)
     {
         return response()->json([
@@ -326,12 +342,12 @@ public function verifyResetCode(Request $request)
         $user = User::findOrFail($id);
         if ($user->picture=="profile_pictures/defoult_image.jpg") {
             $user->delete();
-        return back()->with('success', 'تم حذف الصنف بنجاح');
+        return back()->with('success', 'تم حذف المستخدم بنجاح');
         }
         elseif ($user->picture && Storage::disk('public')->exists($user->picture)) {
             Storage::disk('public')->delete($user->picture);
             $user->delete();
-        return back()->with('success', 'تم حذف الصنف بنجاح');
+        return back()->with('success', 'تم حذف المستخدم بنجاح');
         }
         
 

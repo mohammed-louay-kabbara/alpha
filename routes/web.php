@@ -42,6 +42,8 @@ Route::middleware('jwt.session')->group(function () {
     Route::get('accepted_product/{id}', [ProductController::class, 'edit'])->name('accepted_product');
     Route::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/editprofile_admin', [AuthController::class, 'editprofile_admin'])->name('editprofile_admin');
+    Route::get('/EditProfileAdmin', [AuthController::class, 'me'])->name('edit');
     
  
     Route::get('/api/product/files/{id}', function ($id) {

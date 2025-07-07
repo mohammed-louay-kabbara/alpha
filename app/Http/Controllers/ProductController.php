@@ -23,11 +23,7 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-        $query = Product::with(['user', 'category']);
-        if ($request->has('approved')) {
-            $query->where('is_approved', $request->approved);
-        }
-        $products = $query->get();
+        $products = Product::with(['user', 'category'])->get();;
         return view('product',compact('products'));
     }
     public function filterproduct(Request $request)

@@ -125,7 +125,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ route('advertisement.index') }}">
-                        <div class="border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <div
+                            class="border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"
                                 class="bi bi-badge-ad" viewBox="0 0 16 16">
                                 <path
@@ -312,8 +313,9 @@
                                 </select>
                                 <button type="submit" class="btn btn"
                                     style="background-color: #F62C20; color:white">فرز</button>
+                                <a href="{{ route('allAllow') }}" class="btn btn-outline-success">الموافقة على
+                                    الكل</a>
                             </form>
-                            <a href="{{ route('allAllow') }}" class="btn btn-outline-success">الموافقة على الكل</a>
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">

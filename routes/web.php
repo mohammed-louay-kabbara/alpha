@@ -38,6 +38,7 @@ Route::middleware('jwt.session')->group(function () {
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');
     Route::get('/products_admin', [ProductController::class, 'create'])->name('products_admin');
     Route::get('/filterproduct', [ProductController::class, 'filterproduct'])->name('filterproduct');
+    Route::get('/allAllow', [ProductController::class, 'allAllow'])->name('allAllow');
     Route::delete('delete_product/{id}',[ProductController::class, 'destroy'])->name('delete_product');
     Route::get('accepted_product/{id}', [ProductController::class, 'edit'])->name('accepted_product');
     Route::delete('user_delete/{id}',[AuthController::class, 'destroy'])->name('user_delete');

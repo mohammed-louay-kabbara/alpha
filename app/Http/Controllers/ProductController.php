@@ -109,6 +109,11 @@ class ProductController extends Controller
     {
         //
     }
+    public function allAllow()
+    {
+        product::where('is_approved',0)->update(['is_approved'=> 1]);
+        return back();
+    }
     public function destroy($id)
     {
         $product=product::with('files')->where('id',$id)->first();

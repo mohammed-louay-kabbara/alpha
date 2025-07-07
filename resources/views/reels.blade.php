@@ -51,7 +51,7 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('dashboard_admin.index') }}">
+                    <a class="nav-link " href="{{ route('dashboard_admin.index') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -123,7 +123,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('reels') }}">
+                    <a class="nav-link active" href="{{ route('reels') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"

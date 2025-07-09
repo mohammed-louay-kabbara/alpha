@@ -205,6 +205,7 @@
                                                 <th scope="col">الصورة</th>
                                                 <th scope="col">الوصف</th>
                                                 <th scope="col">تاريخ الانتهاء</th>
+                                                <th scope="col">النوع</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
@@ -216,6 +217,7 @@
                                                             alt="" srcset=""></td>
                                                     <td>{{ $c->description }}</td>
                                                     <td>{{ $c->publishing_end }}</td>
+                                                    <td>{{ $c->type }}</td>
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <button type="button" class="btn btn-success"

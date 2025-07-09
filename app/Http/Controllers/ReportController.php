@@ -13,20 +13,17 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        $report=report::get();
+        return view('reports',compact('report'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         report::create([
@@ -54,9 +51,7 @@ class ReportController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(report $report)
     {
         //

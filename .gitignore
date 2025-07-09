@@ -23,3 +23,5 @@ yarn-error.log
 /.zed
 public/*.json
 public/*.json
+public/*.json
+*.json

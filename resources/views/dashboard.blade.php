@@ -108,7 +108,6 @@
 
                         </div>
                         <span class="nav-link-text mr-24">إدارة الإعلانات </span>
-
                     </a>
                 </li>
 
@@ -346,7 +345,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">طلابات النشر </p>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">طلبات النشر </p>
                                         <h5 class="font-weight-bolder">
                                             {{ $products_Notallowed_count }}
                                         </h5>

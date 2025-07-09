@@ -18,6 +18,7 @@ use App\Mail\VerificationCodeMail;
 use App\Models\follower;
 use App\Models\product;
 use App\Models\reels;
+use App\Models\DeviceToken;
 
 class AuthController extends Controller
 {
@@ -100,6 +101,23 @@ class AuthController extends Controller
         return response()->json([
             'product' =>$product,
         ], 200);
+    }
+
+    public function storeDeviceToken(Request $request)
+    {
+        $request->validate([
+            'token' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+
+        // احفظ أو حدث التوكن الحالي للمستخدم
+        DeviceToken::updateOrCreate(
+            ['user_id' => $user->id],
+            ['token' => $request->token]
+        );
+
+        return response()->json(['message' => 'تم حفظ التوكن بنجاح'], 200);
     }
 
     public function my_reels(){

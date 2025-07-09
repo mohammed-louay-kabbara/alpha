@@ -17,6 +17,19 @@ use  App\Http\Controllers\FollowerController;
 use  App\Http\Controllers\CommentReactionsController;
 use  App\Http\Controllers\PrivacySettingController;
 use  App\Http\Controllers\ReportController;
+use  App\Services\FirebaseService;
+
+
+
+Route::get('/test-notification', function (FirebaseService $firebase) {
+    $deviceToken = 'توكن جهاز الهاتف من FCM';
+
+    return $firebase->sendNotification(
+        $deviceToken,
+        'مرحبا بك!',
+        'تم إرسال الإشعار بنجاح 🎉'
+    );
+});
 
 
 
@@ -68,3 +81,5 @@ Route::group([
     Route::get('Users', [AuthController::class,'users']);
      Route::delete('deletefollower', [FollowerController::class,'deleteFollower']);
     Route::get('homereels',[ReelsController::class,'homereels']);
+
+    Route::middleware('auth:api')->post('/store-device-token', [AuthController::class, 'storeDeviceToken']);

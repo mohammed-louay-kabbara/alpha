@@ -27,11 +27,11 @@ class AdvertisementController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('advertisement_images', 'public');
         }
-
         advertisement::create([
             'image' => $imagePath,
             'description' => $request->description,
-            'publishing_end' => $request->publishing_end
+            'publishing_end' => $request->publishing_end,
+            'type' => $request->type
         ]);
         return back();
     }

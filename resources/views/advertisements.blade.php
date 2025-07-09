@@ -26,7 +26,7 @@
 
 <body class="g-sidenav-show   bg-gray-100">
     <div class="min-height-300 bg-dark position-absolute w-100"></div>
-      <aside
+    <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
         id="sidenav-main">
         <div class="sidenav-header">
@@ -194,7 +194,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>إدارة الأصناف</h6>
+                            <h6>إدارة الإعلانات</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -336,6 +336,14 @@
                         <div class="mb-3">
                             <label for="name" style="color: black" class="form-label">تاريخ الانتهاء</label>
                             <input type="date" class="form-control" name="publishing_end" id="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" style="color: black" class="form-label"> نوع الاعلان</label>
+                            <select name="type" id="" class="form-control">
+                                <option value="ذهبي">ذهبي</option>
+                                <option value="فضي">فضي</option>
+                                <option value="عميق">عميق</option>
+                            </select>
                         </div>
                     </div>
 

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class advertisement extends Model
 {
-    protected $fillable = ['image', 'description','publishing_end'];
+    protected $fillable = ['image', 'description','publishing_end','type'];
 }

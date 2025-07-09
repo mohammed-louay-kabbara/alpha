@@ -12,19 +12,19 @@ class ProductController extends Controller
 {
     public function index()
     {
-    $product = product::with('files','user')->withCount([
-        'likes' => function ($query) {}
-    ])
-    ->where('is_approved', 1)
-    ->orderBy('created_at', 'desc')
-    ->get();
-    return response()->json($product);
+        $product = product::with('files','user')->withCount([
+            'likes' => function ($query) {}
+        ])
+        ->where('is_approved', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return response()->json($product);
     }
 
     public function create(Request $request)
     {
-        $products = Product::with(['user', 'category'])
-                        ->withCount('likes') // هذا سيضيف عمود likes_count
+        $products = product::with(['user', 'category'])
+                        ->withCount('likes') 
                         ->get();
         return view('product', compact('products'));
     }

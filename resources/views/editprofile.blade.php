@@ -152,7 +152,7 @@
 </head>
 
 <body>
-    <section class="vh-100 d-flex align-items-center justify-content-center">
+    <section class="" style="width: 100%">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">

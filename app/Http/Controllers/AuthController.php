@@ -279,11 +279,10 @@ public function verifyResetCode(Request $request)
 
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
-            'email'         => 'required|email|unique:users,email',
+            'email'         => 'required',
             'phone'         => 'required|string|max:20',
             'datebirthday'  => 'required|date',
             'address'       => 'required|string|max:255',
-            'password'      => 'required|string|min:8', // password + password_confirmation
         ]);
         
         if ($validator->fails()) {
@@ -292,15 +291,19 @@ public function verifyResetCode(Request $request)
                 'errors'  => $validator->errors(),
             ], 422);
         }      
+
+        if ($request->password) {
+            dd('تم تنفيذ');
+        }
+
         $user = User::where('id',Auth::id())->update([
             'name'         => $request->name,
             'email'        => $request->email,
             'phone'        => $request->phone,
-            'datebirthday' => $request->datebirthday,
             'description'  => $request->description,
             'address'      => $request->address,
-            'password'     => Hash::make($request->password),
         ]);
+
         return back();
     }
 

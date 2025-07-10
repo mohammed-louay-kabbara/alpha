@@ -281,7 +281,6 @@ public function verifyResetCode(Request $request)
             'name'          => 'required|string|max:255',
             'email'         => 'required',
             'phone'         => 'required|string|max:20',
-            'datebirthday'  => 'required|date',
             'address'       => 'required|string|max:255',
         ]);
         

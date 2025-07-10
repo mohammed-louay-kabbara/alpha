@@ -292,7 +292,16 @@ public function verifyResetCode(Request $request)
         }      
 
         if ($request->password) {
-            dd('تم تنفيذ');
+            $user = User::where('id',Auth::id())->update([
+                'name'         => $request->name,
+                'email'        => $request->email,
+                'phone'        => $request->phone,
+                'description'  => $request->description,
+                'address'      => $request->address,
+                'password'     => $request->password
+            ]);
+            
+            return back();
         }
 
         $user = User::where('id',Auth::id())->update([

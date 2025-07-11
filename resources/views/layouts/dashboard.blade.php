@@ -87,8 +87,7 @@
     </div>
 
   </aside>
-
-
+  
     {{-- المحتوى --}}
     <main class="main-content position-relative border-radius-lg ps">
         <div class="container-fluid py-4">

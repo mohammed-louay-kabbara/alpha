@@ -344,11 +344,45 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody">
-                                                @foreach ($reports as $report)
+                                                @foreach ($reports as $reportGroup)
                                                     <tr>
-                                                        <td>{{ $report->report_typeable_type }}</td>
-                                                        <td>{{ optional($report->reportable)->name ?? '—' }}</td>
-                                                        <td>{{ $report->reports_count }}</td>
+                                                        <td>
+                                                            {{ $reportGroup->report_typeable_type }}
+                                                        </td>
+                                                        <td>
+                                                            @if ($reportGroup->report_typeable)
+                                                                <!-- عرض بيانات العنصر حسب نوعه -->
+                                                                @if ($reportGroup->report_typeable_type === 'reels')
+                                                                    {{ $reportGroup->report_typeable->description }}
+                                                                @elseif($reportGroup->report_typeable_type === 'product')
+                                                                    {{ $reportGroup->report_typeable->name }}
+                                                                    {{-- {{ Str::limit($reportGroup->report_typeable->content, 50) }} --}}
+                                                                @endif
+                                                            @else
+                                                                <span class="text-danger">تم حذف هذا العنصر</span>
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $reportGroup->report_count }}</td>
+                                                        <td>
+                                                            <a href="{{ route('reports.details', [
+                                                                'type' => $reportGroup->report_typeable_type,
+                                                                'id' => $reportGroup->report_typeable_id,
+                                                            ]) }}"
+                                                                class="btn btn-sm btn-info">
+                                                                التفاصيل
+                                                            </a>
+
+                                                            <form action="{{ route('content.delete') }}"
+                                                                method="POST" class="d-inline">
+                                                                @csrf
+                                                                <input type="hidden" name="type"
+                                                                    value="{{ $reportGroup->report_typeable_type }}">
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $reportGroup->report_typeable_id }}">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-danger">حذف المحتوى</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

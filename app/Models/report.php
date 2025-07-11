@@ -10,9 +10,14 @@ class report extends Model
       'user_id' , 'report_typeable_type' , 'report_typeable_id' 
     ];
 
-    public function reportable()
+    public function report_typeable()
     {
-      return $this->morphTo('report_typeable');
+        return $this->morphTo();
+    }
+    
+    public function reporter()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

@@ -22,7 +22,7 @@ class ReportController extends Controller
             ->select('report_typeable_type', 'report_typeable_id', \DB::raw('count(*) as reports_count'))
             ->groupBy('report_typeable_type', 'report_typeable_id')
             ->get();
-        dd($report->reportable);
+        dd($reports->reportable);
         return view('reports',compact('reports'));
     }
 

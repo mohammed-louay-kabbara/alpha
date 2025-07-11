@@ -347,7 +347,7 @@
                                                 @foreach ($reports as $c)
                                                     <tr>
                                                         <td>{{ class_basename($c->report_typeable_type) }}</td>
-                                                        <td>{{ $c->reportable->title ?? 'بدون عنوان' }}</td>
+                                                        <td>{{ $c->reportable->name ?? 'بدون عنوان' }}</td>
                                                         <td>{{ $c->reports_count }} بلاغ</td>
                                                     </tr>
                                                 @endforeach

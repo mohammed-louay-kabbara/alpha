@@ -22,26 +22,30 @@ class StoryController extends Controller
 
 
     public function create()
-    {
+    { 
         //
     }
 
 
     public function store(Request $request)
     {
-        $request->validate([
-        'media' => 'required|file|mimes:jpg,jpeg,png,mp4',
-        'type' => 'required|in:image,video',
-        'caption' => 'nullable|string']);
-        $path = $request->file('media')->store('stories', 'public');
-        $story = Story::create([
-            'user_id' => Auth::id(),
-            'media' => $path,
-            'type' => $request->type,
-            'caption' => $request->caption,
-            'expires_at' => now()->addDay(), // 24 ساعة
-        ]);
-        return response()->json(['status' => true, 'story' => $story]);
+        if ($request->media) {
+            $path = $request->file('media')->store('stories', 'public');
+            $story = Story::create([
+                'user_id' => Auth::id(),
+                'media' => $path,
+                'type' => $request->type,
+                'caption' => $request->caption,
+                'expires_at' => now()->addDay(), // 24 ساعة
+            ]);
+            return response()->json(['status' => true, 'story' => $story]);
+        }
+            $story = Story::create([
+                'user_id' => Auth::id(),
+                'caption' => $request->caption,
+                'expires_at' => now()->addDay(), // 24 ساعة
+            ]);
+
     }
 
     /**

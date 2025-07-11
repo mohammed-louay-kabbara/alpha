@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('media'); // صورة أو فيديو
-            $table->string('type'); // image أو video
+            $table->string('media')->nullable();; // صورة أو فيديو
+            $table->string('type')->nullable();; // image أو video
             $table->text('caption')->nullable();
             $table->timestamp('expires_at'); // تنتهي بعد 24 ساعة
             $table->timestamps();

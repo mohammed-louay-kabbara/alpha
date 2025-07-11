@@ -13,8 +13,11 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $report=report::get();
-        return view('reports',compact('report'));
+        $reports = \App\Models\Report::with('reportable')
+            ->select('report_typeable_type', 'report_typeable_id', \DB::raw('count(*) as reports_count'))
+            ->groupBy('report_typeable_type', 'report_typeable_id')
+            ->get();
+        return view('reports',compact('reports'));
     }
 
 

@@ -275,22 +275,20 @@ public function verifyResetCode(Request $request)
         return view('editprofile',compact('user'));
     }
 
-    public function editprofile_admin(Request $request){
-
+    public function editprofile_admin(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
             'email'         => 'required',
             'phone'         => 'required|string|max:20',
             'address'       => 'required|string|max:255',
         ]);
-        
         if ($validator->fails()) {
             return response()->json([
                 'status'  => false,
                 'errors'  => $validator->errors(),
             ], 422);
         }      
-
         if ($request->password) {
             $user = User::where('id',Auth::id())->update([
                 'name'         => $request->name,
@@ -298,12 +296,10 @@ public function verifyResetCode(Request $request)
                 'phone'        => $request->phone,
                 'description'  => $request->description,
                 'address'      => $request->address,
-                'password'     => $request->password
+                'password'     => Hash::make($request->password)
             ]);
-            
             return back();
         }
-
         $user = User::where('id',Auth::id())->update([
             'name'         => $request->name,
             'email'        => $request->email,
@@ -311,7 +307,6 @@ public function verifyResetCode(Request $request)
             'description'  => $request->description,
             'address'      => $request->address,
         ]);
-
         return back();
     }
 

@@ -369,7 +369,7 @@
                                                                 التفاصيل
                                                             </a>
 
-                                                            <form action="{{ route('content.delete') }}"
+                                                            <form action=""
                                                                 method="POST" class="d-inline">
                                                                 @csrf
                                                                 <input type="hidden" name="type"

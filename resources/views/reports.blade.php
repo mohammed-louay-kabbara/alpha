@@ -353,7 +353,7 @@
                                                     <tr>
                                                         <td>{{ class_basename($firstReport->report_typeable_type) }}
                                                         </td>
-                                                        <td>{{ $reportedItem->name ?? ($reportedItem->title ?? 'بدون عنوان') }}
+                                                        <td>{{ $reportedItem}}
                                                         </td>
                                                         <td>{{ $count }} بلاغ</td>
                                                     </tr>

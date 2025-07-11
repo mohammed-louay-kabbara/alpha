@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentReactionsController;
 use App\Http\Controllers\PrivacySettingController;
 use App\Http\Controllers\ReelsController;
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\ReportController;
 
 
 Route::middleware('jwt.session')->group(function () {
@@ -35,6 +36,7 @@ Route::middleware('jwt.session')->group(function () {
     'destroy' => 'advertisement.destroy',]);
     Route::delete('delete_reel/{id}', [ReelsController::class,'destroy'])->name('delete_reel');
     Route::resource('category_admin', CategoryController::class);
+    Route::resource('report', ReportController::class)->names(['index' => 'report.index']);
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');
     Route::get('/products_admin', [ProductController::class, 'create'])->name('products_admin');
     Route::get('/filterproduct', [ProductController::class, 'filterproduct'])->name('filterproduct');

@@ -344,18 +344,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody">
-                                                @foreach ($reports as $group)
-                                                    @php
-                                                        $firstReport = $group->first();
-                                                        $reportedItem = $firstReport->reportable;
-                                                        $count = $group->count();
-                                                    @endphp
+                                                @foreach ($reports as $report)
                                                     <tr>
-                                                        <td>{{ class_basename($firstReport->report_typeable_type) }}
+                                                        <td>{{ class_basename($report->report_typeable_type) }}</td>
+                                                        <td>{{ $report->reportable->title ?? ($report->reportable->name ?? '—') }}
                                                         </td>
-                                                        <td>{{ $reportedItem}}
-                                                        </td>
-                                                        <td>{{ $count }} بلاغ</td>
+                                                        <td>{{ $report->reports_count }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

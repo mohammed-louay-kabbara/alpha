@@ -19,4 +19,10 @@ class reels extends Model
     return $this->morphMany(Favorite::class, 'favoritable');
   }
 
+  public function reportable()
+  {
+      return $this->morphTo(__FUNCTION__, 'report_typeable_type', 'report_typeable_id');
+  }
+
+
 }

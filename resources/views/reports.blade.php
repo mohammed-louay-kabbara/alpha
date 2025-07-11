@@ -346,9 +346,8 @@
                                             <tbody id="tableBody">
                                                 @foreach ($reports as $report)
                                                     <tr>
-                                                        <td>{{ class_basename($report->report_typeable_type) }}</td>
-                                                        <td>{{ $report->reportable->name ?? ($report->reportable->name ?? '—') }}
-                                                        </td>
+                                                        <td>{{ $report->report_typeable_type }}</td>
+                                                        <td>{{ optional($report->reportable)->name ?? '—' }}</td>
                                                         <td>{{ $report->reports_count }}</td>
                                                     </tr>
                                                 @endforeach

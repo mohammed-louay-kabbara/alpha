@@ -16,11 +16,10 @@ class ReportController extends Controller
         //     ->groupBy('report_typeable_type', 'report_typeable_id')
         //     ->get();
         //     dd($reports);
-        $reports = report::with('reportable')
-            ->select('report_typeable_type', 'report_typeable_id', \DB::raw('count(*) as reports_count'))
-            ->groupBy('report_typeable_type', 'report_typeable_id')
-            ->get();
-        dd($reports->first()->reportable);
+    $reports = \App\Models\report::select('report_typeable_type', 'report_typeable_id', \DB::raw('count(*) as reports_count'))
+        ->groupBy('report_typeable_type', 'report_typeable_id')
+        ->get()
+        ->load('reportable');
         return view('reports',compact('reports'));
     }
 

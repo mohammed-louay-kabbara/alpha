@@ -332,6 +332,8 @@
                                                         <td>{{ $reportGroup->report_count }}</td>
                                                         <td>
                                                             <form action="{{ route('reports_d') }}" method="get">
+                                                                <input type="hidden" name="type" value="{{ $reportGroup->report_typeable_type }}" >
+                                                                <input type="hidden" name="id" value="{{ $reportGroup->report_typeable_id }}" >
                                                                 <button type="submit" class="btn btn-sm btn-info">
                                                                     التفاصيل
                                                                 </button>

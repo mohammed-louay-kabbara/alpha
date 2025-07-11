@@ -83,5 +83,6 @@ Route::group([
     Route::get('Users', [AuthController::class,'users']);
      Route::delete('deletefollower', [FollowerController::class,'deleteFollower']);
     Route::get('homereels',[ReelsController::class,'homereels']);
-
+    Route::post('session/start', [SessionController::class, 'startSession']);
+    Route::post('session/end', [SessionController::class, 'endSession']);
     Route::middleware('auth:api')->post('/store-device-token', [AuthController::class, 'storeDeviceToken']);

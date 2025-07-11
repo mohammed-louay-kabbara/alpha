@@ -87,6 +87,18 @@ class User extends Authenticatable implements JWTSubject
     {
      return $this->hasMany(reels::class);
     }
+        public function sessions()
+    {
+        return $this->hasMany(UserSession::class);
+    }
+
+    // دالة لحساب متوسط وقت الجلسة
+    public function averageSessionDuration()
+    {
+        return $this->sessions()
+            ->whereNotNull('ended_at')
+            ->avg('duration');
+    }
 
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.

@@ -38,6 +38,7 @@ Route::middleware('jwt.session')->group(function () {
     Route::resource('category_admin', CategoryController::class);
     Route::resource('report', ReportController::class)->names(['index' => 'report.index']);
     Route::get('/users_admin', [AuthController::class, 'getusers'])->name('users_admin');
+    Route::get('/reports_info', [ProductController::class, 'reports_d'])->name('reports_d');
     Route::get('/products_admin', [ProductController::class, 'create'])->name('products_admin');
     Route::get('/filterproduct', [ProductController::class, 'filterproduct'])->name('filterproduct');
     Route::get('/allAllow', [ProductController::class, 'allAllow'])->name('allAllow');

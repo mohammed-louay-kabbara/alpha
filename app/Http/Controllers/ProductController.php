@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\product;
 use App\Models\product_file;
+use App\Models\reels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,20 @@ class ProductController extends Controller
                         ->withCount('likes') 
                         ->get();
         return view('product', compact('products'));
+    }
+    public function reports_d(Request $request)
+    {
+        if ($request->type == 'product') {
+            $products = product::with(['user', 'category'])->where('id',$request->id)
+                            ->withCount('likes') 
+                            ->get();
+            return view('product', compact('products'));
+        }
+        else {
+            $reels = Reels::with('user')->where('id',$request->id)->get();
+            return view('reels',compact('reels'));
+        }
+
     }
     public function filterproduct(Request $request)
     {

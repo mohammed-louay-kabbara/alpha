@@ -288,7 +288,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>نوع</th>
-                                                    <th onclick="sortTable(1)">الوصف 
+                                                    <th onclick="sortTable(1)">الوصف
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor"
                                                             class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
@@ -308,6 +308,7 @@
                                                                 d="M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
                                                         </svg>
                                                     </th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody">
@@ -330,20 +331,10 @@
                                                         </td>
                                                         <td>{{ $reportGroup->report_count }}</td>
                                                         <td>
-                                                            <a href=""
-                                                                class="btn btn-sm btn-info">
-                                                                التفاصيل
-                                                            </a>
-
-                                                            <form action=""
-                                                                method="POST" class="d-inline">
-                                                                @csrf
-                                                                <input type="hidden" name="type"
-                                                                    value="{{ $reportGroup->report_typeable_type }}">
-                                                                <input type="hidden" name="id"
-                                                                    value="{{ $reportGroup->report_typeable_id }}">
-                                                                <button type="submit"
-                                                                    class="btn btn-sm btn-danger">حذف المحتوى</button>
+                                                            <form action="{{ route('reports_d') }}" method="get">
+                                                                <button type="submit" class="btn btn-sm btn-info">
+                                                                    التفاصيل
+                                                                </button>
                                                             </form>
                                                         </td>
                                                     </tr>

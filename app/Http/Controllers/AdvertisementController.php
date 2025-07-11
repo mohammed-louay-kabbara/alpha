@@ -19,6 +19,12 @@ class AdvertisementController extends Controller
     {
 
     }
+
+    public function ad()
+    {
+        $advertisements= advertisement::get();
+        return response()->json($advertisements, 200);
+    }
     
     public function store(Request $request)
     {

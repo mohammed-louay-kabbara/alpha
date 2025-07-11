@@ -17,6 +17,7 @@ use  App\Http\Controllers\FollowerController;
 use  App\Http\Controllers\CommentReactionsController;
 use  App\Http\Controllers\PrivacySettingController;
 use  App\Http\Controllers\ReportController;
+use  App\Http\Controllers\AdvertisementController;
 use  App\Services\FirebaseService;
 
 
@@ -54,6 +55,7 @@ Route::group([
     Route::post('count_profile', [AuthController::class, 'count_profile']);
     Route::post('info_user', [AuthController::class, 'info_user']);
     Route::get('my_profile', [AuthController::class, 'my_profile']);
+    Route::get('advertisements', [AdvertisementController::class, 'ad']);
     Route::resource('commentReactions',CommentReactionsController::class);
     Route::get('my_products', [AuthController::class, 'my_products']);
     Route::get('my_reels', [AuthController::class, 'my_reels']);

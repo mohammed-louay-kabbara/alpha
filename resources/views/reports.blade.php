@@ -364,10 +364,7 @@
                                                         </td>
                                                         <td>{{ $reportGroup->report_count }}</td>
                                                         <td>
-                                                            <a href="{{ route('reports.details', [
-                                                                'type' => $reportGroup->report_typeable_type,
-                                                                'id' => $reportGroup->report_typeable_id,
-                                                            ]) }}"
+                                                            <a href=""
                                                                 class="btn btn-sm btn-info">
                                                                 التفاصيل
                                                             </a>

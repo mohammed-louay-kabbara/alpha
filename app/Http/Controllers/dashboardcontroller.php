@@ -20,6 +20,10 @@ class dashboardcontroller extends Controller
             ->groupBy('address')
             ->orderByDesc('user_countad')
             ->get();
+        $mostFollowedUsers = User::withCount('followers')
+        ->orderByDesc('followers_count')
+        ->take(10)
+        ->get();
         $user_count=User::where('role',2)->count();
         $products_count=product::where('is_approved',1)->count();
         $category_count=category::count();

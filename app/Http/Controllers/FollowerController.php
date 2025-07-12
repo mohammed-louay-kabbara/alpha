@@ -40,6 +40,7 @@ class FollowerController extends Controller
         if ($followerId == $userIdToFollow) {
             return response()->json(['message' => 'لا يمكنك متابعة نفسك'], 400);
         }
+        
         $existing = follower::where('follower_id', $followerId)
                             ->where('followed_id', $userIdToFollow)
                             ->first();

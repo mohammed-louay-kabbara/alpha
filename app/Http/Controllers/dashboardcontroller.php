@@ -32,6 +32,7 @@ class dashboardcontroller extends Controller
         return view('dashboard',compact('user_count',
         'products_count',
         'category_count',
+        'mostFollowedUsers',
         'products_Notallowed_count',
         'topAddresses',
         'advertisements'));

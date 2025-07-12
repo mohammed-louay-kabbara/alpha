@@ -468,13 +468,12 @@
                                             <th scope="col">الصورة</th>
                                             <th scope="col">الاسم</th>
                                             <th scope="col">الايميل</th>
-                                            <th scope="col">عدد المتابعين</th>
+                                            <th scope="col">المتابعين</th>
                                         </tr>
                                     </thead>
                                     @foreach ($mostFollowedUsers as $item)
                                         <tr>
-                                            <td><img width="50px" height="50px"
-                                                    src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
+                                            <td><img width="50px" height="50px"src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
                                             </td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>

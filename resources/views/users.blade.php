@@ -352,6 +352,8 @@
                                                     </th>
                                                     <th>الوصف</th>
                                                     <th>الصلاحيات</th>
+                                                    <th>آخر نشاط</th>
+                                                    <th>الحالة</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -372,6 +374,27 @@
                                                                 User
                                                             @else
                                                                 Admin
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($user->last_activity_at)
+                                                                {{ $user->last_activity_at->diffForHumans() }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($user->status == 'نشط الآن')
+                                                                <span
+                                                                    class="badge bg-success">{{ $user->status }}</span>
+                                                            @elseif($user->status == 'نشط (غير متصل)')
+                                                                <span class="badge bg-info">{{ $user->status }}</span>
+                                                            @elseif($user->status == 'خامل')
+                                                                <span
+                                                                    class="badge bg-warning">{{ $user->status }}</span>
+                                                            @else
+                                                                <span
+                                                                    class="badge bg-secondary">{{ $user->status }}</span>
                                                             @endif
                                                         </td>
                                                         <td>

@@ -43,7 +43,12 @@ class AuthController extends Controller
 
     public function getusers()
     {
-        $users=user::get();
+        $users = User::with(['sessions' => function($query) {
+            $query->latest('started_at')->limit(1);
+        }])
+        ->select('id', 'name', 'email','picture','phone','datebirthday','address','description','role', 'created_at')
+        ->withCount('sessions')
+        ->paginate(20);
         return view('users',compact('users'));
     }
 

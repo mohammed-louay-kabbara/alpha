@@ -441,7 +441,7 @@
                                         class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                         <div class="d-flex align-items-center">
                                             <div
-                                                class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                                                class="icon icon-shape icon-sm me-3  shadow text-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                                     viewBox="-5.0 -10.0 110.0 135.0">
                                                     <g fill-rule="evenodd">

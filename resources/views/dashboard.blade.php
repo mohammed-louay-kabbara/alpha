@@ -332,12 +332,12 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">عدد الأقسام</p>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">متوسط وقت الجلسة</p>
                                         <h5 class="font-weight-bolder">
-                                            {{ $category_count }}
+                                            {{ $UserSession }}
                                         </h5>
                                         <p class="mb-0">
-                                            عدد الأقسام الموجودة في التطبيق
+                                            كم الوقت الذي يقضونه المستخدمون داخل التطبيق
                                         </p>
                                     </div>
                                 </div>
@@ -511,7 +511,7 @@
                             <ul class="list-group">
                                 @foreach ($topCategories as $item)
                                     <li
-                                        class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                        class="list-group-item border-0 d-flex justify-content-between  border-radius-lg">
                                         <div class="d-flex align-items-center">
                                             <div class="icon icon-shape icon-sm me-3  shadow text-center">
                                                 <img width="50px" height="50px" src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"

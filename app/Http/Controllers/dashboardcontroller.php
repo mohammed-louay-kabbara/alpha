@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\User;
+use App\Models\UserSession;
 use App\Models\advertisement;
 use App\Models\category;
     use Illuminate\Support\Facades\DB;
@@ -30,12 +31,12 @@ class dashboardcontroller extends Controller
                 ->get();
         $user_count=User::where('role',2)->count();
         $products_count=product::where('is_approved',1)->count();
-        $category_count=category::count();
+        $UserSession=floor(UserSession::avg('duration') / 60);
         $advertisements=advertisement::get();
         $products_Notallowed_count=product::where('is_approved',0)->count();
         return view('dashboard',compact('user_count',
         'products_count',
-        'category_count',
+        'UserSession',
         'mostFollowedUsers',
         'products_Notallowed_count',
         'topCategories',

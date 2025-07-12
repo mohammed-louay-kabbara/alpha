@@ -352,7 +352,7 @@
                                                     </th>
                                                     <th>الوصف</th>
                                                     <th>الصلاحيات</th>
-                                                    <th>آخر نشاط</th>
+                    
                                                     <th>الحالة</th>
                                                     <th></th>
                                                 </tr>
@@ -376,13 +376,7 @@
                                                                 Admin
                                                             @endif
                                                         </td>
-                                                        <td>
-                                                            @if ($c->last_activity_at)
-                                                                {{ $c->last_activity_at->diffForHumans() }}
-                                                            @else
-                                                                -
-                                                            @endif
-                                                        </td>
+                                          
                                                         <td>
                                                             @if ($c->status == 'نشط الآن')
                                                                 <span

@@ -21,10 +21,13 @@ class dashboardcontroller extends Controller
             ->orderByDesc('user_countad')
             ->get();
         $mostFollowedUsers = User::withCount('followers')
-        ->orderByDesc('followers_count')
-        ->take(10)
-        ->get();
-        // dd($mostFollowedUsers);
+            ->orderByDesc('followers_count')
+            ->take(10)
+            ->get();
+        $topCategories = category::withCount('product')
+                ->orderByDesc('products_count')
+                ->take(3)
+                ->get();
         $user_count=User::where('role',2)->count();
         $products_count=product::where('is_approved',1)->count();
         $category_count=category::count();
@@ -35,6 +38,7 @@ class dashboardcontroller extends Controller
         'category_count',
         'mostFollowedUsers',
         'products_Notallowed_count',
+        'topCategories',
         'topAddresses',
         'advertisements'));
     }

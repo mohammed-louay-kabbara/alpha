@@ -440,8 +440,7 @@
                                     <li
                                         class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                         <div class="d-flex align-items-center">
-                                            <div
-                                                class="icon icon-shape icon-sm me-3  shadow text-center">
+                                            <div class="icon icon-shape icon-sm me-3  shadow text-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                                     viewBox="-5.0 -10.0 110.0 135.0">
                                                     <g fill-rule="evenodd">
@@ -452,8 +451,8 @@
                                                     </g>
                                                     <text x="0.0" y="117.5" font-size="5.0" font-weight="bold"
                                                         font-family="Arbeit Regular, Helvetica, Arial-Unicode, Arial, Sans-serif"
-                                                        fill="#000000"></text><text x="0.0"
-                                                        y="122.5" font-size="5.0" font-weight="bold"
+                                                        fill="#000000"></text><text x="0.0" y="122.5" font-size="5.0"
+                                                        font-weight="bold"
                                                         font-family="Arbeit Regular, Helvetica, Arial-Unicode, Arial, Sans-serif"
                                                         fill="#000000"></text>
                                                 </svg>
@@ -502,7 +501,33 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row mt-4">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">أكثر الاقسام نشراً</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <ul class="list-group">
+                                @foreach ($topCategories as $item)
+                                    <li
+                                        class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon icon-shape icon-sm me-3  shadow text-center">
+                                                <img src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
+                                                    alt="" srcset="">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <h6 class="mb-1 text-dark text-sm">{{ $item->name }}</h6>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <!--   Core JS Files   -->

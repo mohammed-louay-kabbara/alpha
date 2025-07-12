@@ -474,7 +474,7 @@
                                     </thead>
                                     @foreach ($mostFollowedUsers as $item)
                                         <tr>
-                                            <td><img
+                                            <td><img width="50px" height="50px"
                                                 src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
                                             </td>
                                             <td>{{ $item->name }}</td>

@@ -377,24 +377,24 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            @if ($user->last_activity_at)
-                                                                {{ $user->last_activity_at->diffForHumans() }}
+                                                            @if ($c->last_activity_at)
+                                                                {{ $c->last_activity_at->diffForHumans() }}
                                                             @else
                                                                 -
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            @if ($user->status == 'نشط الآن')
+                                                            @if ($c->status == 'نشط الآن')
                                                                 <span
-                                                                    class="badge bg-success">{{ $user->status }}</span>
-                                                            @elseif($user->status == 'نشط (غير متصل)')
-                                                                <span class="badge bg-info">{{ $user->status }}</span>
-                                                            @elseif($user->status == 'خامل')
+                                                                    class="badge bg-success">{{ $c->status }}</span>
+                                                            @elseif($c->status == 'نشط (غير متصل)')
+                                                                <span class="badge bg-info">{{ $c->status }}</span>
+                                                            @elseif($c->status == 'خامل')
                                                                 <span
-                                                                    class="badge bg-warning">{{ $user->status }}</span>
+                                                                    class="badge bg-warning">{{ $c->status }}</span>
                                                             @else
                                                                 <span
-                                                                    class="badge bg-secondary">{{ $user->status }}</span>
+                                                                    class="badge bg-secondary">{{ $c->status }}</span>
                                                             @endif
                                                         </td>
                                                         <td>

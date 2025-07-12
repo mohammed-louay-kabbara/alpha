@@ -471,9 +471,11 @@
                                                 <i class="ni ni-mobile-button text-white opacity-10"></i>
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm">{{ $item->name }}</h6>
                                                 <h6 class="mb-1 text-dark text-sm">{{ $item->followers_count }}</h6>
                                                 <span class="text-xs">{{ $item->email }}</span>
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <h6 class="mb-1 text-dark text-sm">{{ $item->followers_count }}</h6>
                                             </div>
                                         </div>
                                     </li>

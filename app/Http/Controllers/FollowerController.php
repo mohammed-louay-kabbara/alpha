@@ -68,11 +68,9 @@ class FollowerController extends Controller
         if($followerIds->isEmpty()) {
             $suggestedUsers = User::where('id', '!=', $currentUser->id)
                 ->whereNotIn('id', $currentUser->following()->pluck('users.id'))
-                ->inRandomOrder()
-                ->take(10)
-                ->get();
+                ->inRandomOrder()->get();
                 
-            return view('suggested-follows', compact('suggestedUsers'));
+             return response()->json($suggestedUsers, 200);
         }
         
         // 3. الحصول على المقترحات
@@ -85,7 +83,6 @@ class FollowerController extends Controller
                 $query->whereIn('follower_id', $followerIds);
             }])
             ->orderByDesc('common_followers')
-            ->take(10)
             ->get();
         
         return response()->json($suggestedUsers, 200);

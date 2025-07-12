@@ -517,7 +517,7 @@
                                                 <img width="50px" height="50px" src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
                                                     alt="" srcset="">
                                             </div>
-                                            <div class="d-flex flex-column">
+                                            <div class="d-flex flex-column p-10">
                                                 <h4 class=" text-dark ">{{ $item->name }}</h6>
                                             </div>
                                         </div>

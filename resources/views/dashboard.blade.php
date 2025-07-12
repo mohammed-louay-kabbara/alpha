@@ -464,7 +464,7 @@
                             <ul class="list-group">
                                 <table class="table table-hover">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center justify-center">
                                             <th scope="col">الصورة</th>
                                             <th scope="col">الاسم</th>
                                             <th scope="col">الايميل</th>

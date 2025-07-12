@@ -40,7 +40,7 @@ class FollowerController extends Controller
         if ($followerId == $userIdToFollow) {
             return response()->json(['message' => 'لا يمكنك متابعة نفسك'], 400);
         }
-        
+
         $existing = follower::where('follower_id', $followerId)
                             ->where('followed_id', $userIdToFollow)
                             ->first();
@@ -55,6 +55,40 @@ class FollowerController extends Controller
 
             return response()->json(['status' => 'followed']);
         }
+    }
+
+    public function suggestedFollows()
+    {
+        $currentUser = Auth::user();
+        
+        // 1. الحصول على قائمة متابعي المستخدم الحالي
+        $followerIds = $currentUser->followers()->pluck('users.id');
+        
+        // 2. إذا لم يكن لديه متابعين، نرجع مستخدمين عشوائيين
+        if($followerIds->isEmpty()) {
+            $suggestedUsers = User::where('id', '!=', $currentUser->id)
+                ->whereNotIn('id', $currentUser->following()->pluck('users.id'))
+                ->inRandomOrder()
+                ->take(10)
+                ->get();
+                
+            return view('suggested-follows', compact('suggestedUsers'));
+        }
+        
+        // 3. الحصول على المقترحات
+        $suggestedUsers = User::whereHas('followers', function($query) use ($followerIds) {
+                $query->whereIn('follower_id', $followerIds);
+            })
+            ->where('id', '!=', $currentUser->id)
+            ->whereNotIn('id', $currentUser->following()->pluck('users.id'))
+            ->withCount(['followers as common_followers' => function($query) use ($followerIds) {
+                $query->whereIn('follower_id', $followerIds);
+            }])
+            ->orderByDesc('common_followers')
+            ->take(10)
+            ->get();
+        
+        return response()->json($suggestedUsers, 200);
     }
 
 

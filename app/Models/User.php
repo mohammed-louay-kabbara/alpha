@@ -121,22 +121,24 @@ class User extends Authenticatable implements JWTSubject
     {
       return $this->hasMany(Story::class);
     }   
-    public function followers()
+
+
+        public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'followed_id', 'follower_id');
     }
 
-
-    // public function followers()
-    // {
-    //     return $this->hasMany(Follower::class, 'followed_id');
-    // }
-
+    // الأشخاص الذين يتابعهم المستخدم الحالي
     public function following()
     {
-        return $this->hasMany(Follower::class, 'follower_id');
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'followed_id');
     }
-
+    
+    // التحقق من متابعة مستخدم معين
+    public function isFollowing(User $user)
+    {
+        return $this->following()->where('followed_id', $user->id)->exists();
+    }
     public function reel_comment()
     {
      return $this->hasMany(reel_comments::class);

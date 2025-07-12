@@ -24,6 +24,7 @@ class dashboardcontroller extends Controller
         ->orderByDesc('followers_count')
         ->take(10)
         ->get();
+        dd($mostFollowedUsers);
         $user_count=User::where('role',2)->count();
         $products_count=product::where('is_approved',1)->count();
         $category_count=category::count();

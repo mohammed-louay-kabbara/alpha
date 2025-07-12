@@ -518,7 +518,7 @@
                                                     alt="" srcset="">
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm">{{ $item->name }}</h6>
+                                                <h4 class=" text-dark ">{{ $item->name }}</h6>
                                             </div>
                                         </div>
                                     </li>

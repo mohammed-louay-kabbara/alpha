@@ -442,7 +442,15 @@
                                         <div class="d-flex align-items-center">
                                             <div
                                                 class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                                <i class="ni ni-mobile-button text-white opacity-10"></i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                    viewBox="-5.0 -10.0 110.0 135.0">
+                                                    <g fill-rule="evenodd">
+                                                        <path
+                                                            d="m50 31.25c-5.1797 0-9.375 4.1953-9.375 9.375s4.1953 9.375 9.375 9.375 9.375-4.1953 9.375-9.375-4.1953-9.375-9.375-9.375zm-15.625 9.375c0-8.6289 6.9961-15.625 15.625-15.625s15.625 6.9961 15.625 15.625-6.9961 15.625-15.625 15.625-15.625-6.9961-15.625-15.625z" />
+                                                        <path
+                                                            d="m50 12.5c-15.609 0-28.125 12.309-28.125 27.32 0 10.387 5.6172 20.957 12.312 29.781 6.2305 8.2109 13.082 14.508 16.148 17.164 3.1328-2.4961 9.6523-8.6914 15.621-16.805 6.6289-9.0078 12.168-19.824 12.168-30.141 0-15.012-12.516-27.32-28.125-27.32zm-34.375 27.32c0-18.617 15.469-33.57 34.375-33.57s34.375 14.953 34.375 33.57c0 12.336-6.5039 24.492-13.387 33.848-6.9141 9.3945-14.633 16.52-17.887 18.848-2.5117 1.7969-5.1016 0.47656-6.2656-0.51953-2.8945-2.4648-10.609-9.3672-17.629-18.617-6.9531-9.1641-13.582-21.102-13.582-33.559z" />
+                                                    </g>
+                                                </svg>
                                             </div>
                                             <div class="d-flex flex-column">
                                                 <h6 class="mb-1 text-dark text-sm">{{ $item->address }}</h6>
@@ -465,6 +473,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr class="text-center justify-center">
+
                                             <th scope="col">الصورة</th>
                                             <th scope="col">الاسم</th>
                                             <th scope="col">الايميل</th>
@@ -473,7 +482,8 @@
                                     </thead>
                                     @foreach ($mostFollowedUsers as $item)
                                         <tr>
-                                            <td><img width="50px" height="50px"src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
+                                            <td><img width="50px"
+                                                    height="50px"src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
                                             </td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>

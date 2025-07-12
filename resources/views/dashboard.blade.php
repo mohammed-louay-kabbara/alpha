@@ -509,20 +509,21 @@
                         </div>
                         <div class="card-body p-3">
                             <ul class="list-group">
-                                @foreach ($topCategories as $item)
-                                    <li
-                                        class="list-group-item border-0 d-flex justify-content-between  border-radius-lg">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon icon-shape icon-sm me-3  shadow text-center">
-                                                <img width="50px" height="50px" src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
-                                                    alt="" srcset="">
-                                            </div>
-                                            <div class="d-flex flex-column p-10">
-                                                <h4 class=" text-dark ">{{ $item->name }}</h6>
-                                            </div>
-                                        </div>
-                                    </li>
-                                @endforeach
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>الصورة</th>
+                                        <th>الاسم</th>
+                                    </tr>
+                                    @foreach ($topCategories as $item)
+                                        <tr>
+                                            <td> <img width="50px" height="50px"
+                                                    src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
+                                                    alt="" srcset=""></td>
+                                            <td>{{ $item->name }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                </table>
                             </ul>
                         </div>
                     </div>

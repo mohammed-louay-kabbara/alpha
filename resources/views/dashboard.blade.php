@@ -462,8 +462,27 @@
                         </div>
                         <div class="card-body p-3">
                             <ul class="list-group">
-                                @foreach ($mostFollowedUsers as $item)
-                                    <li
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">الصورة</th>
+                                            <th scope="col">الاسم</th>
+                                            <th scope="col">الايميل</th>
+                                            <th scope="col">عدد المتابعين</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach ($mostFollowedUsers as $item)
+                                        <tr>
+                                            <td><img
+                                                src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
+                                            </td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->followers_count }}</td>
+                                        </tr>
+                                </table>
+                                {{-- <li
                                         class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                         <div class="d-flex align-items-center">
                                             <div
@@ -471,15 +490,15 @@
                                                 <i class="ni ni-mobile-button text-white opacity-10"></i>
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm">{{ $item->name }}</h6>
-                                                <span class="text-xs">{{ $item->email }}</span>
+                                                <h6 class="mb-1 text-dark text-sm"></h6>
+                                                <span class="text-xs"></span>
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm">{{ $item->followers_count }}</h6>
+                                                <h6 class="mb-1 text-dark text-sm"></h6>
                                                  <span class="text-xs"></span>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> --}}
                                 @endforeach
                             </ul>
                         </div>

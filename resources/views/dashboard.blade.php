@@ -462,7 +462,6 @@
                         </div>
                         <div class="card-body p-3">
                             <ul class="list-group">
-
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -475,31 +474,14 @@
                                     @foreach ($mostFollowedUsers as $item)
                                         <tr>
                                             <td><img width="50px" height="50px"
-                                                src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
+                                                    src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
                                             </td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>{{ $item->followers_count }}</td>
                                         </tr>
+                                    @endforeach
                                 </table>
-                                {{-- <li
-                                        class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                        <div class="d-flex align-items-center">
-                                            <div
-                                                class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                                <i class="ni ni-mobile-button text-white opacity-10"></i>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm"></h6>
-                                                <span class="text-xs"></span>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm"></h6>
-                                                 <span class="text-xs"></span>
-                                            </div>
-                                        </div>
-                                    </li> --}}
-                                @endforeach
                             </ul>
                         </div>
                     </div>

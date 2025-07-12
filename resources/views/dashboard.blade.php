@@ -514,7 +514,7 @@
                                         class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                         <div class="d-flex align-items-center">
                                             <div class="icon icon-shape icon-sm me-3  shadow text-center">
-                                                <img src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
+                                                <img width="50px" height="50px" src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
                                                     alt="" srcset="">
                                             </div>
                                             <div class="d-flex flex-column">

@@ -26,5 +26,11 @@ class product extends Model
   {
     return $this->morphMany(Report::class, 'report_typeable');
   }
+  public function likeTypes()
+  {
+      return $this->hasMany(product_like::class)
+                  ->select('type')
+                  ->distinct('type');
+  }
   
 }

@@ -13,12 +13,20 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = product::with('files','user')->withCount([
-            'likes' => function ($query) {}
-        ])
+        // $product = product::with('files','user')->withCount([
+        //     'likes' => function ($query) {}
+        // ])
+        // ->where('is_approved', 1)
+        // ->orderBy('created_at', 'desc')
+        // ->get();
+        // 
+
+        $product = Product::with(['files', 'user', 'likeTypes']) // 👍 جلب أنواع التفاعل
+        ->withCount(['likes']) // 👍 عدد التفاعلات
         ->where('is_approved', 1)
         ->orderBy('created_at', 'desc')
         ->get();
+        $product->likeTypes->pluck('type'); 
         return response()->json($product);
     }
 

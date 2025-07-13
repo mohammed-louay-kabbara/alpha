@@ -20,14 +20,21 @@ class ProductController extends Controller
         // ->orderBy('created_at', 'desc')
         // ->get();
         // 
-
-        $product = Product::with(['files', 'user', 'likeTypes']) // 👍 جلب أنواع التفاعل
-        ->withCount(['likes']) // 👍 عدد التفاعلات
+        $products = product::with(['files', 'user', 'likeTypes' => function ($query) {
+            $query->select('type', 'product_id')->distinct('type');
+        }])
+        ->withCount('likes')
         ->where('is_approved', 1)
         ->orderBy('created_at', 'desc')
         ->get();
-        $product->likeTypes->pluck('type'); 
-        return response()->json($product);
+
+        // استخراج فقط أنواع التفاعلات إن احتجت لاحقاً:
+        foreach ($products as $product) {
+            $reactionTypes = $product->likeTypes->pluck('type'); // مثلاً: ['like', 'love', 'angry']
+        }
+
+        return response()->json($products);
+
     }
 
     public function create(Request $request)

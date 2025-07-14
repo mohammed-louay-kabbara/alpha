@@ -13,13 +13,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // $product = product::with('files','user')->withCount([
-        //     'likes' => function ($query) {}
-        // ])
-        // ->where('is_approved', 1)
-        // ->orderBy('created_at', 'desc')
-        // ->get();
-        // 
         $products = product::with(['files', 'user', 'likeTypes'])
         ->withCount('likes')
         ->where('is_approved', 1)

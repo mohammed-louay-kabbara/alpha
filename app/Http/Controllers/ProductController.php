@@ -32,7 +32,9 @@ class ProductController extends Controller
     
     public function getUsersWithProducts()
     {
-       $users = User::has('product')->with('product')->get();
+        $users = User::has('product')
+            ->with(['product.files']) // product -> ثم files التابعة لكل منتج
+            ->get();
         return response()->json($users);
     }
 

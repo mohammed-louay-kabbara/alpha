@@ -78,6 +78,7 @@ Route::group([
     Route::resource('productLike', ProductLikeController::class);
     Route::post('searchProducts', [ProductController::class,'searchProducts']);
     Route::post('searchUsers', [AuthController::class,'searchUsers']);
+    Route::get('pagesproduct', [ProductController::class,'getUsersWithProducts']);
     Route::resource('ProductComments', ProductCommentsController::class);
     Route::resource('follower', FollowerController::class);
     Route::get('getFollower', [FollowerController::class,'getFollower']);

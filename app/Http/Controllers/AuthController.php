@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\user;
@@ -27,8 +26,6 @@ class AuthController extends Controller
      *
      * @return void
      */
-
-
 
     public function login()
     {
@@ -71,6 +68,7 @@ class AuthController extends Controller
         $user=user::where('id',$request->user_id)->first();
         return response()->json($user, 200);
     }
+    
     public function count_profile(Request $request){
         if ($request->user_id) {
         $count_follower=follower::where('followed_id',$request->user_id)->count();

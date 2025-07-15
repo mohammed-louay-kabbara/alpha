@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\User;
 use App\Models\product_file;
 use App\Models\reels;
 use Illuminate\Http\Request;
@@ -19,16 +20,20 @@ class ProductController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
-    // نعدل كل منتج لإضافة reaction_types كمصفوفة بسيطة
-    $products->transform(function ($product) {
-        $product->reaction_types = $product->likeTypes->pluck('type')->unique()->values();
-        unset($product->likeTypes); // حذف العلاقة الأصلية إن لم تكن لازمة
-        return $product;
-    });
+        // نعدل كل منتج لإضافة reaction_types كمصفوفة بسيطة
+        $products->transform(function ($product) {
+            $product->reaction_types = $product->likeTypes->pluck('type')->unique()->values();
+            unset($product->likeTypes); // حذف العلاقة الأصلية إن لم تكن لازمة
+            return $product;
+        });
+        return response()->json($products);
+    }
 
-    return response()->json($products);
-
-
+    
+    public function getUsersWithProducts()
+    {
+       $users = User::has('product')->with('product')->get();
+        return response()->json($users);
     }
 
     public function create(Request $request)

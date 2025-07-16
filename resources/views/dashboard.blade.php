@@ -527,7 +527,6 @@
             </div>
         </div>
     </main>
-    <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -554,14 +553,11 @@
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
                 ];
-
                 const chartLabels = months;
                 const chartData = new Array(12).fill(0);
-
                 data.forEach(item => {
                     chartData[item.month - 1] = item.count;
                 });
-
                 new Chart(document.getElementById('userChart'), {
                     type: 'line',
                     data: {

@@ -352,7 +352,9 @@
                                                     </th>
                                                     <th>الوصف</th>
                                                     <th>الصلاحيات</th>
-                    
+                                                    <th>عدد الجلسات</th>
+                                                    <th>متوسط مدة الجلسة</th>
+                                                    <th>تاريخ التسجيل</th>
                                                     <th>الحالة</th>
                                                     <th></th>
                                                 </tr>
@@ -376,7 +378,30 @@
                                                                 Admin
                                                             @endif
                                                         </td>
-                                          
+                                                        <td>{{ $user->sessions_count }}</td>
+                                                        <td>
+                                                            @if ($user->sessions_count > 0)
+                                                                @php
+                                                                    // تحويل الثواني إلى دقائق وساعات
+                                                                    $seconds = $user->average_session_duration;
+                                                                    $hours = floor($seconds / 3600);
+                                                                    $minutes = floor(($seconds % 3600) / 60);
+                                                                    $seconds = $seconds % 60;
+                                                                @endphp
+
+                                                                @if ($hours > 0)
+                                                                    {{ $hours }} س {{ $minutes }} د
+                                                                @elseif($minutes > 0)
+                                                                    {{ $minutes }} دقيقة
+                                                                @else
+                                                                    {{ $seconds }} ثانية
+                                                                @endif
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $user->created_at->format('Y-m-d') }}</td>
+
                                                         <td>
                                                             @if ($c->status == 'نشط الآن')
                                                                 <span

@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\UserSession;
 use App\Models\advertisement;
 use App\Models\category;
-    use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 
 class dashboardcontroller extends Controller
 {
@@ -51,6 +51,19 @@ class dashboardcontroller extends Controller
     public function create()
     {
         //
+    }
+
+    public function getMonthlyUserStats()
+    {
+        $users = User::select(
+            DB::raw("MONTH(created_at) as month"),
+            DB::raw("COUNT(*) as count")
+        )
+        ->whereYear('created_at', now()->year)
+        ->groupBy(DB::raw("MONTH(created_at)"))
+        ->orderBy(DB::raw("MONTH(created_at)"))
+        ->get();
+        return response()->json($users);
     }
 
     /**

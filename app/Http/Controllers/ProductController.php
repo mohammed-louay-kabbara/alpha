@@ -45,6 +45,7 @@ class ProductController extends Controller
                         ->get();
         return view('product', compact('products'));
     }
+    
     public function reports_d(Request $request)
     {
         if ($request->type == 'product') {

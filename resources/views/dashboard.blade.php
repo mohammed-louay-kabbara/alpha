@@ -389,7 +389,7 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="chart">
-                                <canvas id="userChart"></canvas>
+                                <canvas id="userChart" class="chart-canvas" height="300"></canvas>
                             </div>
                         </div>
                     </div>

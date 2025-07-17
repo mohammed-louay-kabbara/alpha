@@ -15,10 +15,7 @@ class dashboardcontroller extends Controller
 
     public function index()
     {
-        // $topAddresses = User::select('address', DB::raw('COUNT(*) as user_countad'))
-        //     ->groupBy('address')
-        //     ->orderByDesc('user_countad')
-        //     ->get();
+
         $mostFollowedUsers = User::withCount('followers')
             ->orderByDesc('followers_count')
             ->take(10)

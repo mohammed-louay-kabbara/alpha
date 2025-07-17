@@ -455,7 +455,7 @@
                                             </div>
                                             <div class="d-flex flex-column">
                                                 <h6 class="mb-1 text-dark text-sm">{{ $item->address }}</h6>
-                                                <span class="text-xs">{{ $item->percentage }}</span>
+                                                <span class="text-xs">{{ $item->percentage }} %</span>
                                             </div>
                                         </div>
                                     </li>

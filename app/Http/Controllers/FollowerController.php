@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class FollowerController extends Controller
 {
 
+
+
     public function index()
     {
         $user = auth()->user();

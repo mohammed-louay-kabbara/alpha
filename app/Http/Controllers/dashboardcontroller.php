@@ -15,10 +15,10 @@ class dashboardcontroller extends Controller
 
     public function index()
     {
-        $topAddresses = User::select('address', DB::raw('COUNT(*) as user_countad'))
-            ->groupBy('address')
-            ->orderByDesc('user_countad')
-            ->get();
+        // $topAddresses = User::select('address', DB::raw('COUNT(*) as user_countad'))
+        //     ->groupBy('address')
+        //     ->orderByDesc('user_countad')
+        //     ->get();
         $mostFollowedUsers = User::withCount('followers')
             ->orderByDesc('followers_count')
             ->take(10)
@@ -28,6 +28,21 @@ class dashboardcontroller extends Controller
                 ->take(3)
                 ->get();
         $user_count=User::where('role',2)->count();
+        
+        $topAddresses = User::select(
+                'address',
+                DB::raw('COUNT(*) as count')
+            )
+            ->groupBy('address')
+            ->orderByDesc('count')
+            ->get()
+            ->map(function ($item) use ($user_count) {
+                $item->percentage = round(($item->count / $user_count) * 100, 2); // النسبة المئوية
+                return $item;
+            });
+
+
+
         $products_count=product::where('is_approved',1)->count();
         $UserSession=floor(UserSession::avg('duration') / 60);
         $advertisements=advertisement::get();

@@ -474,7 +474,6 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr class="text-center justify-center">
-
                                             <th scope="col">الصورة</th>
                                             <th scope="col">الاسم</th>
                                             <th scope="col">الايميل</th>
@@ -483,8 +482,8 @@
                                     </thead>
                                     @foreach ($mostFollowedUsers as $item)
                                         <tr>
-                                            <td><img width="50px"
-                                                    height="50px"src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
+                                            <td><img width="50px" height="50px"
+                                                    src="{{ asset('http://alphaword.sy/storage/' . $item->picture) }}">
                                             </td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
@@ -496,7 +495,34 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="row mt-4">
                 <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">أكثر الاقسام نشراً</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <ul class="list-group">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>الصورة</th>
+                                        <th>الاسم</th>
+                                    </tr>
+                                    @foreach ($topCategories as $item)
+                                        <tr>
+                                            <td> <img width="50px" height="50px"
+                                                    src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
+                                                    alt="" srcset=""></td>
+                                            <td>{{ $item->name }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                </table>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header pb-0 p-3">
                             <h6 class="mb-0">احصائيات عامة</h6>
@@ -524,34 +550,6 @@
                                             <td id="inactive-month"></td>
                                         </tr>
                                     </tbody>
-                                </table>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-lg-5">
-                    <div class="card">
-                        <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0">أكثر الاقسام نشراً</h6>
-                        </div>
-                        <div class="card-body p-3">
-                            <ul class="list-group">
-                                <table class="table table-hover">
-                                    <tr>
-                                        <th>الصورة</th>
-                                        <th>الاسم</th>
-                                    </tr>
-                                    @foreach ($topCategories as $item)
-                                        <tr>
-                                            <td> <img width="50px" height="50px"
-                                                    src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
-                                                    alt="" srcset=""></td>
-                                            <td>{{ $item->name }}</td>
-                                        </tr>
-                                    @endforeach
-
                                 </table>
                             </ul>
                         </div>

@@ -27,7 +27,7 @@ class dashboardcontroller extends Controller
                 ->orderByDesc('product_count')
                 ->take(3)
                 ->get();
-        $user_count=User::where('role',2)->count();
+        $user_count=User::count();
         
         $topAddresses = User::select(
                 'address',
@@ -40,8 +40,6 @@ class dashboardcontroller extends Controller
                 $item->percentage = round(($item->count / $user_count) * 100, 2); // النسبة المئوية
                 return $item;
             });
-
-
 
         $products_count=product::where('is_approved',1)->count();
         $UserSession=floor(UserSession::avg('duration') / 60);

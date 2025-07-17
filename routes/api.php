@@ -88,4 +88,4 @@ Route::group([
     Route::get('homereels',[ReelsController::class,'homereels']);
     Route::post('session/start', [SessionController::class, 'startSession']);
     Route::post('session/end', [SessionController::class, 'endSession']);
-    Route::middleware('auth:api')->post('/store-device-token', [AuthController::class, 'storeDeviceToken']);
+    Route::post('/store-device-token', [AuthController::class, 'storeDeviceToken']);

@@ -378,12 +378,12 @@
                                                                 Admin
                                                             @endif
                                                         </td>
-                                                        <td>{{ $user->sessions_count }}</td>
+                                                        <td>{{ $c->sessions_count }}</td>
                                                         <td>
-                                                            @if ($user->sessions_count > 0)
+                                                            @if ($c->sessions_count > 0)
                                                                 @php
                                                                     // تحويل الثواني إلى دقائق وساعات
-                                                                    $seconds = $user->average_session_duration;
+                                                                    $seconds = $c->average_session_duration;
                                                                     $hours = floor($seconds / 3600);
                                                                     $minutes = floor(($seconds % 3600) / 60);
                                                                     $seconds = $seconds % 60;
@@ -400,7 +400,7 @@
                                                                 -
                                                             @endif
                                                         </td>
-                                                        <td>{{ $user->created_at->format('Y-m-d') }}</td>
+                                                        <td>{{ $c->created_at->format('Y-m-d') }}</td>
 
                                                         <td>
                                                             @if ($c->status == 'نشط الآن')

@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class dashboardcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $topAddresses = User::select('address', DB::raw('COUNT(*) as user_countad'))
@@ -44,10 +42,6 @@ class dashboardcontroller extends Controller
         'advertisements'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -66,9 +60,6 @@ class dashboardcontroller extends Controller
         return response()->json($users);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //

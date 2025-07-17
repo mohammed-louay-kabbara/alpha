@@ -18,6 +18,7 @@ use App\Models\follower;
 use App\Models\product;
 use App\Models\reels;
 use App\Models\DeviceToken;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -71,6 +72,11 @@ class AuthController extends Controller
     }
     }
 
+    public function fcm_token(Request $request)
+    {
+
+    }
+
     public function info_user(Request $request){
         $user=user::where('id',$request->user_id)->first();
         return response()->json($user, 200);
@@ -119,13 +125,21 @@ class AuthController extends Controller
             'token' => 'required|string',
         ]);
 
+        // $devicetoken = DeviceToken::where('user_id',Auth::id());
+        // if ($devicetoken) {
+        //     $devicetoken->update([
+        //         'token' => $request->token
+        //     ]);
+        // }
         $user = Auth::user();
-
-        // احفظ أو حدث التوكن الحالي للمستخدم
         DeviceToken::updateOrCreate(
             ['user_id' => $user->id],
             ['token' => $request->token]
         );
+    
+
+        // احفظ أو حدث التوكن الحالي للمستخدم
+
 
         return response()->json(['message' => 'تم حفظ التوكن بنجاح'], 200);
     }

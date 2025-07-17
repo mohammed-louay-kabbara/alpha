@@ -496,6 +496,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">احصائيات عامة</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <ul class="list-group">
+                                <table class="table table-hover" id="statistics-table">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>الوصف</th>
+                                            <th>النسبة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>نسبة المستخدمين الذين لم ينشروا منتجات</td>
+                                            <td id="without-products"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>نسبة المستخدمين الذين لم يدخلوا التطبيق مطلقاً</td>
+                                            <td id="without-sessions"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>نسبة المستخدمين الذين لم يدخلوا التطبيق منذ أكثر من شهر</td>
+                                            <td id="inactive-month"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row mt-4">
                 <div class="col-lg-5">
@@ -584,6 +617,19 @@
                         }
                     }
                 });
+            });
+    </script>
+
+    <script>
+        fetch('/api/user-statistics')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('without-products').textContent = data.without_products + '%';
+                document.getElementById('without-sessions').textContent = data.without_sessions + '%';
+                document.getElementById('inactive-month').textContent = data.inactive_more_than_month + '%';
+            })
+            .catch(error => {
+                console.error('Error fetching user statistics:', error);
             });
     </script>
 </body>

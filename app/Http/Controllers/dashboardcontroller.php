@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserSession;
 use App\Models\advertisement;
 use App\Models\category;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class dashboardcontroller extends Controller
@@ -83,25 +84,41 @@ class dashboardcontroller extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function getUserStatistics()
+    {
+        $totalUsers = User::count();
+        $usersWithProducts = User::has('product')->count();
+        $usersWithoutProducts = $totalUsers - $usersWithProducts;
+        $percentageWithoutProducts = round(($usersWithoutProducts / $totalUsers) * 100, 2);
+
+        $usersWithSessions = User::has('sessions')->count();
+        $usersWithoutSessions = $totalUsers - $usersWithSessions;
+        $percentageWithoutSessions = round(($usersWithoutSessions / $totalUsers) * 100, 2);
+
+        $oneMonthAgo = \Carbon\Carbon::now()->subMonth();
+        $inactiveUsersCount = User::whereDoesntHave('sessions', function ($query) use ($oneMonthAgo) {
+            $query->where('started_at', '>=', $oneMonthAgo);
+        })->count();
+        $percentageInactive = $totalUsers > 0 ? round(($inactiveUsersCount / $totalUsers) * 100, 2) : 0;
+
+        return response()->json([
+            'without_products' => $percentageWithoutProducts,
+            'without_sessions' => $percentageWithoutSessions,
+            'inactive_more_than_month' => $percentageInactive
+        ]);
+    }
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //

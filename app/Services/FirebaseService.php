@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
-use Google\Auth\Credentials\ServiceAccountCredentials;
+use Google\Auth\ApplicationDefaultCredentials;
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 
 class FirebaseService
 {
@@ -13,14 +14,20 @@ class FirebaseService
 
     public function __construct()
     {
-        // مسار ملف JSON
+        $scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
         $keyFile = base_path(env('FIREBASE_CREDENTIALS'));
 
-        // نطاق الأذونات لـ FCM
-        $scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
+        // إعداد الـ Middleware باستخدام بيانات الخدمة
+        $middleware = ApplicationDefaultCredentials::getMiddleware($scopes, $keyFile);
 
-        $this->credentials = new ServiceAccountCredentials($scopes, $keyFile);
-        $this->http = new Client();
+        $stack = HandlerStack::create();
+        $stack->push($middleware);
+
+        $this->http = new Client([
+            'handler' => $stack,
+            'auth'    => 'google_auth',
+        ]);
+
         $this->projectId = env('FIREBASE_PROJECT_ID');
     }
 
@@ -72,3 +79,7 @@ class FirebaseService
         return json_decode((string) $response->getBody(), true);
     }
 }
+
+
+
+

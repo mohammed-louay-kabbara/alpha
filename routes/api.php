@@ -19,6 +19,7 @@ use  App\Http\Controllers\PrivacySettingController;
 use  App\Http\Controllers\ReportController;
 use  App\Http\Controllers\AdvertisementController;
 use  App\Http\Controllers\SessionController;
+use  App\Http\Controllers\NotificationController;
 use  App\Services\FirebaseService;
 
 
@@ -55,6 +56,11 @@ Route::group([
     Route::post('reset-password', [AuthController::class, 'verifyResetCode']);
     Route::post('count_profile', [AuthController::class, 'count_profile']);
     Route::post('info_user', [AuthController::class, 'info_user']);
+
+    Route::post('notify', [NotificationController::class, 'sendTest']);
+
+
+
     Route::get('my_profile', [AuthController::class, 'my_profile']);
     Route::get('advertisements', [AdvertisementController::class, 'ad']);
     Route::resource('commentReactions',CommentReactionsController::class);

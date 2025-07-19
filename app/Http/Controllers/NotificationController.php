@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\notification;
 use App\Services\FirebaseService;
 
 class NotificationController extends Controller
@@ -13,6 +15,14 @@ class NotificationController extends Controller
     {
         $this->firebase = $firebase;
     }
+
+    public function index()
+    {
+        $notifications=notification::with('sender')->where('user_id',Auth::id())->get();
+        return response()->json($notifications, 200);
+    }
+
+ 
    
 
     public function sendTest(Request $request)

@@ -42,9 +42,12 @@ class FirebaseService
                     'title' => $title,
                     'body'  => $body,
                 ],
-                'data' => $dataPayload, // يجب أن تكون key-value strings
-            ],
-        ];
+                'data' => [
+                    'type' => 'demo',
+                    'id'   => '123',
+                ],
+            ], ];
+        
 
         $response = $this->http->post($url, [
             'headers' => ['Content-Type' => 'application/json'],

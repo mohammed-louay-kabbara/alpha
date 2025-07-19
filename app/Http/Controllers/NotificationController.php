@@ -33,8 +33,8 @@ class NotificationController extends Controller
 
         $result = $this->firebase->sendNotification(
             $request->input('token'),
-            'عنوان الاختبار',
-            'هذه رسالة تجريبية من Laravel'
+            'تهنئة',
+            'كل عام وأنتم بألف خير'
         );
         return response()->json($result);
     }

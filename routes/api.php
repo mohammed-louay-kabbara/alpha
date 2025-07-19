@@ -46,9 +46,7 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 });
-
     Route::post('login', [AuthController::class, 'login']);
-    // Route::post('/login_admin', [AuthController::class, 'login_admin'])->name('login_admin');
     Route::post('editpassword', [AuthController::class, 'editpassword']);
     Route::post('forgotpassword', [AuthController::class, 'forgot_password']);
     Route::post('register', [AuthController::class, 'register']);
@@ -57,11 +55,7 @@ Route::group([
     Route::post('count_profile', [AuthController::class, 'count_profile']);
     Route::post('info_user', [AuthController::class, 'info_user']);
     Route::post('pictureupdate', [AuthController::class, 'pictureupdate']);
-
     Route::post('notify', [NotificationController::class, 'sendTest']);
-
-
-
     Route::get('my_profile', [AuthController::class, 'my_profile']);
     Route::get('advertisements', [AdvertisementController::class, 'ad']);
     Route::resource('commentReactions',CommentReactionsController::class);

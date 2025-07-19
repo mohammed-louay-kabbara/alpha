@@ -3,26 +3,34 @@
 namespace App\Services;
 
 use Google\Auth\ApplicationDefaultCredentials;
+use Google\Auth\HttpHandler\HttpHandlerFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 
 class FirebaseService
 {
-    protected ServiceAccountCredentials $credentials;
     protected Client $http;
     protected string $projectId;
 
     public function __construct()
     {
+        // تعيين مسار ملف الخدمة
+        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path(env('FIREBASE_CREDENTIALS')));
+
+        // نطاق الأذونات المطلوبة لـ FCM
         $scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
-        $keyFile = base_path(env('FIREBASE_CREDENTIALS'));
 
-        // إعداد الـ Middleware باستخدام بيانات الخدمة
-        $middleware = ApplicationDefaultCredentials::getMiddleware($scopes, $keyFile);
+        // إنشاء handler للـ HTTP
+        $httpHandler = HttpHandlerFactory::build();
 
+        // إنشاء middleware للمصادقة
+        $middleware = ApplicationDefaultCredentials::getMiddleware($scopes, $httpHandler);
+
+        // تجهيز stack لـ Guzzle
         $stack = HandlerStack::create();
         $stack->push($middleware);
 
+        // إنشاء العميل HTTP
         $this->http = new Client([
             'handler' => $stack,
             'auth'    => 'google_auth',
@@ -32,21 +40,13 @@ class FirebaseService
     }
 
     /**
-     * جلب توكن الوصول (access token)
-     */
-    protected function getAccessToken(): string
-    {
-        $authToken = $this->credentials->fetchAuthToken($this->http);
-        return $authToken['access_token'] ?? '';
-    }
-
-    /**
      * إرسال إشعار إلى جهاز محدد عبر FCM HTTP v1 API
      *
      * @param string $deviceToken
      * @param string $title
      * @param string $body
      * @param array  $dataPayload (اختياري)
+     * @return array
      */
     public function sendNotification(
         string $deviceToken,
@@ -58,20 +58,18 @@ class FirebaseService
 
         $message = [
             'message' => [
-                'token'        => $deviceToken,
+                'token' => $deviceToken,
                 'notification' => [
                     'title' => $title,
-                    'body'  => $body,
+                    'body' => $body,
                 ],
-                // بيانات إضافية يقرأها التطبيق
                 'data' => $dataPayload,
             ],
         ];
 
         $response = $this->http->post($url, [
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->getAccessToken(),
-                'Content-Type'  => 'application/json',
+                'Content-Type' => 'application/json',
             ],
             'json' => $message,
         ]);
@@ -79,7 +77,3 @@ class FirebaseService
         return json_decode((string) $response->getBody(), true);
     }
 }
-
-
-
-

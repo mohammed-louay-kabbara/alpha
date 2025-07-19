@@ -80,7 +80,7 @@ class AuthController extends Controller
     public function pictureupdate(Request $request)
     {
         $user = Auth::user();
-        dd($request);
+        dd($request->picture);
         $imagePath = $request->file('picture')->store('profile_pictures', 'public');
         if ($user->picture=="profile_pictures/defoult_image.jpg") {
             $user->update(['picture' => $imagePath ]);

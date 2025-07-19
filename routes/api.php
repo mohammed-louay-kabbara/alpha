@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
@@ -24,18 +23,6 @@ use  App\Services\FirebaseService;
 
 
 
-Route::get('/test-notification', function (FirebaseService $firebase) {
-    $deviceToken = 'توكن جهاز الهاتف من FCM';
-
-    return $firebase->sendNotification(
-        $deviceToken,
-        'مرحبا بك!',
-        'تم إرسال الإشعار بنجاح 🎉'
-    );
-});
-
-
-
 
 Route::group([
     'middleware' => 'api',
@@ -56,6 +43,7 @@ Route::group([
     Route::post('info_user', [AuthController::class, 'info_user']);
     Route::post('pictureupdate', [AuthController::class, 'pictureupdate']);
     Route::post('notify', [NotificationController::class, 'sendTest']);
+    Route::post('notification_read', [NotificationController::class, 'read']);
     Route::get('notification', [NotificationController::class, 'index']);
     Route::post('notify_delete', [NotificationController::class, 'delete']);
     Route::get('my_profile', [AuthController::class, 'my_profile']);
@@ -85,9 +73,9 @@ Route::group([
     Route::resource('ProductComments', ProductCommentsController::class);
     Route::resource('follower', FollowerController::class);
     Route::get('getFollower', [FollowerController::class,'getFollower']);
-     Route::get('suggestedFollows', [FollowerController::class,'suggestedFollows']);
+    Route::get('suggestedFollows', [FollowerController::class,'suggestedFollows']);
     Route::get('Users', [AuthController::class,'users']);
-     Route::delete('deletefollower', [FollowerController::class,'deleteFollower']);
+    Route::delete('deletefollower', [FollowerController::class,'deleteFollower']);
     Route::get('homereels',[ReelsController::class,'homereels']);
     Route::post('session/start', [SessionController::class, 'startSession']);
     Route::post('session/end', [SessionController::class, 'endSession']);

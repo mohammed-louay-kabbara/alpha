@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\notification;
 use App\Services\FirebaseService;
+use App\Models\user;
 
 class NotificationController extends Controller
 {
@@ -16,15 +17,22 @@ class NotificationController extends Controller
         $this->firebase = $firebase;
     }
 
+    public function read(){
+        Notification::where('user_id', Auth::id())->whereNull('read_at')->update(['read_at' => now()]);
+        return response()->json(['لقد أصبح كل المنشورات مقروءة'], 200 );
+    }
+
     public function index()
     {
         $notifications=notification::with('sender')->where('user_id',Auth::id())->get();
         return response()->json($notifications, 200);
     }
 
- 
-   
-
+    public function admin()
+    {
+        $users=User::get();
+        return view('notification',compact('users'));
+    }
     public function sendTest(Request $request)
     {
         $request->validate([

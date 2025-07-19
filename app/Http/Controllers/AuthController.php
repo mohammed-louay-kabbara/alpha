@@ -77,6 +77,21 @@ class AuthController extends Controller
 
     }
 
+    public function pictureupdate(Request $request)
+    {
+        $user = User::findOrFail($id);
+        $imagePath = $request->file('picture')->store('profile_pictures', 'public');
+        if ($user->picture=="profile_pictures/defoult_image.jpg") {
+            $user->update(['picture' => $imagePath ]);
+            return response()->json(['تم تعديل الصورة بنجاح'], 200);
+        }
+        elseif ($user->picture && Storage::disk('public')->exists($user->picture)) {
+            Storage::disk('public')->delete($user->picture);
+            $user->update(['picture' => $imagePath ]);
+         return response()->json(['تم تعديل الصورة بنجاح'], 200);
+        }     
+    }
+
     public function info_user(Request $request){
         $user=user::where('id',$request->user_id)->first();
         return response()->json($user, 200);
@@ -247,7 +262,7 @@ public function verifyResetCode(Request $request)
         return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 401);
     }
     $record->delete();
-    return response()->json(['message' => 'تم تعيين كلمة المرور الجديدة بنجاح']);
+    return response()->json(['message' => 'تم التحقق الرمز بنجاح']);
 }
 
     public function register(Request $request)
@@ -397,7 +412,5 @@ public function verifyResetCode(Request $request)
             $user->delete();
         return back()->with('success', 'تم حذف المستخدم بنجاح');
         }
-        
-
-        }
+    }
 }

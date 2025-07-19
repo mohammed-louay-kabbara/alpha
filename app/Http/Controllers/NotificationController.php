@@ -31,13 +31,10 @@ class NotificationController extends Controller
 
       public function send(Request $request, FirebaseService $firebaseService)
     {
-        dd(file_exists(base_path(env('FIREBASE_CREDENTIALS'))));
-        
         $request->validate([
             'device_token' => 'required|string',
             'title'        => 'required|string',
             'body'         => 'required|string',
-            'data'         => 'array',
         ]);
 
         try {

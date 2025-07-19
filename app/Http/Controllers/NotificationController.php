@@ -28,4 +28,33 @@ class NotificationController extends Controller
         );
         return response()->json($result);
     }
+
+      public function send(Request $request, FirebaseService $firebaseService)
+    {
+        $request->validate([
+            'device_token' => 'required|string',
+            'title'        => 'required|string',
+            'body'         => 'required|string',
+            'data'         => 'array',
+        ]);
+
+        try {
+            $response = $firebaseService->sendNotification(
+                $request->device_token,
+                $request->title,
+                $request->body,
+                $request->data ?? []
+            );
+
+            return response()->json([
+                'success' => true,
+                'response' => $response
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

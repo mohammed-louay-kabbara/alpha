@@ -66,4 +66,10 @@ class NotificationController extends Controller
             ], 500);
         }
     }
+
+    public function delete(Request $request)
+    {
+        notification::where('id',$request->notify_id)->delete();
+        return response()->json(['تم حذف الإشعار بنجاح'], 200);
+    }
 }

@@ -57,6 +57,7 @@ Route::group([
     Route::post('pictureupdate', [AuthController::class, 'pictureupdate']);
     Route::post('notify', [NotificationController::class, 'sendTest']);
     Route::get('notification', [NotificationController::class, 'index']);
+    Route::post('notify_delete', [NotificationController::class, 'delete']);
     Route::get('my_profile', [AuthController::class, 'my_profile']);
     Route::get('advertisements', [AdvertisementController::class, 'ad']);
     Route::resource('commentReactions',CommentReactionsController::class);

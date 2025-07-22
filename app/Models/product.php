@@ -15,6 +15,7 @@ class product extends Model
     return $this->hasMany(product_like::class);
   }
 
+
   public function user(){
     return $this->belongsTo(User::class);
   }

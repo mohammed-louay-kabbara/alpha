@@ -14,18 +14,23 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = product::with(['files', 'user', 'likeTypes'])
-        ->withCount('likes')
-        ->where('is_approved', 1)
-        ->orderBy('created_at', 'desc')
-        ->get();
-
-        // نعدل كل منتج لإضافة reaction_types كمصفوفة بسيطة
-        $products->transform(function ($product) {
-            $product->reaction_types = $product->likeTypes->pluck('type')->unique()->values();
-            unset($product->likeTypes); // حذف العلاقة الأصلية إن لم تكن لازمة
-            return $product;
-        });
+        // $products = product::with(['files', 'user', 'likeTypes'])
+        // ->withCount('likes')
+        // ->where('is_approved', 1)
+        // ->orderBy('created_at', 'desc')
+        // ->get();     
+        // return response()->json($products);
+        $user = auth()->user(); // المستخدم من التوكن (JWT Guard)
+        $products = Product::with(['files', 'user', 'likeTypes', 'likes']) // تأكد من وجود علاقة likes
+            ->withCount('likes')
+            ->where('is_approved', 1)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($product) use ($user) {
+                $product->liked_by_user = $product->likes->contains('user_id', $user->id);
+                unset($product->likes); // إذا ما بدك تعرض بيانات الإعجابات نفسها
+                return $product;
+            });
         return response()->json($products);
     }
 

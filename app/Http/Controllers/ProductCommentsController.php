@@ -87,7 +87,7 @@ class ProductCommentsController extends Controller
         'أنا و النوم قصة حب تدمرها ماما كل صباح'];
         $product_comments= product_comments::with('user')->where('product_id',$id)->get();
         $randomPhrase = $array[array_rand($array)];
-        return response()->json($product_comments, 200);
+        return response()->json([$product_comments , $randomPhrase], 200);
     }
 
     /**

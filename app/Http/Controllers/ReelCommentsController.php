@@ -88,6 +88,7 @@ class ReelCommentsController extends Controller
         $reel_comments = reel_comments::with('user')
             ->where('reels_id', $id)
             ->get()
+            ->orderBy('created_at', 'desc')
             ->map(function ($comment) {
             $comment->liked_by_user = $comment->likes->contains('user_id', auth()->id());
             unset($comment->likes);

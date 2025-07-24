@@ -29,6 +29,12 @@ class FavoriteController extends Controller
 
     }
 
+    public function deleteall()
+    {
+        favorite::where('user_id',Auth::id())->delete();
+        return response()->json(['تم الحذف بنجاح '], 200);
+    }
+
     public function details($id)
     {
         $fav = favorite::where('id',$id)->first();

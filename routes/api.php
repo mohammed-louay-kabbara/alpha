@@ -63,6 +63,7 @@ Route::group([
     Route::resource('reelComments', ReelCommentsController::class);
     Route::resource('favorite', FavoriteController::class);
     Route::post('favorite_delete', [FavoriteController::class,'destroy']);
+    Route::post('deleteall', [FavoriteController::class,'deleteall']);
     Route::resource('story', StoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);

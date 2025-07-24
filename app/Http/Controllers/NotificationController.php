@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\notification;
 use App\Services\FirebaseService;
 use App\Models\user;
+use Illuminate\Support\Facades\DB;
 
 class NotificationController extends Controller
 {

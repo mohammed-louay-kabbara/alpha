@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserSession;
+use Carbon\Carbon;
 
 class SessionController extends Controller
 {
@@ -29,12 +30,12 @@ class SessionController extends Controller
         if ($session->user_id !== auth()->id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
-
-        $endedAt = now();
-        $duration = $session->started_at->diffInSeconds($endedAt);
+        
+        $startedAt = Carbon::parse($session->started_at);
+        $duration = $startedAt->diffInSeconds(now());
 
         $session->update([
-            'ended_at' => $endedAt,
+            'ended_at' => now(),
             'duration' => $duration
         ]);
         return response()->json(['message' => 'Session ended']);

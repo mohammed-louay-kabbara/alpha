@@ -21,8 +21,12 @@ class ReelsController extends Controller
                     ->where('followed_id', $reel->user_id)
                     ->exists();
                 return $reel;
+            })
+            ->map(function ($reel) {
+            $reel->liked_by_user = $reel->likes->contains('user_id', auth()->id());
+            unset($reel->likes);
+            return $reel;
             });
-
         return response()->json($reels);
     }
     

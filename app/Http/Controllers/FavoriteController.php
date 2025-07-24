@@ -31,14 +31,12 @@ class FavoriteController extends Controller
 
     }
 
-    public function details(Request $request)
+    public function details($id)
     {
-        dd($request->favorite_id);
-        $fav = favorite::where('id',$request->favorite_id)->first();
+        $fav = favorite::where('id',$id)->first();
         if (!$fav) {
             return response()->json(['error' => 'Favorite not found'], 404);
         }
-
         $favoritable = $fav->favoritable;
 
         if ($favoritable instanceof \App\Models\product) {
@@ -46,7 +44,6 @@ class FavoriteController extends Controller
         } elseif ($favoritable instanceof \App\Models\reels) {
             $favoritable->load('user');
         }
-
         return response()->json($favoritable);
     }
 

@@ -54,7 +54,7 @@ Route::group([
     Route::get('show_products/{id}',[ProductController::class,'show']);
     Route::post('product_sold',[ProductController::class,'sold']);
     Route::get('show_reels/{id}',[ReelsController::class,'show']);
-    Route::get('details',[FavoriteController::class,'details']);
+    Route::get('details/{id}',[FavoriteController::class,'details']);
     Route::resource('PrivacySetting', PrivacySettingController::class);
     Route::post('profilevisibility',[PrivacySettingController::class,'profilevisibility']);
     Route::post('commentpermission',[PrivacySettingController::class,'commentpermission']);

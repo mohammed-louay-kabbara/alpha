@@ -15,12 +15,16 @@ class product extends Model
     return $this->hasMany(product_like::class);
   }
 
-
   public function user(){
     return $this->belongsTo(User::class);
   }
   public function category(){
     return $this->belongsTo(category::class);
+  }
+
+  public function favorites()
+  {
+    return $this->morphMany(Favorite::class, 'favoritable');
   }
 
   public function reports()

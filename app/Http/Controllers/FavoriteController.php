@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\favorite;
+use App\Models\Reels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,21 @@ class FavoriteController extends Controller
     public function create()
     {
 
+    }
+
+    public function details(Request $request)
+    {
+
+    $favorites = Favorite::where('id', $request->favorite_id)
+        ->with([
+            'favoritable' => function ($morph) {
+                $morph->morphWith([
+                    'product' => ['files','user'],
+                    'reel' => ['user'], 
+                ]);
+            }
+        ])->first();
+        return response()->json($favorites);
     }
 
 

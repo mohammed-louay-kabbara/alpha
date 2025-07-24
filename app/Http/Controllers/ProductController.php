@@ -14,21 +14,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // $products = product::with(['files', 'user', 'likeTypes'])
-        // ->withCount('likes')
-        // ->where('is_approved', 1)
-        // ->orderBy('created_at', 'desc')
-        // ->get();     
-        // return response()->json($products);
-        $user = auth()->user(); // المستخدم من التوكن (JWT Guard)
-        $products = Product::with(['files', 'user', 'likeTypes', 'likes']) // تأكد من وجود علاقة likes
+        $products = Product::with(['files', 'user', 'likeTypes', 'likes']) 
             ->withCount('likes')
             ->where('is_approved', 1)
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($product) use ($user) {
                 $product->liked_by_user = $product->likes->contains('user_id', $user->id);
-                unset($product->likes); // إذا ما بدك تعرض بيانات الإعجابات نفسها
+                unset($product->likes); 
                 return $product;
             });
         return response()->json($products);
@@ -38,7 +31,7 @@ class ProductController extends Controller
     public function getUsersWithProducts()
     {
         $users = User::has('product')
-            ->with(['product.files']) // product -> ثم files التابعة لكل منتج
+            ->with(['product.files']) 
             ->get();
         return response()->json($users);
     }
@@ -64,6 +57,11 @@ class ProductController extends Controller
             return view('reels',compact('reels'));
         }
 
+    }
+
+    public function product()
+    {
+        
     }
     public function filterproduct(Request $request)
     {
@@ -96,7 +94,6 @@ class ProductController extends Controller
         else {
             $product->update(['is_sold'=> 0]);
         }
-
         return response()->json(['تم تعديل المنتج'], 200);
     }
 
@@ -142,7 +139,7 @@ class ProductController extends Controller
     }
     public function update(Request $request, product $product)
     {
-        //
+        
     }
     public function allAllow()
     {
@@ -152,9 +149,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product=product::with('files')->where('id',$id)->first();
-        // حذف كل الصور والفيديوهات المرتبطة بالمنتج
         foreach ($product->files as $file) {
-            // حذف الملف من storage
             if (Storage::disk('public')->exists($file->file_path)) {
                 Storage::disk('public')->delete($file->file_path);
             }

@@ -11,6 +11,7 @@ use App\Http\Controllers\PrivacySettingController;
 use App\Http\Controllers\ReelsController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\NotificationController;
 
 
 Route::middleware('jwt.session')->group(function () {

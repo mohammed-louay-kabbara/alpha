@@ -41,26 +41,21 @@ class ReelLikesController extends Controller
             'status' => true,
             'message' => 'تم إلغاء الإعجاب بنجاح',], 200);
         }
-
         // إنشاء السجل الجديد
         reel_likes::create([
             'user_id' => Auth::id(),
             'type' => $request->type,
             'reels_id' => $request->reels_id,
         ]);
-
         // تحديث العدادات
         $reel = reels::find($request->reels_id);
-        if ($request->type == 'like') {
             $reel->increment('likes_count');
-        } else {
-            $reel->increment('dislikes_count');
-        }
-        if ($reel->user_id != Auth::id()) {
-            $postOwner = $reel->user;
-            $fromUser = Auth::user();
-            $postOwner->notify(new NewOrderNotification($fromUser, $reel));
-        }
+       
+        // if ($reel->user_id != Auth::id()) {
+        //     $postOwner = $reel->user;
+        //     $fromUser = Auth::user();
+        //     $postOwner->notify(new NewOrderNotification($fromUser, $reel));
+        // }
      return response()->json([
             'status' => true,
             'message' => 'تم التقييم بنجاح.',

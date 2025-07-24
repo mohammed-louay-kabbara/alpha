@@ -513,7 +513,7 @@
                                     @foreach ($topCategories as $item)
                                         <tr>
                                             <td> <img width="50px" height="50px"
-                                                    src="{{ asset('http://alphaword.sy/storage/' . $a->image) }}"
+                                                    src="{{ asset('http://alphaword.sy/storage/' . $item->image) }}"
                                                     alt="" srcset=""></td>
                                             <td>{{ $item->name }}</td>
                                         </tr>

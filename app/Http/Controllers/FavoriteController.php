@@ -20,9 +20,7 @@ class FavoriteController extends Controller
             }
         });
         return response()->json($favorites, 200);
-    //   $user = Auth::user();
-    //   $favorites = $user->favorites()->with('favoritable')->get();
-    //   return response()->json($favorites, 200);
+
     }
 
 
@@ -45,7 +43,6 @@ class FavoriteController extends Controller
         }
         return response()->json($favoritable);
     }
-
 
     public function store(Request $request)
     {

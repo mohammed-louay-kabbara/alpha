@@ -80,7 +80,7 @@ class FavoriteController extends Controller
     public function destroy(Request $request)
     {
         if ($request->favorite_id) {
-            Favorite::where('id',$request->favorite_id)->delete();
+            favorite::where('id',$request->favorite_id)->delete();
             return response()->json(['تم حذف العنصر من السلة من السلة'], 200);
         }
         return response()->json(['العنصر غير موجود'], 404,);       

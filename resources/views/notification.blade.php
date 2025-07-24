@@ -171,7 +171,7 @@
                             <div class="modal-content">
                                 <form method="POST" action="" enctype="multipart/form-data">
                                     @csrf
-                                   
+
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCategoryLabel">
                                             الرسالة</h5>

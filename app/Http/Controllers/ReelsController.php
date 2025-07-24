@@ -12,11 +12,20 @@ class ReelsController extends Controller
 
     public function index()
     {
-      $reels = Reels::with('user')->orderBy('created_at', 'desc')->get();
-      return response()->json($reels);
+        $userId = auth()->id();
+        $reels = Reels::with('user')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($reel) use ($userId) {
+                $reel->is_following = \App\Models\Follower::where('follower_id', $userId)
+                    ->where('followed_id', $reel->user_id)
+                    ->exists();
+                return $reel;
+            });
+
+        return response()->json($reels);
     }
-
-
+    
     public function create()
     {
         $reels = Reels::with('user')->orderBy('created_at', 'desc')->get();

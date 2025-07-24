@@ -38,9 +38,8 @@ class FavoriteController extends Controller
             return response()->json(['error' => 'Favorite not found'], 404);
         }
         $favoritable = $fav->favoritable;
-
         if ($favoritable instanceof \App\Models\product) {
-            $favoritable->load('files');
+            $favoritable->load(['files','user']);
         } elseif ($favoritable instanceof \App\Models\reels) {
             $favoritable->load('user');
         }

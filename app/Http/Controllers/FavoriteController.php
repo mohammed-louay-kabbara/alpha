@@ -39,10 +39,12 @@ class FavoriteController extends Controller
             'favoritable' => function ($morph) {
                 $morph->morphWith([
                     'product' => ['files','user'],
-                    'reel' => ['user'], 
+                    'reel' => ['user'], // لا تحتاج تحميل علاقات إضافية
                 ]);
             }
-        ])->first();
+        ])
+        ->latest()
+        ->first();
         return response()->json($favorites);
     }
 

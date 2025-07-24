@@ -16,6 +16,6 @@ class reel_comments extends Model
    }
     public function comments()
     {
-      return $this->morphMany(Comment::class, 'commentable');
+      return $this->morphMany(comment_reactions::class, 'commentable');
     }
 }

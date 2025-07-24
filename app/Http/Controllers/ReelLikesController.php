@@ -51,11 +51,6 @@ class ReelLikesController extends Controller
         $reel = reels::find($request->reels_id);
             $reel->increment('likes_count');
        
-        // if ($reel->user_id != Auth::id()) {
-        //     $postOwner = $reel->user;
-        //     $fromUser = Auth::user();
-        //     $postOwner->notify(new NewOrderNotification($fromUser, $reel));
-        // }
      return response()->json([
             'status' => true,
             'message' => 'تم التقييم بنجاح.',

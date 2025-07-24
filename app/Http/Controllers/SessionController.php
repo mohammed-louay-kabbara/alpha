@@ -20,24 +20,23 @@ class SessionController extends Controller
         ]);
     }
 
-    // إنهاء الجلسة
     public function endSession(Request $request)
     {
         $request->validate([
             'session_id' => 'required|exists:user_sessions,id'
         ]);
-
         $session = UserSession::find($request->session_id);
-        
-        if($session->user_id !== auth()->id()) {
+        if ($session->user_id !== auth()->id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
-        $session->update([
-            'ended_at' => now(),
-            'duration' => now()->diffInSeconds($session->started_at)
-        ]);
+        $endedAt = now();
+        $duration = $session->started_at->diffInSeconds($endedAt);
 
+        $session->update([
+            'ended_at' => $endedAt,
+            'duration' => $duration
+        ]);
         return response()->json(['message' => 'Session ended']);
     }
 }

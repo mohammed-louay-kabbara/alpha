@@ -33,7 +33,7 @@ class FavoriteController extends Controller
 
     public function details(Request $request)
     {
-
+        dd($request->favorite_id);
         $fav = favorite::where('id',$request->favorite_id)->first();
         if (!$fav) {
             return response()->json(['error' => 'Favorite not found'], 404);

@@ -40,7 +40,8 @@ class dashboardcontroller extends Controller
             });
 
         $products_count=product::where('is_approved',1)->count();
-        $UserSession=floor(UserSession::avg('duration') / 60);
+         $UserSession = (int) UserSession::avg('duration');
+        // $UserSession=floor(UserSession::avg('duration'));
         $advertisements=advertisement::get();
         $products_Notallowed_count=product::where('is_approved',0)->count();
         return view('dashboard',compact('user_count',

@@ -14,6 +14,7 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $user=Auth::user();
         $products = Product::with(['files', 'user', 'likeTypes', 'likes']) 
             ->withCount('likes')
             ->where('is_approved', 1)

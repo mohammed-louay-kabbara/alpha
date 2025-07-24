@@ -205,7 +205,7 @@
 
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCategoryLabel">
-                                            الرسالة</h5>
+                                            رسالة شكر</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="إغلاق"></button>
                                     </div>

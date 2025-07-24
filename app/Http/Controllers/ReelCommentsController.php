@@ -86,11 +86,11 @@ class ReelCommentsController extends Controller
         $user=Auth::user();
         $reel_comments= reel_comments::with('user')->where('reels_id',$id)            ->orderBy('created_at', 'desc')
             ->get()
-            ->map(function ($reel_comments) use ($user) {
-                $reel_comments->liked_by_user = $reel_comments->comments->contains('user_id', $user->id);
-                unset($reel_comments->comments); 
-                return $reel_comments;
-            });
+            ->map(function ($comment) {
+            $comment->liked_by_user = $comment->likes->contains('user_id', Auth::id());
+            return $comment;
+        });
+
           $randomPhrase = $array[array_rand($array)];
         return response()->json(['reel_comments' => $reel_comments ,'comment'=> $randomPhrase], 200);
     }

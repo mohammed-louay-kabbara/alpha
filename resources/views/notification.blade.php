@@ -163,7 +163,7 @@
                         <li class="breadcrumb-item text-sm text-white active" aria-current="page">Notifications</li>
                     </ol>
                     <h6 class="font-weight-bolder text-white mb-0">Notification</h6>
-                    <button class="btn btn" data-bs-toggle="modal"
+                    <button class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#editCategoryModal">الخاملون</button>
                     <div class="modal fade" id="editCategoryModal" tabindex="-1"
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
@@ -193,6 +193,38 @@
                             </div>
                         </div>
                     </div>
+
+                    <button class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#editCategoryModal1">أكثر خمس أشخاص ينشرون</button>
+                    <div class="modal fade" id="editCategoryModal1" tabindex="-1"
+                        aria-labelledby="editCategoryLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form method="POST" action="" enctype="multipart/form-data">
+                                    @csrf
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editCategoryLabel">
+                                            الرسالة</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="إغلاق"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <textarea name="message" id="" cols="30" rows="10" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">إغلاق</button>
+                                        <button type="submit" style="background-color: #F62C20; color:white"
+                                            class="btn btn">إرسال</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">

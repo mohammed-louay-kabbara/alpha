@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class reel_comments extends Model
 {
@@ -17,5 +18,10 @@ class reel_comments extends Model
     public function likes()
     {
       return $this->morphMany(comment_reactions::class, 'commentable');
+    }
+
+    public function likedByAuthUser()
+    {
+      return $this->morphOne(comment_reactions::class, 'commentable')->where('user_id', Auth::id());
     }
 }

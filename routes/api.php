@@ -22,8 +22,6 @@ use  App\Http\Controllers\NotificationController;
 use  App\Services\FirebaseService;
 
 
-
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'

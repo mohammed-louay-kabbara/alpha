@@ -83,7 +83,14 @@ class ReelCommentsController extends Controller
         'أشعر بالوحدة التي شعر بها آخر ديناصور قبل انقراضه.',
         'لا يوجد انتظار أسوء من انتظار الأكل',
         'أنا و النوم قصة حب تدمرها ماما كل صباح'];
-        $reel_comments= reel_comments::with('user')->where('reels_id',$id)->get();
+        $user=Auth::user();
+        $reel_comments= reel_comments::with('user')->where('reels_id',$id)            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($reel_comments) use ($user) {
+                $reel_comments->liked_by_user = $reel_comments->comments->contains('user_id', $user->id);
+                unset($reel_comments->comments); 
+                return $reel_comments;
+            });
           $randomPhrase = $array[array_rand($array)];
         return response()->json(['reel_comments' => $reel_comments ,'comment'=> $randomPhrase], 200);
     }

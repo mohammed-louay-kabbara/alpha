@@ -270,7 +270,7 @@ public function verifyResetCode(Request $request)
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
             'email'         => 'required|email|unique:users,email',
-            'phone'         => 'required|string|max:20',
+            'phone'         => 'required|str    ing|max:20',
             'datebirthday'  => 'required|date',
             'address'       => 'required|string|max:255',
             'password'      => 'required|string|min:8', // password + password_confirmation

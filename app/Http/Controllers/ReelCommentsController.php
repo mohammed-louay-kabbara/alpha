@@ -90,10 +90,10 @@ class ReelCommentsController extends Controller
             ->get()
             ->map(function ($comment) {
             $comment->liked_by_user = $comment->likes->contains('user_id', auth()->id());
+            unset($comment->likes);
             return $comment;
         });
-
-          $randomPhrase = $array[array_rand($array)];
+        $randomPhrase = $array[array_rand($array)];
         return response()->json(['reel_comments' => $reel_comments ,'comment'=> $randomPhrase], 200);
     }
 

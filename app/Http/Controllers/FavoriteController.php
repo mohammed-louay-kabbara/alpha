@@ -34,18 +34,20 @@ class FavoriteController extends Controller
     public function details(Request $request)
     {
 
-    $favorites = Favorite::where('id', $request->favorite_id)
-        ->with([
-            'favoritable' => function ($morph) {
-                $morph->morphWith([
-                    'product' => ['files','user'],
-                    'reel' => ['user'], // لا تحتاج تحميل علاقات إضافية
-                ]);
-            }
-        ])
-        ->latest()
-        ->first();
-        return response()->json($favorites);
+        $fav = favorite::find($request->favorite_id);
+        if (!$fav) {
+            return response()->json(['error' => 'Favorite not found'], 404);
+        }
+
+        $favoritable = $fav->favoritable;
+
+        if ($favoritable instanceof \App\Models\product) {
+            $favoritable->load('files');
+        } elseif ($favoritable instanceof \App\Models\reels) {
+            $favoritable->load('user');
+        }
+
+        return response()->json($favoritable);
     }
 
 

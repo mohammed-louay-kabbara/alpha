@@ -28,6 +28,21 @@ class NotificationController extends Controller
         return response()->json($notifications, 200);
     }
 
+    public function admin_notification(){
+            $users = User::with(['sessions' => function($query) {
+                $query->latest('started_at')->limit(1);
+            }])
+            ->select('id', 'name', 'email', 'picture', 'phone', 'datebirthday', 'address', 'description', 'role', 'created_at')
+            ->withCount('sessions')
+            ->addSelect([
+                'average_session_duration' => DB::table('user_sessions')
+                    ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, started_at, COALESCE(ended_at, NOW())))')
+                    ->whereColumn('user_id', 'users.id')
+                    ->whereNotNull('started_at')
+            ])->paginate(20);
+        return view('notification', compact('users'));
+    }
+
     public function admin()
     {
         $users=User::get();

@@ -26,6 +26,7 @@ Route::middleware('jwt.session')->group(function () {
 
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
     Route::get('reels',[ReelsController::class,'create'])->name('reels');
+    Route::get('notifications',[NotificationController::class,'admin_notification'])->name('admin_notification');
     Route::resource('advertisement',AdvertisementController::class)->names([
     'index' => 'advertisement.index',
     'create' => 'advertisement.create',

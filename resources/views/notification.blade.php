@@ -9,6 +9,11 @@
     <title>
         Alpha
     </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--     Fonts and icons     -->
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') }}" rel="stylesheet" />
@@ -57,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ route('users_admin') }}">
+                    <a class="nav-link active" href="{{ route('users_admin') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"
@@ -70,7 +75,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('categories_admin') }}">
+                    <a class="nav-link" href="{{ route('categories_admin') }}">
                         <div class="border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="ni ni-tv-2 text-dark text-sm opacity-10"
                                 width="20" height="20" fill="#F62C20" class="bi bi-card-checklist"
@@ -110,6 +115,7 @@
 
                         </div>
                         <span class="nav-link-text mr-24">إدارة الإعلانات </span>
+
                     </a>
                 </li>
 
@@ -141,7 +147,6 @@
                         <span class="nav-link-text ms-1">إدارة الإبلاغات</span>
                     </a>
                 </li>
-
             </ul>
         </div>
 
@@ -155,9 +160,39 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
                                 href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Notification</li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Notifications</li>
                     </ol>
                     <h6 class="font-weight-bolder text-white mb-0">Notification</h6>
+                    <button class="btn btn" data-bs-toggle="modal"
+                        data-bs-target="#editCategoryModal">الخاملون</button>
+                    <div class="modal fade" id="editCategoryModal" tabindex="-1"
+                        aria-labelledby="editCategoryLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form method="POST" action="" enctype="multipart/form-data">
+                                    @csrf
+                                   
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editCategoryLabel">
+                                            الرسالة</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="إغلاق"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <textarea name="message" id="" cols="30" rows="10" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">إغلاق</button>
+                                        <button type="submit" style="background-color: #F62C20; color:white"
+                                            class="btn btn">إرسال</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -170,11 +205,7 @@
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-                            <button class="btn rounded-circle d-flex align-items-center justify-content-center"
-                                style="width: 40px; height: 40px; background-color: white;" data-bs-toggle="modal"
-                                data-bs-target="#addCategoryModal">
-                                <i class="bi bi-plus" style="font-size: 1.2rem; color: black;"></i>
-                            </button>
+
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
@@ -278,92 +309,166 @@
                 </div>
             </div>
         </nav>
-        <!-- End Navbar -->
+
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>إدارة الأصناف</h6>
+                            <h6>إدارة المستخدمين</h6>
+                            @if (session('success'))
+                                <div cclass="alert alert-secondary" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col"> الاسم </th>
-                                                <th scope="col"> الايميل </th>
-                                                <th scope="col"> تاريخ الميلاد </th>
-                                                <th scope="col"> الوصف </th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tableBody">
-                                            @foreach ($users as $c)
+                                        <table id="userTable" class="table">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{ $c->name }}</td>
-                                                    <td>{{ $c->email }}</td>
-                                                    <td>{{ $c->datebirthday }}</td>
-                                                    <td>{{ $c->description }}</td>
-                                                    <td>
-                                                        <div class="d-flex gap-2">
-                                                            <button type="button" class="btn btn-success"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#editCategoryModal{{ $c->id }}">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-bell" viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </td>
+                                                    <th>الصورة</th>
+                                                    <th onclick="sortTable(1)">اسم المستخدم
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371zm1.57-.785L11 2.687h-.047l-.652 2.157z" />
+                                                            <path
+                                                                d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
+                                                        </svg>
+                                                    </th>
+                                                    <th onclick="sortTable(2)">رقم الهاتف
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-sort-numeric-down-alt" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M11.36 7.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.836 1.973-1.836 1.09 0 2.063.637 2.063 2.688 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98" />
+                                                            <path
+                                                                d="M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
+                                                        </svg>
+                                                    </th>
+                                                    <th onclick="sortTable(3)">الإيميل
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371zm1.57-.785L11 2.687h-.047l-.652 2.157z" />
+                                                            <path
+                                                                d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
+                                                        </svg>
+                                                    </th>
+                                                    <th onclick="sortTable(4)">تاريخ الميلاد
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-sort-numeric-down-alt" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M11.36 7.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.836 1.973-1.836 1.09 0 2.063.637 2.063 2.688 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98" />
+                                                            <path
+                                                                d="M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
+                                                        </svg>
+                                                    </th>
+                                                    <th onclick="sortTable(5)">العنوان
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371zm1.57-.785L11 2.687h-.047l-.652 2.157z" />
+                                                            <path
+                                                                d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
+                                                        </svg>
+                                                    </th>
+                                                    <th>الوصف</th>
+                                                    <th>الصلاحيات</th>
+                                                    <th>عدد الجلسات</th>
+                                                    <th>متوسط مدة الجلسة</th>
+                                                    <th>تاريخ التسجيل</th>
+                                                    <th>الحالة</th>
+                                                    <th></th>
                                                 </tr>
-                                                <div class="modal fade" id="editCategoryModal{{ $c->id }}"
-                                                    tabindex="-1" aria-labelledby="editCategoryLabel"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <form method="POST"
-                                                                action="{{ route('category_admin.update', $c->id) }}"
-                                                                enctype="multipart/form-data" method="POST">
-                                                                @csrf
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="editCategoryLabel">
-                                                                        تعديل الصنف</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="إغلاق"></button>
-                                                                </div>
+                                            </thead>
+                                            <tbody id="tableBody">
+                                                @foreach ($users as $c)
+                                                    <tr>
+                                                        <td><img width="75px"
+                                                                src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"alt=""
+                                                                srcset=""></td>
+                                                        <td>{{ $c->name }}</td>
+                                                        <td>{{ $c->phone }}</td>
+                                                        <td>{{ $c->email }}</td>
+                                                        <td>{{ $c->datebirthday }}</td>
+                                                        <td>{{ $c->address }}</td>
+                                                        <td>{{ $c->description }}</td>
+                                                        <td>
+                                                            @if ($c->role == 2)
+                                                                User
+                                                            @else
+                                                                Admin
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $c->sessions_count }}</td>
+                                                        <td>
+                                                            @if ($c->sessions_count > 0)
+                                                                @php
+                                                                    // تحويل الثواني إلى دقائق وساعات
+                                                                    $seconds = $c->average_session_duration;
+                                                                    $hours = floor($seconds / 3600);
+                                                                    $minutes = floor(($seconds % 3600) / 60);
+                                                                    $seconds = $seconds % 60;
+                                                                @endphp
 
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="name" style="color: black"
-                                                                            class="form-label">اسم الصنف</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="name" name="name"
-                                                                            value="{{ $c->name }}" required>
-                                                                    </div>
-                                                                </div>
+                                                                @if ($hours > 0)
+                                                                    {{ $hours }} س {{ $minutes }} د
+                                                                @elseif($minutes > 0)
+                                                                    {{ $minutes }} دقيقة
+                                                                @else
+                                                                    {{ $seconds }} ثانية
+                                                                @endif
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $c->created_at->format('Y-m-d') }}</td>
 
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">إغلاق</button>
-                                                                    <button type="submit"
-                                                                        style="background-color: #F62C20; color:white"
-                                                                        class="btn btn">حفظ</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-
-
-                                        </tbody>
-                                    </table>
+                                                        <td>
+                                                            @if ($c->status == 'نشط الآن')
+                                                                <span
+                                                                    class="badge bg-success">{{ $c->status }}</span>
+                                                            @elseif($c->status == 'نشط (غير متصل)')
+                                                                <span class="badge bg-info">{{ $c->status }}</span>
+                                                            @elseif($c->status == 'خامل')
+                                                                <span
+                                                                    class="badge bg-warning">{{ $c->status }}</span>
+                                                            @else
+                                                                <span
+                                                                    class="badge bg-secondary">{{ $c->status }}</span>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex gap-2">
+                                                                <form action="{{ route('user_delete', $c->id) }}"
+                                                                    method="POST"
+                                                                    onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="16" height="16"
+                                                                            fill="currentColor" class="bi bi-trash3"
+                                                                            viewBox="0 0 16 16">
+                                                                            <path
+                                                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                 </div>
                             </div>
 
@@ -372,46 +477,8 @@
                 </div>
             </div>
         </div>
-
         </div>
     </main>
-    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form method="POST" action="{{ route('category_admin.store') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addCategoryLabel">إضافة صنف جديد</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="إغلاق"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="name" style="color: black" class="form-label">اسم الصنف</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="image" style="color: black" class="form-label">صورة الصنف</label>
-                            <input type="file" class="form-control" id="image" name="image"
-                                accept="image/*" required>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                        <button type="submit" style="background-color: #F62C20; color:white"
-                            class="btn btn">إضافة</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
     <!--   Core JS Files   -->
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -439,10 +506,44 @@
         });
     </script>
 
+    <script>
+        function sortTable(columnIndex) {
+            const table = document.getElementById("userTable");
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            const asc = !table.dataset.sortAsc || table.dataset.sortAsc === "false";
+            table.dataset.sortAsc = asc;
+
+            rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].textContent.trim().toLowerCase();
+                const cellB = b.cells[columnIndex].textContent.trim().toLowerCase();
+
+                return asc ?
+                    cellA.localeCompare(cellB, 'ar', {
+                        numeric: true
+                    }) :
+                    cellB.localeCompare(cellA, 'ar', {
+                        numeric: true
+                    });
+            });
+
+            // إعادة ترتيب الصفوف
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+
+
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

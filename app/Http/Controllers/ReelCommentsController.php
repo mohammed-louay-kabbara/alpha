@@ -85,13 +85,13 @@ class ReelCommentsController extends Controller
         'لا يوجد انتظار أسوء من انتظار الأكل',
         'أنا و النوم قصة حب تدمرها ماما كل صباح'];
         $user=Auth::user();
-        $reel_comments = reel_comments::with(['user', 'likedByAuthUser'])
+        $reel_comments = reel_comments::with('user')
             ->where('reels_id', $id)
             ->get()
             ->map(function ($comment) {
-                $comment->liked_by_user = $comment->likedByAuthUser !== null;
-                return $comment;
-            });
+            $comment->liked_by_user = $comment->likes->contains('user_id', auth()->id());
+            return $comment;
+        });
 
           $randomPhrase = $array[array_rand($array)];
         return response()->json(['reel_comments' => $reel_comments ,'comment'=> $randomPhrase], 200);

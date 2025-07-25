@@ -97,8 +97,11 @@ class NotificationController extends Controller
         $inactiveUsers = User::with('DeviceToken')->whereDoesntHave('sessions', function ($query) {
         $query->where('started_at', '>=', now()->subMonth());
         })->get();
+
+        dd($inactiveUsers[0].DeviceToken.token);
         foreach($inactiveUsers as $i)
         {
+            
             if ($i->DeviceToken->token) {
             $result = $this->firebase->sendNotification(
             $i->DeviceToken->token,

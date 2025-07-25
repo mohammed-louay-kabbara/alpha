@@ -53,7 +53,6 @@ class AuthController extends Controller
                     ->whereNotNull('started_at')
             ])
             ->paginate(20);
-
         return view('users', compact('users'));
     }
 

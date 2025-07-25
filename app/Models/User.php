@@ -149,6 +149,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(UserSession::class);
     }
 
+    public function DeviceToken()
+    {
+     return $this->hasMany(DeviceToken::class);
+    }
+
     // دالة لحساب متوسط وقت الجلسة
     public function averageSessionDuration()
     {

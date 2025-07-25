@@ -26,6 +26,7 @@ Route::middleware('jwt.session')->group(function () {
     'destroy' => 'dashboard_admin.destroy',]);
 
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
+    Route::get('khamenon',[NotificationController::class,'khamenon'])->name('khamenon');
     Route::get('reels',[ReelsController::class,'create'])->name('reels');
     Route::get('notifications',[NotificationController::class,'admin_notification'])->name('admin_notification');
     Route::resource('advertisement',AdvertisementController::class)->names([

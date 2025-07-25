@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\notification;
 use App\Services\FirebaseService;
 use App\Models\user;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class NotificationController extends Controller
@@ -89,6 +90,29 @@ class NotificationController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function khamenon()
+    {
+        $inactiveUsers = User::with('DeviceToken')->whereDoesntHave('sessions', function ($query) {
+        $query->where('started_at', '>=', now()->subMonth());
+        })->get();
+
+        dd($inactiveUsers);
+
+        foreach($inactiveUsers as $i)
+        {
+        $result = $this->firebase->sendNotification(
+            // $i->,
+            'تهنئة',
+            'كل عام وأنتم بألف خير'
+        );
+
+        }
+
+
+
+        
     }
 
     public function delete(Request $request)

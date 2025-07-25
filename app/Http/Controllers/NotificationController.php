@@ -98,7 +98,6 @@ class NotificationController extends Controller
         $query->where('started_at', '>=', now()->subMonth());
         })->get();
 
-        dd($inactiveUsers[0].DeviceToken.token);
         foreach($inactiveUsers as $i)
         {
             

@@ -99,12 +99,19 @@ class NotificationController extends Controller
         })->get();
         foreach($inactiveUsers as $i)
         {
-        $result = $this->firebase->sendNotification(
+            if ($i->DeviceToken->token) {
+            $result = $this->firebase->sendNotification(
             $i->DeviceToken->token,
             $request->title,
-            $request->message
-        );
+            $request->message);
+            }
+            notification::create([
+                'user_id' => $i->id,
+                'title' => $request->title,
+                'body' => $request->body,
+                'sender_id' =>4 ]);
         }
+        return back();
     }
 
     public function delete(Request $request)

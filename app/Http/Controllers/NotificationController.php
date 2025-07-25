@@ -114,7 +114,28 @@ class NotificationController extends Controller
         }
         return back();
     }
-
+    public function think_you()
+    {
+        $topUsers = User::with('DeviceToken')->withCount('product')
+            ->orderByDesc('product_count')
+            ->limit(5)
+            ->get();
+        foreach($topUsers as $i)
+        {
+            if($i->DeviceToken?->token) {
+            $result = $this->firebase->sendNotification(
+            $i->DeviceToken->token,
+            $request->title,
+            $request->message);
+            }
+            notification::create([
+                'user_id' => $i->id,
+                'title' => $request->title,
+                'body' => $request->message,
+                'sender_id' =>4 ]);
+        }
+        return back();
+    }
     public function delete(Request $request)
     {
         notification::where('id',$request->notify_id)->delete();

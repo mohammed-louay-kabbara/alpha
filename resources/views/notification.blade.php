@@ -179,10 +179,10 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <input type="text" name="title" class="form-control"/>
+                                            <input type="text" placeholder="العنوان" name="title" class="form-control" />
                                         </div>
                                         <div class="mb-3">
-                                            <textarea name="message" id="" cols="30" rows="10" class="form-control"></textarea>
+                                            <textarea name="message" placeholder="الرسالة...." id="" cols="30" rows="10" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -195,25 +195,26 @@
                             </div>
                         </div>
                     </div>
-
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCategoryModal1">أكثر
                         خمس أشخاص ينشرون</button>
                     <div class="modal fade" id="editCategoryModal1" tabindex="-1"
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form method="POST" action="" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('think_you') }}" enctype="multipart/form-data">
                                     @csrf
-
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCategoryLabel">
-                                            رسالة شكر</h5>
+                                            الرسالة</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="إغلاق"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <textarea name="`" id="" cols="30" rows="10" class="form-control"></textarea>
+                                            <input type="text" name="title" placeholder="العنوان" class="form-control" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="message" id="" cols="30" placeholder="الرسالة...." rows="10" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

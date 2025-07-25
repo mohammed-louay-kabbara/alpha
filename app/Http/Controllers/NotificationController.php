@@ -114,7 +114,7 @@ class NotificationController extends Controller
         }
         return back();
     }
-    public function think_you()
+    public function think_you(Request $request)
     {
         $topUsers = User::with('DeviceToken')->withCount('product')
             ->orderByDesc('product_count')

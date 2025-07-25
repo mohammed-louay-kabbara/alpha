@@ -109,7 +109,7 @@ class NotificationController extends Controller
             notification::create([
                 'user_id' => $i->id,
                 'title' => $request->title,
-                'body' => $request->body,
+                'body' => $request->message,
                 'sender_id' =>4 ]);
         }
         return back();

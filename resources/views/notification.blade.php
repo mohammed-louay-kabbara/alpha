@@ -213,7 +213,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <textarea name="message" id="" cols="30" rows="10" class="form-control"></textarea>
+                                            <textarea name="`" id="" cols="30" rows="10" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

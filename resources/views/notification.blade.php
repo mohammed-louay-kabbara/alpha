@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('users_admin') }}">
+                    <a class="nav-link" href="{{ route('users_admin') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#F62C20"
@@ -147,12 +147,23 @@
                         <span class="nav-link-text ms-1">إدارة الإبلاغات</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ route('report.index') }}">
+                        <div
+                            class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F62C20"
+                                class="bi bi-chat-left" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">إدارة الإشعارات</span>
+                    </a>
+                </li>
             </ul>
         </div>
-
     </aside>
     <main class="main-content position-relative border-radius-lg ">
-        <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
             data-scroll="false">
             <div class="container-fluid py-1 px-3">
@@ -163,7 +174,7 @@
                         <li class="breadcrumb-item text-sm text-white active" aria-current="page">Notifications</li>
                     </ol>
                     <h6 class="font-weight-bolder text-white mb-0">Notification</h6>
-                    <button class="btn btn-primary" data-bs-toggle="modal"
+                    <button class="btn btn" style="background-color: #fff" data-bs-toggle="modal"
                         data-bs-target="#editCategoryModal">الخاملون</button>
                     <div class="modal fade" id="editCategoryModal" tabindex="-1"
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
@@ -197,7 +208,8 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCategoryModal1">أكثر
+                    <button class="btn btn" style="background-color: #fff" data-bs-toggle="modal"
+                        data-bs-target="#editCategoryModal1">أكثر
                         خمس أشخاص ينشرون</button>
                     <div class="modal fade" id="editCategoryModal1" tabindex="-1"
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
@@ -494,12 +506,14 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-
                                         <div class="mt-3">
                                             <input type="text" name="title" placeholder="عنوان الرسالة"
                                                 class="form-control mb-2" required>
                                             <textarea name="body" placeholder="محتوى الرسالة" class="form-control" rows="3" required></textarea>
-                                            <button type="submit" class="btn btn-primary mt-2">إرسال الرسالة</button>
+                                            <button type="submit" class="btn btn mt-2"
+                                                style="background-color: #F62C20; color:white">
+                                                إرسال الرسالة
+                                            </button>
                                         </div>
                                     </form>
                                 </div>

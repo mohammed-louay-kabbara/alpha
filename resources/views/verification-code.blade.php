@@ -9,3 +9,4 @@
     <h2>{{ $code }}</h2>
 </body>
 </html>
+

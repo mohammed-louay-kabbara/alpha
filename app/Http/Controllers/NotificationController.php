@@ -100,8 +100,7 @@ class NotificationController extends Controller
 
         foreach($inactiveUsers as $i)
         {
-            
-            if ($i->DeviceToken->token) {
+            if($i->DeviceToken?->token) {
             $result = $this->firebase->sendNotification(
             $i->DeviceToken->token,
             $request->title,

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class DeviceToken extends Model
 {
     protected $fillable = ['user_id', 'token'];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+       public function DeviceToken()
+        {
+            return $this->hasOne(DeviceToken::class);
+        }
 }

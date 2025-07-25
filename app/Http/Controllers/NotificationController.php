@@ -136,6 +136,37 @@ class NotificationController extends Controller
         }
         return back();
     }
+
+    public function sendMessage(Request $request)
+    {
+        $request->validate([
+            'user_ids' => 'required|array',
+            'title' => 'required|string',
+            'body' => 'required|string',
+        ]);
+
+        $users = User::whereIn('id', $request->user_ids)->with('DeviceToken')->get();
+
+        foreach ($users as $user) {
+            if ($user->DeviceToken && $user->DeviceToken->token) {
+                $this->firebase->sendNotification(
+                    $user->DeviceToken->token,
+                    $request->title,
+                    $request->body
+                );
+            }
+
+            Notification::create([
+                'user_id' => $user->id,
+                'title' => $request->title,
+                'body' => $request->body,
+                'sender_id' => auth()->id()
+            ]);
+        }
+
+        return back()->with('success', 'تم إرسال الرسالة بنجاح.');
+    }
+
     public function delete(Request $request)
     {
         notification::where('id',$request->notify_id)->delete();

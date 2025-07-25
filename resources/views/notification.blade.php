@@ -179,10 +179,12 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <input type="text" placeholder="العنوان" name="title" class="form-control" />
+                                            <input type="text" placeholder="العنوان" name="title"
+                                                class="form-control" />
                                         </div>
                                         <div class="mb-3">
-                                            <textarea name="message" placeholder="الرسالة...." id="" cols="30" rows="10" class="form-control"></textarea>
+                                            <textarea name="message" placeholder="الرسالة...." id="" cols="30" rows="10"
+                                                class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -201,7 +203,8 @@
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form method="POST" action="{{ route('think_you') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('think_you') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCategoryLabel">
@@ -211,10 +214,12 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <input type="text" name="title" placeholder="العنوان" class="form-control" />
+                                            <input type="text" name="title" placeholder="العنوان"
+                                                class="form-control" />
                                         </div>
                                         <div class="mb-3">
-                                            <textarea name="message" id="" cols="30" placeholder="الرسالة...." rows="10" class="form-control"></textarea>
+                                            <textarea name="message" id="" cols="30" placeholder="الرسالة...." rows="10"
+                                                class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -360,10 +365,12 @@
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <form action="{{ route('send.message') }}" method="POST">
+                                        @csrf
                                         <table id="userTable" class="table">
                                             <thead>
                                                 <tr>
+                                                    <th><input type="checkbox" id="checkAll"></th>
                                                     <th>الصورة</th>
                                                     <th onclick="sortTable(1)">اسم المستخدم
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -427,6 +434,8 @@
                                             <tbody id="tableBody">
                                                 @foreach ($users as $c)
                                                     <tr>
+                                                        <td><input type="checkbox" name="user_ids[]"
+                                                                value="{{ $c->id }}"></td>
                                                         <td><img width="75px"
                                                                 src="{{ asset('http://alphaword.sy/storage/' . $c->picture) }}"alt=""
                                                                 srcset=""></td>
@@ -504,8 +513,18 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+
+                                        <div class="mt-3">
+                                            <input type="text" name="title" placeholder="عنوان الرسالة"
+                                                class="form-control mb-2" required>
+                                            <textarea name="body" placeholder="محتوى الرسالة" class="form-control" rows="3" required></textarea>
+                                            <button type="submit" class="btn btn-primary mt-2">إرسال الرسالة</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+
+
 
                         </div>
                     </div>
@@ -528,6 +547,14 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+    </script>
+    <script>
+        document.getElementById('checkAll').addEventListener('change', function() {
+            let checkboxes = document.querySelectorAll('input[name="user_ids[]"]');
+            for (let box of checkboxes) {
+                box.checked = this.checked;
+            }
+        });
     </script>
     <script>
         const searchInput = document.getElementById('searchInput');

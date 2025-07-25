@@ -92,27 +92,19 @@ class NotificationController extends Controller
         }
     }
 
-    public function khamenon()
+    public function khamenon(Request $request)
     {
         $inactiveUsers = User::with('DeviceToken')->whereDoesntHave('sessions', function ($query) {
         $query->where('started_at', '>=', now()->subMonth());
         })->get();
-
-        dd($inactiveUsers);
-
         foreach($inactiveUsers as $i)
         {
         $result = $this->firebase->sendNotification(
-            // $i->,
-            'تهنئة',
-            'كل عام وأنتم بألف خير'
+            $i->DeviceToken->token,
+            $request->title,
+            $request->message
         );
-
         }
-
-
-
-        
     }
 
     public function delete(Request $request)

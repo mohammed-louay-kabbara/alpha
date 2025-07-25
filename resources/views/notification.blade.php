@@ -169,9 +169,8 @@
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form method="POST" action="" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('khamenon') }}" enctype="multipart/form-data">
                                     @csrf
-
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editCategoryLabel">
                                             الرسالة</h5>
@@ -179,6 +178,9 @@
                                             aria-label="إغلاق"></button>
                                     </div>
                                     <div class="modal-body">
+                                        <div class="mb-3">
+                                            <input type="text" name="title" class="form-control"/>
+                                        </div>
                                         <div class="mb-3">
                                             <textarea name="message" id="" cols="30" rows="10" class="form-control"></textarea>
                                         </div>
@@ -194,8 +196,8 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#editCategoryModal1">أكثر خمس أشخاص ينشرون</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCategoryModal1">أكثر
+                        خمس أشخاص ينشرون</button>
                     <div class="modal fade" id="editCategoryModal1" tabindex="-1"
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog">

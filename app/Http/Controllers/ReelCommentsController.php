@@ -84,7 +84,6 @@ class ReelCommentsController extends Controller
         'أشعر بالوحدة التي شعر بها آخر ديناصور قبل انقراضه.',
         'لا يوجد انتظار أسوء من انتظار الأكل',
         'أنا و النوم قصة حب تدمرها ماما كل صباح'];
-        $user=Auth::user();
         $reel_comments = reel_comments::with('user')
             ->where('reels_id', $id)
             ->orderBy('created_at', 'desc')

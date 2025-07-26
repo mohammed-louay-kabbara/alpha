@@ -20,8 +20,4 @@ class reel_comments extends Model
       return $this->morphMany(comment_reactions::class, 'commentable');
     }
 
-    public function likedByAuthUser()
-    {
-      return $this->morphOne(comment_reactions::class, 'commentable')->where('user_id', Auth::id());
-    }
 }

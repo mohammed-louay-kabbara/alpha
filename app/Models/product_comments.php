@@ -14,8 +14,8 @@ class product_comments extends Model
    {
      return $this->belongsTo(User::class);
    }
-  public function comments()
+    public function likes()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+      return $this->morphMany(comment_reactions::class, 'commentable');
     }
 }

@@ -85,7 +85,14 @@ class ProductCommentsController extends Controller
         'أشعر بالوحدة التي شعر بها آخر ديناصور قبل انقراضه.',
         'لا يوجد انتظار أسوء من انتظار الأكل',
         'أنا و النوم قصة حب تدمرها ماما كل صباح'];
-        $product_comments= product_comments::with('user')->where('product_id',$id)->get();
+        $product_comments= product_comments::with('user')->where('product_id',$id)  
+        ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($comment) {
+            $comment->liked_by_user = $comment->likes->contains('user_id', auth()->id());
+            unset($comment->likes);
+            return $comment;
+        });
         $randomPhrase = $array[array_rand($array)];
         return response()->json(['product_comments' => $product_comments ,'comment'=> $randomPhrase], 200);
     }

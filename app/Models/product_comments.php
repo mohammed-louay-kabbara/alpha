@@ -18,4 +18,5 @@ class product_comments extends Model
       {
         return $this->morphMany(comment_reactions::class, 'commentable');
       }
+      
 }

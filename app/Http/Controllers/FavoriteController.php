@@ -16,18 +16,10 @@ class FavoriteController extends Controller
         $favorites = $user->favorites()->with('favoritable')->get();
         $favorites->each(function ($favorite) use ($user) {
             if ($favorite->favoritable_type === 'product' && $favorite->favoritable) {
-                // تحميل ملفات المنتج
                 $favorite->favoritable->load('files');
-                // التحقق من وجود لايك من نفس المستخدم
-                $hasLiked = \App\Models\comment_reactions::where('commentable_type', 'product')
-                    ->where('commentable_id', $favorite->favoritable->id)
-                    ->where('user_id', $user->id)
-                    ->exists();
-                $favorite->favoritable->liked_by_user = $hasLiked;
             }
         });
         return response()->json($favorites, 200);
-
     }
 
 
@@ -51,10 +43,12 @@ class FavoriteController extends Controller
         $favoritable = $fav->favoritable;
         if ($favoritable instanceof \App\Models\product) {
             $favoritable->load(['files','user']);
+            $has_product_like =product_like::where('product_id', $fav->favoritable_id)
+            ->where('user_id',Auth::id())->exists();
         } elseif ($favoritable instanceof \App\Models\reels) {
             $favoritable->load('user');
         }
-        return response()->json($favoritable);
+        return response()->json(['favoritable' => $favoritable, 'has_product_like'=> $has_product_like]);
     }
 
     public function store(Request $request)

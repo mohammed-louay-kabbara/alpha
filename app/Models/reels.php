@@ -17,8 +17,8 @@ class reels extends Model
 
     public function likes()
     {
-        return $this->hasMany(reel_likes::class);
-    }   
+      return $this->morphMany(comment_reactions::class, 'commentable');
+    }
    
    public function favorites()
   {

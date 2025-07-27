@@ -12,11 +12,18 @@ class FavoriteController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        $user = Auth::user();   
         $favorites = $user->favorites()->with('favoritable')->get();
-        $favorites->each(function ($favorite) {
+        $favorites->each(function ($favorite) use ($user) {
             if ($favorite->favoritable_type === 'product' && $favorite->favoritable) {
+                // تحميل ملفات المنتج
                 $favorite->favoritable->load('files');
+                // التحقق من وجود لايك من نفس المستخدم
+                $hasLiked = \App\Models\comment_reactions::where('commentable_type', 'product')
+                    ->where('commentable_id', $favorite->favoritable->id)
+                    ->where('user_id', $user->id)
+                    ->exists();
+                $favorite->favoritable->liked_by_user = $hasLiked;
             }
         });
         return response()->json($favorites, 200);

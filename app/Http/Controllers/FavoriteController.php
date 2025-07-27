@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\favorite;
+use App\Models\product_like;
 use App\Models\Reels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

@@ -96,6 +96,8 @@ class ProductCommentsController extends Controller
                     ->exists();
                 return $comment;
             });
+
+            
         $randomPhrase = $array[array_rand($array)];
         return response()->json(['product_comments' => $product_comments ,'comment'=> $randomPhrase], 200);
     }

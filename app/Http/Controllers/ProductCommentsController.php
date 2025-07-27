@@ -86,7 +86,7 @@ class ProductCommentsController extends Controller
         'لا يوجد انتظار أسوء من انتظار الأكل',
         'أنا و النوم قصة حب تدمرها ماما كل صباح'];
 
-        $product_comments = product_comments::with(['user', 'likes']) // أضف likes هنا
+        $product_comments = product_comments::with(['user']) // أضف likes هنا
             ->where('product_id', $id)
             ->orderBy('created_at', 'desc')
             ->get()

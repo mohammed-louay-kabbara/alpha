@@ -91,8 +91,9 @@ class ProductCommentsController extends Controller
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($comment) {
-                $comment->liked_by_user = $comment->likes->contains('user_id', auth()->id());
-                // unset($comment->likes);
+                $comment->liked_by_user = $comment->likes()
+                    ->where('user_id', auth()->id())
+                    ->exists();
                 return $comment;
             });
 

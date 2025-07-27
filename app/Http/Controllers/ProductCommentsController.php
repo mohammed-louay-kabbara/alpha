@@ -92,8 +92,10 @@ class ProductCommentsController extends Controller
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($comment) {
-                $comment->liked_by_user = $comment->likes->contains('user_id', auth()->id());
-                unset($comment->likes); // لإزالة البيانات غير الضرورية من الريسبونس
+                $comment->liked_by_user = $comment->likes->contains(function ($like) {
+                    return $like->user_id == auth()->id();
+                });
+                unset($comment->likes); // إذا لا تريد إرسالها للـ frontend
                 return $comment;
             });
         $randomPhrase = $array[array_rand($array)];

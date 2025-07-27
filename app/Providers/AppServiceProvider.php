@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     Relation::morphMap([
         'reels' => \App\Models\reels::class,
         'reel_comments' => \App\Models\reel_comments::class,
+        'ProductComments' => \App\Models\product_comments::class,
         'reel' => \App\Models\reels::class,
         'product' => \App\Models\product::class,
         'story' => \App\Models\Story::class,

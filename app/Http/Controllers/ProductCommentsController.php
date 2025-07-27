@@ -90,14 +90,11 @@ class ProductCommentsController extends Controller
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($comment) {
-                $comment->liked_by_user = \App\Models\comment_reactions::where('commentable_type', get_class($comment))
-                    ->where('commentable_id', $comment->id)
-                    ->where('user_id', auth()->id())
-                    ->exists();
-                return $comment;
-            });
+            $comment->liked_by_user = $comment->likes->contains('user_id', auth()->id());
+            unset($comment->likes);
+            return $comment;
+        });
 
-            
         $randomPhrase = $array[array_rand($array)];
         return response()->json(['product_comments' => $product_comments ,'comment'=> $randomPhrase], 200);
     }

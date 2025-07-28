@@ -38,8 +38,8 @@ class ProductController extends Controller
             ->with(['product.files'])
             ->get()
             ->map(function ($user) use ($authUser) {
-            $user->is_following = follower::where('followed_id', $authUser->id)
-                ->where('follower_id', $user->id)
+            $user->is_following = follower::where('follower_id', $authUser->id)
+                ->where('followed_id', $user->id)
                 ->exists();
                 return $user;
             });

@@ -17,7 +17,10 @@ class FavoriteController extends Controller
         $favorites = $user->favorites()->with('favoritable')->get();
         $favorites->each(function ($favorite) use ($user) {
             if ($favorite->favoritable_type === 'product' && $favorite->favoritable) {
-                $favorite->favoritable->load('files');
+                $favorite->favoritable->load('files','user');
+            }
+            else{
+                  $favorite->favoritable->load('user');
             }
         });
         return response()->json($favorites, 200);

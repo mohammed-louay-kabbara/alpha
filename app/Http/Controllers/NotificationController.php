@@ -144,23 +144,24 @@ class NotificationController extends Controller
                 now()->day,
                 now()->month
             ])->get();
-
-            dd($topUsers);
-        foreach($topUsers as $i)
-        {
-            if($i->DeviceToken?->token) {
-            $result = $this->firebase->sendNotification(
-            $i->DeviceToken->token,
-            $request->title,
-            $request->message);
+            if ($topUsers) {
+            foreach($topUsers as $i)
+            {
+                if($i->DeviceToken?->token) {
+                $result = $this->firebase->sendNotification(
+                $i->DeviceToken->token,
+                $request->title,
+                $request->message);
+                }
+                notification::create([
+                    'user_id' => $i->id,
+                    'title' => $request->title,
+                    'body' => $request->message,
+                    'sender_id' =>4 ]);
             }
-            notification::create([
-                'user_id' => $i->id,
-                'title' => $request->title,
-                'body' => $request->message,
-                'sender_id' =>4 ]);
-        }
-        return back();
+            return back();   
+            }
+
     }
 
     public function sendMessage(Request $request)

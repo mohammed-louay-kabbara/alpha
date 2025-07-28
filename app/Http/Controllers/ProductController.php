@@ -6,6 +6,7 @@ use App\Models\product;
 use App\Models\User;
 use App\Models\product_file;
 use App\Models\reels;
+use App\Models\follower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ class ProductController extends Controller
             ->with(['product.files'])
             ->get()
             ->map(function ($user) use ($authUser) {
-            $user->is_following = Follower::where('followed_id', $authUser->id)
+            $user->is_following = follower::where('followed_id', $authUser->id)
                 ->where('follower_id', $user->id)
                 ->exists();
             });

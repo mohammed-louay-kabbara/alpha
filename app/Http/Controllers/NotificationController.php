@@ -144,6 +144,8 @@ class NotificationController extends Controller
                 now()->day,
                 now()->month
             ])->get();
+
+            dd($topUsers);
         foreach($topUsers as $i)
         {
             if($i->DeviceToken?->token) {

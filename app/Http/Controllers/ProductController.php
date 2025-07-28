@@ -31,9 +31,17 @@ class ProductController extends Controller
     
     public function getUsersWithProducts()
     {
+        $authUser = Auth::user();
+
         $users = User::has('product')
-            ->with(['product.files']) 
-            ->get();
+            ->with(['product.files'])
+            ->get()
+            ->map(function ($user) use ($authUser) {
+                // تحقق إن كان المستخدم الحالي يتابع هذا المستخدم
+                $user->is_following = $authUser->followings
+                    ->contains('following_id', $user->id);
+                return $user;
+            });
         return response()->json($users);
     }
 

@@ -37,10 +37,9 @@ class ProductController extends Controller
             ->with(['product.files'])
             ->get()
             ->map(function ($user) use ($authUser) {
-                // تحقق إن كان المستخدم الحالي يتابع هذا المستخدم
-                $user->is_following = $authUser->followings
-                    ->contains('following_id', $user->id);
-                return $user;
+            $user->is_following = Follower::where('followed_id', $authUser->id)
+                ->where('follower_id', $user->id)
+                ->exists();
             });
         return response()->json($users);
     }

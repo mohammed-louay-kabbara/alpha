@@ -41,6 +41,7 @@ class ProductController extends Controller
             $user->is_following = follower::where('followed_id', $authUser->id)
                 ->where('follower_id', $user->id)
                 ->exists();
+                return $user;
             });
         return response()->json($users);
     }

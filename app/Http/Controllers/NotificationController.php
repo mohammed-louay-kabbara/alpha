@@ -137,6 +137,30 @@ class NotificationController extends Controller
         return back();
     }
 
+        public function datebirthday(Request $request)
+    {
+            $topUsers = User::with('DeviceToken')
+            ->whereRaw('DAY(datebirthday) = ? AND MONTH(datebirthday) = ?', [
+                now()->day,
+                now()->month
+            ])->get();
+        foreach($topUsers as $i)
+        {
+            if($i->DeviceToken?->token) {
+            $result = $this->firebase->sendNotification(
+            $i->DeviceToken->token,
+            $request->title,
+            $request->message);
+            }
+            notification::create([
+                'user_id' => $i->id,
+                'title' => $request->title,
+                'body' => $request->message,
+                'sender_id' =>4 ]);
+        }
+        return back();
+    }
+
     public function sendMessage(Request $request)
     {
         $request->validate([

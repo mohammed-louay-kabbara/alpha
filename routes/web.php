@@ -28,6 +28,7 @@ Route::middleware('jwt.session')->group(function () {
     Route::get('categories_admin',[CategoryController::class,'create'])->name('categories_admin');
     Route::post('khamenon',[NotificationController::class,'khamenon'])->name('khamenon');
     Route::post('think_you',[NotificationController::class,'think_you'])->name('think_you');
+     Route::post('datebirthday',[NotificationController::class,'datebirthday'])->name('datebirthday');
     Route::post('/send-message', [NotificationController::class, 'sendMessage'])->name('send.message');
     Route::get('reels',[ReelsController::class,'create'])->name('reels');
     Route::get('notifications',[NotificationController::class,'admin_notification'])->name('admin_notification');

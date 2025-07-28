@@ -151,8 +151,8 @@
                     <a class="nav-link active" href="{{ route('admin_notification') }}">
                         <div
                             class=" border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="#F62C20" class="bi bi-chat-left" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F62C20"
+                                class="bi bi-chat-left" viewBox="0 0 16 16">
                                 <path
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
                             </svg>
@@ -231,6 +231,42 @@
                                         </div>
                                         <div class="mb-3">
                                             <textarea name="message" id="" cols="30" placeholder="الرسالة...." rows="10"
+                                                class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">إغلاق</button>
+                                        <button type="submit" style="background-color: #F62C20; color:white"
+                                            class="btn btn">إرسال</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn" style="background-color: #fff" data-bs-toggle="modal"
+                        data-bs-target="#editCategoryModal">ميلاد</button>
+                    <div class="modal fade" id="editCategoryModal" tabindex="-1"
+                        aria-labelledby="editCategoryLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form method="POST" action="{{ route('datebirthday') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editCategoryLabel">
+                                            الرسالة</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="إغلاق"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <input type="text" placeholder="العنوان" name="title"
+                                                class="form-control" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="message" placeholder="الرسالة...." id="" cols="30" rows="10"
                                                 class="form-control"></textarea>
                                         </div>
                                     </div>

@@ -172,11 +172,13 @@ class ProductController extends Controller
         public function delete_product($id)
     {
         $product=product::with('files')->where('id',$id)->first();
-        foreach ($product->files as $file) {
+        if ($product->files) {
+            foreach ($product->files as $file) {
             if (Storage::disk('public')->exists($file->file_path)) {
                 Storage::disk('public')->delete($file->file_path);
             }
             $file->delete();
+        }
         }
         $product->delete();
 

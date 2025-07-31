@@ -169,9 +169,9 @@ class ProductController extends Controller
 
         return back();
     }
-        public function delete_product($id)
+    public function delete_product(Request $request)
     {
-        $product = product::with('files')->where('id', $id)->first();
+        $product = product::with('files')->where('id', $request->id)->first();
         if ($product) {
             if ($product->files && $product->files->count() > 0) {
                 foreach ($product->files as $file) {

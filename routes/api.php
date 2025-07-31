@@ -47,7 +47,7 @@ Route::group([
     Route::get('my_profile', [AuthController::class, 'my_profile']);
     Route::get('advertisements', [AdvertisementController::class, 'ad']);
     Route::resource('commentReactions',CommentReactionsController::class);
-    Route::delete('product_delete/{id}',[ProductController::class, 'delete_product']);
+    Route::post('product_delete',[ProductController::class, 'delete_product']);
     Route::get('my_products', [AuthController::class, 'my_products']);
     Route::get('my_reels', [AuthController::class, 'my_reels']);
     Route::resource('reels', ReelsController::class);

@@ -32,7 +32,7 @@ class FirebaseService
             'auth'    => 'google_auth',
         ]);
 
-        $this->projectId = env('FIREBASE_PROJECT_ID');
+        $this->projectId = 'alpha-f1b26';
     }
 
     public function sendNotification(string $deviceToken, string $title, string $body, array $dataPayload = []): array

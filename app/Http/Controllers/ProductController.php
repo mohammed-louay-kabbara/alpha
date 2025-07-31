@@ -183,6 +183,6 @@ class ProductController extends Controller
             }
             $product->delete();
         }
-      return response()->json(['تم الحذف بنجاح'], 200,);
+      return response()->json(['تم الحذف بنجاح'], 200);
     }
 }

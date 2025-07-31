@@ -14,6 +14,8 @@ class FirebaseService
 
     public function __construct()
     {
+        dd(base_path(env('FIREBASE_CREDENTIALS')));
+
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path(env('FIREBASE_CREDENTIALS')));
 
         $scopes = ['https://www.googleapis.com/auth/firebase.messaging'];

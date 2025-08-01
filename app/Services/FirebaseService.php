@@ -14,9 +14,7 @@ class FirebaseService
 
     public function __construct()
     {
-
         
-
         // putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path(env('FIREBASE_CREDENTIALS')));
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . base_path('app/firebase/alpha-f1b26-firebase-adminsdk-fbsvc-37d544640f.json'));
 

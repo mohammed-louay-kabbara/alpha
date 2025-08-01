@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\reels;
+use FFMpeg;
+use FFMpeg\Coordinate\TimeCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -47,24 +49,34 @@ class ReelsController extends Controller
 
     public function store(Request $request)
     {
-      
-    $request->validate([
-        'media_path' => 'required|mimes:mp4', // 10MB كحد أقصى
-        'description' => 'nullable|string',
-    ]);
-
-    $path = $request->file('media_path')->store('reels', 'public');
-
-    $reel = Reels::create([
-        'user_id' => Auth::id(),
-        'media_path' => $path,
-        'description' => $request->description,
-    ]);
-
-    return response()->json([
-        'status' => true,
-        'message' => 'تمت الإضافة بنجاح',
-    ], 201);
+        $request->validate([
+            'media_path' => 'required|mimes:mp4', 
+            'description' => 'nullable|string',
+        ]);
+        $path = $request->file('media_path')->store('reels', 'public');
+        // $thumbnailPath = 'thumbnails/' . uniqid() . '.jpg';
+        // $this->generateVideoThumbnail(storage_path('app/public/' . $path), storage_path('app/public/' . $thumbnailPath));
+        $reel = Reels::create([
+            'user_id' => Auth::id(),
+            'media_path' => $path,
+            // 'thumbnail_path' => $thumbnailPath,
+            'description' => $request->description,
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'تمت الإضافة بنجاح',
+        ], 201);
+    }
+    public function generateVideoThumbnail($videoPath, $thumbnailPath, $second = 1)
+    {
+        $ffmpeg = FFMpeg\FFMpeg::create([
+            'ffmpeg.binaries'  => '/usr/bin/ffmpeg',     // غير هذا حسب بيئتك
+            'ffprobe.binaries' => '/usr/bin/ffprobe',    // غير هذا حسب بيئتك
+            'timeout'          => 3600,
+            'ffmpeg.threads'   => 12,
+        ]);
+        $video = $ffmpeg->open($videoPath);
+        $video->frame(TimeCode::fromSeconds($second))->save($thumbnailPath);
     }
     public function react(Request $request)
     {

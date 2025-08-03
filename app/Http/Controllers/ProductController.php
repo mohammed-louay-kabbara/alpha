@@ -35,7 +35,7 @@ class ProductController extends Controller
         $authUser = Auth::user();
 
         $users = User::has('product')
-            ->with(['product.files','user'])
+            ->with(['product.files'])
             ->get()
             ->map(function ($user) use ($authUser) {
             $user->is_following = follower::where('follower_id', $authUser->id)

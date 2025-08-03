@@ -139,7 +139,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $products = product::with('files')->where('user_id',$id)->get();   
+        $products = product::with(['files','user'])->where('user_id',$id)->get();   
         return response()->json($products, 200);
     }
     public function edit($id)

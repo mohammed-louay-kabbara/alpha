@@ -28,6 +28,7 @@ class AuthController extends Controller
      * @return void
      */
 
+
     public function login()
     {
         $credentials = request(['email', 'password']);
@@ -127,7 +128,7 @@ class AuthController extends Controller
     public function my_products()
     {
         $user_id=Auth::id();
-        $product=product::with('files')->where('user_id',$user_id)->get();
+        $product=product::with(['files','user'])->where('user_id',$user_id)->get();
         return response()->json([
             'product' =>$product,
         ], 200);

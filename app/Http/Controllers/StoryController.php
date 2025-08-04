@@ -16,6 +16,7 @@ class StoryController extends Controller
     {
         $usersWithStories = User::with(['stories' => function ($query) {
             $query->orderBy('created_at', 'desc');
+            $query->withCount('likes');
         }])->whereHas('stories')->get();
         return response()->json($usersWithStories);
     }
@@ -23,7 +24,11 @@ class StoryController extends Controller
 
     public function create()
     { 
-        //
+        
+    }
+    public function addcount()
+    {
+        
     }
 
 
@@ -48,35 +53,28 @@ class StoryController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Story $story)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Story $story)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Story $story)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Story $story)
+
+    public function destroy($id)
     {
-        //
+        Story::where('id',$id)->delete();
+        return response()->json(['تم الحذف بنجاح'], 200);
     }
 }

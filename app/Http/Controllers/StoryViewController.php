@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\story_view;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class StoryViewController extends Controller

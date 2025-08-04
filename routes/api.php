@@ -19,6 +19,7 @@ use  App\Http\Controllers\ReportController;
 use  App\Http\Controllers\AdvertisementController;
 use  App\Http\Controllers\SessionController;
 use  App\Http\Controllers\NotificationController;
+use  App\Http\Controllers\StoryViewController;
 use  App\Services\FirebaseService;
 
 
@@ -32,6 +33,7 @@ Route::group([
     Route::post('me', 'AuthController@me');
 });
     Route::post('login', [AuthController::class, 'login']);
+    Route::post('StoryView', [StoryViewController::class, 'store']);
     Route::post('editpassword', [AuthController::class, 'editpassword']);
     Route::post('forgotpassword', [AuthController::class, 'forgot_password']);
     Route::post('register', [AuthController::class, 'register']);

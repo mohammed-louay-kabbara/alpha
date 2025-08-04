@@ -16,7 +16,7 @@ class StoryController extends Controller
     {
         $usersWithStories = User::with(['stories' => function ($query) {
             $query->orderBy('created_at', 'desc');
-            $query->withCount('likes');
+            $query->withCount('views');
         }])->whereHas('stories')->get();
         return response()->json($usersWithStories);
     }

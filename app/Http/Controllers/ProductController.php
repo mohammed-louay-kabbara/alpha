@@ -89,7 +89,7 @@ class ProductController extends Controller
         if (!$query || trim($query) === '') {
             return response()->json(['products' => []]);
         }
-        $products = Product::where('name', 'like', '%' . $query . '%')->get();
+        $products = Product::where('name', 'like', '%' . $query . '%')->with(['user','files'])->get();
         return response()->json(['products' => $products]);
     }
 

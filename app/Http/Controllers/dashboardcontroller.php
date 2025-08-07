@@ -21,10 +21,6 @@ class dashboardcontroller extends Controller
             ->orderByDesc('followers_count')
             ->take(10)
             ->get();
-        $datebirthday_count=User::whereRaw('DAY(datebirthday) = ? AND MONTH(datebirthday) = ?', [
-                now()->day,
-                now()->month
-            ])->count();
         $topCategories = category::withCount('product')
                 ->orderByDesc('product_count')
                 ->take(3)
@@ -54,7 +50,6 @@ class dashboardcontroller extends Controller
         'mostFollowedUsers',
         'products_Notallowed_count',
         'topCategories',
-        'datebirthday_count',
         'topAddresses',
         'advertisements'));
     }

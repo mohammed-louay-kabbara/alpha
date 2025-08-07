@@ -34,6 +34,7 @@ class NotificationController extends Controller
             $users = User::with(['sessions' => function($query) {
                 $query->latest('started_at')->limit(1);
             }])
+            
             ->select('id', 'name', 'email', 'picture', 'phone', 'datebirthday', 'address', 'description', 'role', 'created_at')
             ->withCount('sessions')
             ->addSelect([
@@ -42,7 +43,11 @@ class NotificationController extends Controller
                     ->whereColumn('user_id', 'users.id')
                     ->whereNotNull('started_at')
             ])->paginate(20);
-        return view('notification', compact('users'));
+                $datebirthday_count=User::whereRaw('DAY(datebirthday) = ? AND MONTH(datebirthday) = ?', [
+                now()->day,
+                now()->month
+            ])->count();
+        return view('notification', compact('users','datebirthday_count'));
     }
 
     public function admin()

@@ -246,7 +246,7 @@
                     </div>
 
                     <button class="btn btn" style="background-color: #fff" data-bs-toggle="modal"
-                        data-bs-target="#editCategoryModal2">ميلاد</button>
+                        data-bs-target="#editCategoryModal2">{{ $datebirthday_count }} ميلاد</button>
                     <div class="modal fade" id="editCategoryModal2" tabindex="-1"
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog">

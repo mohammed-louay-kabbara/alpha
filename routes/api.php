@@ -72,6 +72,7 @@ Route::group([
     Route::resource('category', CategoryController::class);
     Route::resource('productLike', ProductLikeController::class);
     Route::post('searchProducts', [ProductController::class,'searchProducts']);
+    Route::post('storetest', [ReelsController::class,'storetest']);
     Route::post('searchUsers', [AuthController::class,'searchUsers']);
     Route::get('pagesproduct', [ProductController::class,'getUsersWithProducts']);
 

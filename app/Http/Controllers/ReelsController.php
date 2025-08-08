@@ -95,8 +95,8 @@ class ReelsController extends Controller
     public function generateVideoThumbnail($videoPath, $thumbnailPath, $second = 1)
     {
         $ffmpeg = FFMpeg\FFMpeg::create([
-            'ffmpeg.binaries'  => 'C:\\ffmpeg\\bin\\ffmpeg.exe',     // غير هذا حسب بيئتك
-            'ffprobe.binaries' => 'C:\\ffmpeg\\bin\\ffprobe.exe',    // غير هذا حسب بيئتك
+            'ffmpeg.binaries'  => 'C:\ffmpeg\bin\ffmpeg.exe',     // غير هذا حسب بيئتك
+            'ffprobe.binaries' => 'C:\ffmpeg\bin\ffprobe.exe',    // غير هذا حسب بيئتك
             'timeout'          => 3600,
             'ffmpeg.threads'   => 12,
         ]);

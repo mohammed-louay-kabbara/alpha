@@ -53,8 +53,8 @@ class ReelLikesController extends Controller
             $reel->increment('likes_count');
             notification::create([
                 'user_id' => $reel->user_id,
-                'title' => $request->title,
-                'body' => $request->message,
+                'title' => 'تفاعل',
+                'body' => 'تم تسجيل إعجاب على الريلز خاصتك',
                 'sender_id' => Auth::id()
             ]);
         return response()->json([

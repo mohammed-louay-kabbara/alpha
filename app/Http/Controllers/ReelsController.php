@@ -46,29 +46,7 @@ class ReelsController extends Controller
         return response()->json($reels);
     }
 
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'media_path' => 'required|mimes:mp4', 
-            'description' => 'nullable|string',
-        ]);
-        $path = $request->file('media_path')->store('reels', 'public');
-        // $thumbnailPath = 'thumbnails/' . uniqid() . '.jpg';
-        // $this->generateVideoThumbnail(storage_path('app/public/' . $path), storage_path('app/public/' . $thumbnailPath));
-        $reel = Reels::create([
-            'user_id' => Auth::id(),
-            'media_path' => $path,
-            // 'thumbnail_path' => $thumbnailPath,
-            'description' => $request->description,
-        ]);
-        return response()->json([
-            'status' => true,
-            'message' => 'تمت الإضافة بنجاح',
-        ], 201);
-    }
-
-        public function storetest(Request $request)
+        public function store(Request $request)
         {
             $request->validate([
                 'media_path' => 'required', 
@@ -83,15 +61,11 @@ class ReelsController extends Controller
                 'thumbnail_path' => $thumbnailPath,
                 'description' => $request->description,
             ]);
-            dd($reel);
             return response()->json([
                 'status' => true,
                 'message' => 'تمت الإضافة بنجاح',
             ], 201);
         }
-
-
-
 
     public function generateVideoThumbnail($videoPath, $thumbnailPath, $second = 1)
     {

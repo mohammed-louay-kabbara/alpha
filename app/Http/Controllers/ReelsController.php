@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ReelsController extends Controller
 {
-
+    
     public function index()
     {
         $userId = auth()->id();

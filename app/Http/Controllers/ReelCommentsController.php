@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\reel_comments;
+use App\Models\notification;
+use App\Models\reels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,27 +27,30 @@ class ReelCommentsController extends Controller
      */
     public function store(Request $request)
     {
-    
         $request->validate([
             'message' => 'required', 
             'reels_id' => 'required',
         ]);
-
-        // إنشاء السجل الجديد
-        reel_comments::create([
+        $reel_comments= reel_comments::create([
             'user_id' => Auth::id(),
             'message' => $request->message,
             'reels_id' => $request->reels_id,
         ]);
+
+        $reel=reels::where('id',$request->reels_id)->first();
+            notification::create([
+                'user_id' =>$reel->user_id,
+                'title' => 'تعليق جديد',
+                'body' => 'تم التعليق على منشور لك',
+                'sender_id' => Auth::id()
+            ]);
         return response()->json([
             'status' => true,
             'message' => 'تم التقييم بنجاح.',
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show($id)
     {
         

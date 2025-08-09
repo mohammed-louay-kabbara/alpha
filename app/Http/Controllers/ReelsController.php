@@ -14,27 +14,7 @@ class ReelsController extends Controller
     
     public function index()
     {
-        $userId = auth()->id();
-        $reels = Reels::with('user')
-            ->orderBy('created_at', 'desc')
-            ->get()
-            ->map(function ($reel) use ($userId) {
-                $reel->is_following = \App\Models\Follower::where('follower_id', $userId)
-                    ->where('followed_id', $reel->user_id)
-                    ->exists();
-                return $reel;
-            })
-            ->map(function ($reel) {
-            $reel->liked_by_user = $reel->likes->contains('user_id', auth()->id());
-            unset($reel->likes);
-            return $reel;
-            });
-        return response()->json($reels);
-    }
-
-    public function getReels()
-    {
-           $userId = auth()->id();
+                   $userId = auth()->id();
 
     // 1️⃣ الأشخاص الذين أتابعهم
     $followingIds = \App\Models\Follower::where('follower_id', $userId)
@@ -76,6 +56,28 @@ class ReelsController extends Controller
         });
 
     return response()->json($reels);
+    
+        // $userId = auth()->id();
+        // $reels = Reels::with('user')
+        //     ->orderBy('created_at', 'desc')
+        //     ->get()
+        //     ->map(function ($reel) use ($userId) {
+        //         $reel->is_following = \App\Models\Follower::where('follower_id', $userId)
+        //             ->where('followed_id', $reel->user_id)
+        //             ->exists();
+        //         return $reel;
+        //     })
+        //     ->map(function ($reel) {
+        //     $reel->liked_by_user = $reel->likes->contains('user_id', auth()->id());
+        //     unset($reel->likes);
+        //     return $reel;
+        //     });
+        // return response()->json($reels);
+    }
+
+    public function getReels()
+    {
+
     }
     
     public function create()

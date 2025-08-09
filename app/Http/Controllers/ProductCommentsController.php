@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product;
+use App\Models\notification;
 use App\Models\product_comments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +35,13 @@ class ProductCommentsController extends Controller
             'message' => $request->message,
             'product_id' => $request->product_id,
         ]);
+        $product=product::where('id',$request->product_id)->first();
+            notification::create([
+                'user_id' => $product->user_id,
+                'title' => 'تعليق جديد',
+                'body' => 'تم تسجيل تعليق على منشورك',
+                'sender_id' => Auth::id()
+            ]);
         return response()->json([
             'status' => true,
             'message' => 'تم التقييم بنجاح.',

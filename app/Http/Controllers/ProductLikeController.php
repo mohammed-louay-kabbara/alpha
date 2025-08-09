@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\notification;
 use App\Models\product_like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;

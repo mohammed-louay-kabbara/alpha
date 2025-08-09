@@ -14,8 +14,7 @@ class ReelsController extends Controller
     
     public function index()
     {
-                   $userId = auth()->id();
-
+    $userId = auth()->id();
     // 1️⃣ الأشخاص الذين أتابعهم
     $followingIds = \App\Models\Follower::where('follower_id', $userId)
         ->pluck('followed_id');
@@ -56,7 +55,12 @@ class ReelsController extends Controller
         });
 
     return response()->json($reels);
-    
+
+
+    }
+
+    public function getReels()
+    {
         // $userId = auth()->id();
         // $reels = Reels::with('user')
         //     ->orderBy('created_at', 'desc')
@@ -73,11 +77,6 @@ class ReelsController extends Controller
         //     return $reel;
         //     });
         // return response()->json($reels);
-    }
-
-    public function getReels()
-    {
-
     }
     
     public function create()

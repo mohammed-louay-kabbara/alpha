@@ -50,7 +50,7 @@ class ReelsController extends Controller
             ->unique();
 
         // 4️⃣ جلب الريلز
-        $reels = Reels::with('user', 'likes')
+        $reels = Reels::with('user')
             ->orderByRaw("
                 CASE 
                     WHEN user_id IN (" . $priorityUserIds->implode(',') . ") THEN 1

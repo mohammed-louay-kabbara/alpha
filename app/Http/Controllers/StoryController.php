@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $usersWithStories = User::with(['stories' => function ($query) {

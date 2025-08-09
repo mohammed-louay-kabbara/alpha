@@ -31,6 +31,45 @@ class ReelsController extends Controller
             });
         return response()->json($reels);
     }
+
+    public function getReels()
+    {
+        $userId = auth()->id();
+
+        // 1️⃣ الأشخاص الذين أتابعهم
+        $followingIds = \App\Models\Follower::where('follower_id', $userId)
+            ->pluck('followed_id');
+
+        // 2️⃣ الأشخاص الذين يتابعهم من أتابعهم
+        $friendsOfFriendsIds = \App\Models\Follower::whereIn('follower_id', $followingIds)
+            ->pluck('followed_id');
+
+        // 3️⃣ دمج كل المستخدمين مع إزالة التكرار
+        $priorityUserIds = $followingIds
+            ->merge($friendsOfFriendsIds)
+            ->unique();
+
+        // 4️⃣ جلب الريلز
+        $reels = Reels::with('user', 'likes')
+            ->orderByRaw("
+                CASE 
+                    WHEN user_id IN (" . $priorityUserIds->implode(',') . ") THEN 1
+                    ELSE 2
+                END
+            ")
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($reel) use ($userId) {
+                $reel->is_following = \App\Models\Follower::where('follower_id', $userId)
+                    ->where('followed_id', $reel->user_id)
+                    ->exists();
+                $reel->liked_by_user = $reel->likes->contains('user_id', $userId);
+                unset($reel->likes);
+                return $reel;
+            });
+
+        return response()->json($reels);
+    }
     
     public function create()
     {

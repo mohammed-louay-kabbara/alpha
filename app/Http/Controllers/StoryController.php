@@ -22,7 +22,14 @@ class StoryController extends Controller
 
     public function create()
     { 
-        
+        $followingIds = auth()->user()->followings()->pluck('users.id')->toArray();
+        $ids = array_unique(array_merge($followingIds, [auth()->id()]));
+        $usersWithStories = User::whereIn('id', $ids)
+            ->whereHas('stories')
+            ->with(['stories' => function ($q) {
+                $q->orderByDesc('created_at')->withCount('views');
+            }])->get();
+            return response()->json($usersWithStories);
     }
     public function addcount()
     {

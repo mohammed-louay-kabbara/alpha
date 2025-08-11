@@ -41,18 +41,6 @@ class ProductController extends Controller
             });
             
             return response()->json($products);
-        // $user=Auth::user();
-        // $products = Product::with(['files', 'user', 'likeTypes', 'likes']) 
-        //     ->withCount('likes')
-        //     ->where('is_approved', 1)
-        //     ->orderBy('created_at', 'desc')
-        //     ->get()
-        //     ->map(function ($product) use ($user) {
-        //         $product->liked_by_user = $product->likes->contains('user_id', $user->id);
-        //         unset($product->likes); 
-        //         return $product;
-        //     });
-        // return response()->json($products);
     }
 
     // public function 

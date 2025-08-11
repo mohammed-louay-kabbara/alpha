@@ -12,27 +12,26 @@ class StoryController extends Controller
 
     public function index()
     {
-        $usersWithStories = User::with(['stories' => function ($query) {
-            $query->orderBy('created_at', 'desc');
-            $query->withCount('views');
-        }])->whereHas('stories')->get();
-        return response()->json($usersWithStories);
-    }
-
-
-    public function create()
-    { 
-        $followingIds = auth()->user()->followings()->pluck('id')->toArray();
+                $followingIds = auth()->user()->followings()->pluck('id')->toArray();
         $ids = array_unique(array_merge($followingIds, [auth()->id()]));
-
         $usersWithStories = User::whereIn('id', $ids)
             ->whereHas('stories')
             ->with(['stories' => function ($q) {
                 $q->orderByDesc('created_at')->withCount('views');
             }])
             ->get();
-
         return response()->json($usersWithStories);
+        // $usersWithStories = User::with(['stories' => function ($query) {
+        //     $query->orderBy('created_at', 'desc');
+        //     $query->withCount('views');
+        // }])->whereHas('stories')->get();
+        // return response()->json($usersWithStories);
+    }
+
+
+    public function create()
+    { 
+
 
     }
     public function addcount()

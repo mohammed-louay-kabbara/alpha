@@ -59,25 +59,6 @@ class ReelsController extends Controller
 
     }
 
-    public function getReels()
-    {
-        // $userId = auth()->id();
-        // $reels = Reels::with('user')
-        //     ->orderBy('created_at', 'desc')
-        //     ->get()
-        //     ->map(function ($reel) use ($userId) {
-        //         $reel->is_following = \App\Models\Follower::where('follower_id', $userId)
-        //             ->where('followed_id', $reel->user_id)
-        //             ->exists();
-        //         return $reel;
-        //     })
-        //     ->map(function ($reel) {
-        //     $reel->liked_by_user = $reel->likes->contains('user_id', auth()->id());
-        //     unset($reel->likes);
-        //     return $reel;
-        //     });
-        // return response()->json($reels);
-    }
     
     public function create()
     {

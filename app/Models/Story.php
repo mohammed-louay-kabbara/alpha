@@ -20,4 +20,9 @@ class Story extends Model
     {
         return $this->hasMany(story_view::class);
     }
+    public function scopeExpired($query)
+    {
+        return $query->where('created_at', '<', now()->subDay());
+    }
+
 }

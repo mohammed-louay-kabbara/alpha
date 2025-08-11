@@ -9,13 +9,23 @@ use Carbon\Carbon;
 
 class DeleteExpiredStories extends Command
 {
-
-    protected $signature = 'stories:delete-old';
-    protected $description = 'حذف الستوري الذي مر عليه أكثر من 24 ساعة';
+    protected $signature = 'stories:delete-expired';
+    protected $description = 'Deletes stories older than 24 hours';
 
     public function handle()
     {
-        $deleted = Story::where('created_at', '<', Carbon::now()->subHours(24))->delete();
-        $this->info("تم حذف {$deleted} ستوري قديمة.");
+        $expiredStories = Story::expired()->get();
+
+        foreach ($expiredStories as $story) {
+            // حذف الصورة من التخزين إذا كانت موجودة
+            if ($story->image_path) {
+                \Storage::delete($story->image_path);
+            }
+
+            // حذف القصة من قاعدة البيانات
+            $story->delete();
+        }
+
+        $this->info("Deleted " . count($expiredStories) . " expired stories.");
     }
 }

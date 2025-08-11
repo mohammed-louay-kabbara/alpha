@@ -8,10 +8,12 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
 
+
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('stories:delete-expired')->hourly(); // أو كل دقيقة لو أردت
+        $schedule->command('stories:delete-expired')->hourly();
     }
+
 
 
     protected function commands(): void

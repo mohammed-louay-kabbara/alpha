@@ -93,8 +93,19 @@ class AuthController extends Controller
     }
 
     public function info_user(Request $request){
-        $user=user::with('isFollowing')->where('id',$request->user_id)->first();
-        return response()->json($user, 200);
+        // $user=user::with('isFollowing')->where('id',$request->user_id)->first();
+        // return response()->json($user, 200);
+         // جلب المستخدم الحالي والمستخدم الهدف
+    $currentUser = Auth::user();
+    $targetUser  = User::findOrFail($request->user_id);
+    // التحقق إن كان المتابع يتابع هذا المستخدم
+    $isFollowing = $currentUser->isFollowing($targetUser);
+    // إرجاع JSON يضم بيانات المستخدم وحالة المتابعة
+    return response()->json([
+        'user'         => $targetUser,
+        'is_following' => $isFollowing,
+    ], 200);
+    
     }
     
     public function count_profile(Request $request){

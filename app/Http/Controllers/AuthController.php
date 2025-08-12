@@ -93,7 +93,7 @@ class AuthController extends Controller
     }
 
     public function info_user(Request $request){
-        $user=user::where('id',$request->user_id)->first();
+        $user=user::with('isFollowing')->where('id',$request->user_id)->first();
         return response()->json($user, 200);
     }
     

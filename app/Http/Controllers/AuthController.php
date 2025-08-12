@@ -96,9 +96,9 @@ class AuthController extends Controller
     {
         $currentUser = Auth::user();
         $targetUser = User::findOrFail($request->user_id);
-            $isFollowing = \App\Models\Follower::where('follower_id',$targetUser->id )
-                    ->where('followed_id',Auth::id() )
-                    ->first();
+            $isFollowing = \App\Models\Follower::where('follower_id', Auth::id())
+                    ->where('followed_id', $targetUser->id)
+                    ->exists();
         $targetUser->is_following = $isFollowing;
         // إرجاع البيانات
         return response()->json([

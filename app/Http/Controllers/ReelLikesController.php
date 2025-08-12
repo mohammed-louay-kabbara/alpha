@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\reel_likes;
 use App\Models\reels;
+use App\Models\notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\NewOrderNotification;
@@ -50,14 +51,19 @@ class ReelLikesController extends Controller
         // تحديث العدادات
         $reel = reels::find($request->reels_id);
             $reel->increment('likes_count');
-       
-     return response()->json([
-            'status' => true,
-            'message' => 'تم التقييم بنجاح.',
-        ], 201);
-  
-        
+            notification::create([
+                'user_id' => $reel->user_id,
+                'title' => 'تفاعل',
+                'body' => 'تم تسجيل إعجاب على الريلز خاصتك',
+                'sender_id' => Auth::id()
+            ]);
+        return response()->json([
+                'status' => true,
+                'message' => 'تم التقييم بنجاح.',
+            ], 201);
     }
+
+    
 
     /**
      * Display the specified resource.

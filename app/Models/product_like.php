@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class product_like extends Model
 {
+    protected $table = 'product_likes';
     protected $fillable = [
       'user_id' , 'type' , 'product_id'
     ];
-     protected $table = 'product_likes';
+   
     public function user()
     {
         return $this->belongsTo(User::class);

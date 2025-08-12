@@ -244,9 +244,13 @@
                             </div>
                         </div>
                     </div>
+                    @if ($datebirthday_count == 0)
+                        <button class="btn btn" style="background-color: #808080; color:#fff" disabled> معايدة</button>
+                    @else
+                        <button class="btn btn" style="background-color: #fff" data-bs-toggle="modal"
+                            data-bs-target="#editCategoryModal2"> معايدة</button>
+                    @endif
 
-                    <button class="btn btn" style="background-color: #fff" data-bs-toggle="modal"
-                        data-bs-target="#editCategoryModal2">ميلاد</button>
                     <div class="modal fade" id="editCategoryModal2" tabindex="-1"
                         aria-labelledby="editCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog">

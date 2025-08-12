@@ -7,12 +7,14 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    protected function schedule(Schedule $schedule): void
+
+
+    protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            \App\Models\Story::where('created_at', '<', now()->subHours(24))->delete();
-        })->everyTenMinutes();
+        $schedule->command('stories:delete-expired')->hourly();
     }
+
+
 
     protected function commands(): void
     {

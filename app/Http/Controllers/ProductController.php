@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\product_file;
 use App\Models\reels;
 use App\Models\follower;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -15,19 +16,34 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $user=Auth::user();
-        $products = Product::with(['files', 'user', 'likeTypes', 'likes']) 
+        $userId = auth()->id();
+
+        // 1) معرفة أكثر فئة تفاعل معها المستخدم
+        $topCategory = DB::table('product_likes')
+            ->join('products', 'product_likes.product_id', '=', 'products.id')
+            ->select('products.category_id', DB::raw('COUNT(*) as interactions'))
+            ->where('product_likes.user_id', $userId)
+            ->groupBy('products.category_id')
+            ->orderByDesc('interactions')
+            ->value('category_id'); // يرجع ID الفئة فقط
+
+        // 2) جلب المنتجات كلها مع ترتيب مخصص
+        $products = Product::with(['files', 'user', 'likeTypes', 'likes'])
             ->withCount('likes')
             ->where('is_approved', 1)
-            ->orderBy('created_at', 'desc')
+            ->orderByRaw("CASE WHEN category_id = ? THEN 0 ELSE 1 END", [$topCategory]) // أولوية للفئة الأكثر تفاعلاً
+            ->orderBy('created_at', 'desc') // ترتيب داخل كل مجموعة
             ->get()
-            ->map(function ($product) use ($user) {
-                $product->liked_by_user = $product->likes->contains('user_id', $user->id);
-                unset($product->likes); 
+            ->map(function ($product) use ($userId) {
+                $product->liked_by_user = $product->likes->contains('user_id', $userId);
+                unset($product->likes);
                 return $product;
             });
-        return response()->json($products);
+            
+            return response()->json($products);
     }
+
+    // public function 
 
     
     public function getUsersWithProducts()
@@ -89,7 +105,7 @@ class ProductController extends Controller
         if (!$query || trim($query) === '') {
             return response()->json(['products' => []]);
         }
-        $products = Product::where('name', 'like', '%' . $query . '%')->get();
+        $products = Product::where('name', 'like', '%' . $query . '%')->with(['user','files'])->get();
         return response()->json(['products' => $products]);
     }
 

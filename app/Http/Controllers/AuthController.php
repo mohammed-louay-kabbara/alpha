@@ -105,7 +105,6 @@ class AuthController extends Controller
         'user'         => $targetUser,
         'is_following' => $isFollowing,
     ], 200);
-    
     }
     
     public function count_profile(Request $request){

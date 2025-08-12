@@ -35,11 +35,13 @@ class ProductController extends Controller
             ->orderBy('created_at', 'desc') // ترتيب داخل كل مجموعة
             ->get()
             ->map(function ($product) use ($userId) {
+            $product->is_following = \App\Models\Follower::where('follower_id', $userId)
+                ->where('followed_id', $product->user_id)
+                ->exists();
                 $product->liked_by_user = $product->likes->contains('user_id', $userId);
                 unset($product->likes);
                 return $product;
             });
-            
             return response()->json($products);
     }
 

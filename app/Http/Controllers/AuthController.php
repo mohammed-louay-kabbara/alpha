@@ -100,8 +100,8 @@ class AuthController extends Controller
     // التحقق من المتابعة
     $isFollowing = false;
     if ($currentUser) {
-        $isFollowing = \App\Models\Follower::where('follower_id', $userId)
-                ->where('followed_id', $product->user_id)
+        $isFollowing = \App\Models\Follower::where('follower_id', $currentUser->id)
+                ->where('followed_id', $targetUser->id)
                 ->exists();
     }
     

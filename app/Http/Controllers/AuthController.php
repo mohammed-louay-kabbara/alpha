@@ -53,7 +53,7 @@ class AuthController extends Controller
                     ->whereColumn('user_id', 'users.id')
                     ->whereNotNull('started_at')
             ])
-            ->paginate(20);
+            ->get();
         return view('users', compact('users'));
     }
 

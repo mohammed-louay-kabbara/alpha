@@ -102,7 +102,7 @@ class AuthController extends Controller
         $targetUser->is_following = $isFollowing;
         // إرجاع البيانات
         return response()->json([
-            'user' => $targetUser
+            'user' => $isFollowing
         ]);
     }
     

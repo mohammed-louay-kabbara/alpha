@@ -36,7 +36,7 @@ class ProductController extends Controller
             ->get()
             ->map(function ($product) use ($userId) {
                 $product->user->is_following = \App\Models\Follower::where('follower_id', $userId)
-                ->where('followed_id', $reel->user_id)
+                ->where('followed_id', $product->user_id)
                 ->exists();
                 $product->liked_by_user = $product->likes->contains('user_id', $userId);
                 unset($product->likes);

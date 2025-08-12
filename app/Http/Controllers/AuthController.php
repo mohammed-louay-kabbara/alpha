@@ -95,8 +95,8 @@ class AuthController extends Controller
     public function info_user(Request $request)
     {
         $targetUser = User::findOrFail($request->user_id);
-            $isFollowing = \App\Models\Follower::where('follower_id', 10)
-                    ->where('followed_id', 1)
+            $isFollowing = \App\Models\Follower::where('follower_id', Auth::id())
+                    ->where('followed_id', $request->user_id)
                     ->exists();
         $targetUser->is_following = $isFollowing;
         // إرجاع البيانات

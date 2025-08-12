@@ -100,7 +100,9 @@ class AuthController extends Controller
     // التحقق من المتابعة
     $isFollowing = false;
     if ($currentUser) {
-        $isFollowing = $currentUser->isFollowing($targetUser);
+        $isFollowing = \App\Models\Follower::where('follower_id', $userId)
+                ->where('followed_id', $product->user_id)
+                ->exists();
     }
     
     // إضافة الحقل إلى كائن المستخدم

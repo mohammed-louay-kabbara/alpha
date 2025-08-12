@@ -92,36 +92,18 @@ class AuthController extends Controller
         }     
     }
 
-    public function info_user(Request $request){
-
-            $currentUser = Auth::user();
-    $targetUser = User::findOrFail($request->user_id);
-    
-    // التحقق من المتابعة
-
-        $isFollowing = \App\Models\Follower::where('follower_id', Auth::id())
-                ->where('followed_id', $targetUser->id)
-                ->exists();
-    
-    // إضافة الحقل إلى كائن المستخدم
-    $targetUser->is_following = $isFollowing;
-    
-    // إرجاع البيانات
-    return response()->json([
-        'user' => $targetUser
-    ]);
-        // $user=user::with('isFollowing')->where('id',$request->user_id)->first();
-        // return response()->json($user, 200);
-         // جلب المستخدم الحالي والمستخدم الهدف
-    // $currentUser = Auth::user();
-    // $targetUser  = User::findOrFail($request->user_id);
-    // // التحقق إن كان المتابع يتابع هذا المستخدم
-    // $isFollowing = $currentUser->isFollowing($targetUser);
-    // // إرجاع JSON يضم بيانات المستخدم وحالة المتابعة
-    // return response()->json([
-    //     'user'         => $targetUser,
-    //     'is_following' => $isFollowing,
-    // ], 200);
+    public function info_user(Request $request)
+    {
+        $currentUser = Auth::user();
+        $targetUser = User::findOrFail($request->user_id);
+            $isFollowing = \App\Models\Follower::where('follower_id',$targetUser->id )
+                    ->where('followed_id',Auth::id() )
+                    ->exists();
+        $targetUser->is_following = $isFollowing;
+        // إرجاع البيانات
+        return response()->json([
+            'user' => $targetUser
+        ]);
     }
     
     public function count_profile(Request $request){

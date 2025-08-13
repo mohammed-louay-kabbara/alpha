@@ -153,6 +153,12 @@ class ProductController extends Controller
         }
      return response()->json(['يرجى الانتظار لبعض الوقت من أجل معاينة الإعلان من قبل مسؤول التطبيق'], 200);
     }
+    public function updateprice(Request $request){
+        product::where('id',$request->id)->update([
+            'price' => $request->newprice
+        ]);
+        return response()->json(['تم تعديل سعر المنتج بنجاح'], 200);
+    }
 
 
     public function show($id)

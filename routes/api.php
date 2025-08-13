@@ -72,16 +72,14 @@ Route::group([
     Route::resource('category', CategoryController::class);
     Route::resource('productLike', ProductLikeController::class);
     Route::post('searchProducts', [ProductController::class,'searchProducts']);
+    Route::post('updateprice', [ProductController::class,'updateprice']);
     Route::post('storetest', [ReelsController::class,'storetest']);
     Route::post('searchUsers', [AuthController::class,'searchUsers']);
     Route::get('pagesproduct', [ProductController::class,'getUsersWithProducts']);
-
     Route::resource('ProductComments', ProductCommentsController::class);
     Route::resource('follower', FollowerController::class);
     Route::get('getFollower', [FollowerController::class,'getFollower']);
-
     Route::get('getReels', [ReelsController::class,'getReels']);
-
     Route::get('suggestedFollows', [FollowerController::class,'suggestedFollows']);
     Route::get('Users', [AuthController::class,'users']);
     Route::delete('deletefollower', [FollowerController::class,'deleteFollower']);

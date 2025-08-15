@@ -125,8 +125,8 @@ public function getReels()
             ->values();
 
         // IDs الريلز التي أعجب بها المستخدم
-        $likedReelsIds = \App\Models\Like::where('user_id', $userId)
-            ->pluck('reel_id')
+        $likedReelsIds = \App\Models\reel_likes::where('user_id', $userId)
+            ->pluck('reels_id')
             ->toArray();
 
         // تحويل المتابَعين إلى Array لبحث أسرع

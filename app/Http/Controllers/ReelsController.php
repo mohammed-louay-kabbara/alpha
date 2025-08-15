@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\reels;
 use FFMpeg;
 use FFMpeg\Coordinate\TimeCode;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -54,47 +55,115 @@ class ReelsController extends Controller
     // return response()->json($reels);
     // }
     public function index()
+    {
+        $userId = auth()->id();
+        // جلب جميع المتابَعين مباشرة
+        $followingIds = \App\Models\Follower::where('follower_id', $userId)
+            ->pluck('followed_id');
+
+        // جلب أصدقاء الأصدقاء (بـ Query واحد)
+        $friendsOfFriendsIds = \App\Models\Follower::whereIn('follower_id', $followingIds)
+            ->pluck('followed_id');
+
+        $priorityUserIds = $followingIds
+            ->merge($friendsOfFriendsIds)
+            ->unique()
+            ->filter()
+            ->values();
+
+        $likedReelsIds = \App\Models\reel_likes::where('user_id', $userId)
+            ->pluck('reels_id')
+            ->toArray();        
+        $followingSet = $followingIds->toArray();
+        $reelsQuery = Reels::with('user');
+        if ($priorityUserIds->isNotEmpty()) {
+            $idsString = $priorityUserIds->implode(',');
+            $reelsQuery->orderByRaw("
+                CASE 
+                    WHEN user_id IN ($idsString) THEN 1
+                    ELSE 2
+                END
+            ");
+        }
+        $reels = $reelsQuery
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($reel) use ($userId, $followingSet, $likedReelsIds) {
+                $reel->is_following = in_array($reel->user_id, $followingSet);
+                $reel->liked_by_user = in_array($reel->id, $likedReelsIds);
+                return $reel;
+            });
+
+        return response()->json($reels);
+    }
+
+
+
+public function getReels()
 {
     $userId = auth()->id();
-    // جلب جميع المتابَعين مباشرة
-    $followingIds = \App\Models\Follower::where('follower_id', $userId)
-        ->pluck('followed_id');
 
-    // جلب أصدقاء الأصدقاء (بـ Query واحد)
-    $friendsOfFriendsIds = \App\Models\Follower::whereIn('follower_id', $followingIds)
-        ->pluck('followed_id');
+    // مفتاح الكاش حسب المستخدم والصفحة المطلوبة
+    $page = request('page', 1);
+    $cacheKey = "feed_user_{$userId}_page_{$page}";
 
-    $priorityUserIds = $followingIds
-        ->merge($friendsOfFriendsIds)
-        ->unique()
-        ->filter()
-        ->values();
+    return Cache::remember($cacheKey, 60, function () use ($userId) {
 
-    $likedReelsIds = \App\Models\reel_likes::where('user_id', $userId)
-        ->pluck('reels_id')
-        ->toArray();        
-    $followingSet = $followingIds->toArray();
-    $reelsQuery = Reels::with('user');
-    if ($priorityUserIds->isNotEmpty()) {
-        $idsString = $priorityUserIds->implode(',');
-        $reelsQuery->orderByRaw("
-            CASE 
-                WHEN user_id IN ($idsString) THEN 1
-                ELSE 2
-            END
-        ");
-    }
-    $reels = $reelsQuery
-        ->orderBy('created_at', 'desc')
-        ->get()
-        ->map(function ($reel) use ($userId, $followingSet, $likedReelsIds) {
+        // جلب IDs المتابَعين
+        $followingIds = \App\Models\Follower::where('follower_id', $userId)
+            ->pluck('followed_id');
+
+        // جلب IDs أصدقاء الأصدقاء
+        $friendsOfFriendsIds = \App\Models\Follower::whereIn('follower_id', $followingIds)
+            ->pluck('followed_id');
+
+        // قائمة الأولوية
+        $priorityUserIds = $followingIds
+            ->merge($friendsOfFriendsIds)
+            ->unique()
+            ->filter()
+            ->values();
+
+        // IDs الريلز التي أعجب بها المستخدم
+        $likedReelsIds = \App\Models\Like::where('user_id', $userId)
+            ->pluck('reel_id')
+            ->toArray();
+
+        // تحويل المتابَعين إلى Array لبحث أسرع
+        $followingSet = $followingIds->toArray();
+
+        // استعلام الريلز الأساسي
+        $reelsQuery = Reels::with(['user', 'likes']); // مثل الكود الأصلي تمامًا
+
+        // ترتيب حسب الأولوية
+        if ($priorityUserIds->isNotEmpty()) {
+            $idsString = $priorityUserIds->implode(',');
+            $reelsQuery->orderByRaw("
+                CASE 
+                    WHEN user_id IN ($idsString) THEN 1
+                    ELSE 2
+                END
+            ");
+        }
+
+        // ترتيب بالوقت
+        $reelsQuery->orderBy('created_at', 'desc');
+
+        // هنا نستخدم paginate أو get حسب ما يناسب
+        $reels = $reelsQuery->paginate(20);
+
+        // تعديل البيانات مع الحفاظ على نفس الحقول الأصلية
+        $reels->getCollection()->transform(function ($reel) use ($userId, $followingSet, $likedReelsIds) {
             $reel->is_following = in_array($reel->user_id, $followingSet);
             $reel->liked_by_user = in_array($reel->id, $likedReelsIds);
+            unset($reel->likes); // نفس إزالة الحقل كما في كودك الأصلي
             return $reel;
         });
 
-    return response()->json($reels);
+        return $reels; // نفس النتيجة، Laravel API يحوّلها JSON تلقائياً
+    });
 }
+
 
 
 

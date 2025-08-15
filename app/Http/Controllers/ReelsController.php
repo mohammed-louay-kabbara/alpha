@@ -12,25 +12,74 @@ use Illuminate\Support\Facades\Storage;
 class ReelsController extends Controller
 {
     
+    // public function index()
+    // {
+    // $userId = auth()->id();
+
+    // $followingIds = \App\Models\Follower::where('follower_id', $userId)
+    //     ->pluck('followed_id');
+
+    // $friendsOfFriendsIds = \App\Models\Follower::whereIn('follower_id', $followingIds)
+    //     ->pluck('followed_id');
+
+    // $priorityUserIds = $followingIds
+    //     ->merge($friendsOfFriendsIds)
+    //     ->unique()
+    //     ->filter() 
+    //     ->values();
+
+    // $reelsQuery = Reels::with('user', 'likes');
+
+    // if ($priorityUserIds->isNotEmpty()) {
+    //     $idsString = $priorityUserIds->implode(',');
+    //     $reelsQuery->orderByRaw("
+    //         CASE 
+    //             WHEN user_id IN ($idsString) THEN 1
+    //             ELSE 2
+    //         END
+    //     ");
+    // }
+
+    // $reels = $reelsQuery
+    //     ->orderBy('created_at', 'desc')
+    //     ->get()
+    //     ->map(function ($reel) use ($userId) {
+    //         $reel->is_following = \App\Models\Follower::where('follower_id', $userId)
+    //             ->where('followed_id', $reel->user_id)
+    //             ->exists();
+    //         $reel->liked_by_user = $reel->likes->contains('user_id', $userId);
+    //         unset($reel->likes);
+    //         return $reel;
+    //     });
+    // return response()->json($reels);
+    // }
     public function index()
-    {
+{
     $userId = auth()->id();
-    // 1️⃣ الأشخاص الذين أتابعهم
+    // جلب جميع المتابَعين مباشرة
     $followingIds = \App\Models\Follower::where('follower_id', $userId)
         ->pluck('followed_id');
 
-    // 2️⃣ الأشخاص الذين يتابعهم من أتابعهم
+    // جلب أصدقاء الأصدقاء (بـ Query واحد)
     $friendsOfFriendsIds = \App\Models\Follower::whereIn('follower_id', $followingIds)
         ->pluck('followed_id');
 
-    // 3️⃣ دمج وإزالة التكرار
     $priorityUserIds = $followingIds
         ->merge($friendsOfFriendsIds)
         ->unique()
-        ->filter() // إزالة أي null
+        ->filter()
         ->values();
 
-    $reelsQuery = Reels::with('user', 'likes');
+    // جلب كل الإعجابات التي تخص المستخدم دفعة واحدة
+    $likedReelsIds = \App\Models\Like::where('user_id', $userId)
+        ->pluck('reel_id')
+        ->toArray();
+
+    // جلب كل بيانات المتابعة مرة واحدة
+    $followingSet = $followingIds->toArray();
+
+    // الاستعلام الرئيسي (مع eager loading)
+    $reelsQuery = Reels::with('user');
 
     if ($priorityUserIds->isNotEmpty()) {
         $idsString = $priorityUserIds->implode(',');
@@ -45,19 +94,16 @@ class ReelsController extends Controller
     $reels = $reelsQuery
         ->orderBy('created_at', 'desc')
         ->get()
-        ->map(function ($reel) use ($userId) {
-            $reel->is_following = \App\Models\Follower::where('follower_id', $userId)
-                ->where('followed_id', $reel->user_id)
-                ->exists();
-            $reel->liked_by_user = $reel->likes->contains('user_id', $userId);
-            unset($reel->likes);
+        ->map(function ($reel) use ($userId, $followingSet, $likedReelsIds) {
+            $reel->is_following = in_array($reel->user_id, $followingSet);
+            $reel->liked_by_user = in_array($reel->id, $likedReelsIds);
             return $reel;
         });
 
     return response()->json($reels);
+}
 
 
-    }
 
     
     public function create()

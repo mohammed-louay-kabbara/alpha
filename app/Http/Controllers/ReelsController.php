@@ -71,7 +71,7 @@ class ReelsController extends Controller
         ->values();
 
     // جلب كل الإعجابات التي تخص المستخدم دفعة واحدة
-    $likedReelsIds = \App\Models\Like::where('user_id', $userId)
+    $likedReelsIds = \App\Models\reel_likes::where('user_id', $userId)
         ->pluck('reel_id')
         ->toArray();
 

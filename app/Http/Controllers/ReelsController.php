@@ -96,9 +96,6 @@ class ReelsController extends Controller
 
         return response()->json($reels);
     }
-
-
-
 public function getReels()
 {
     $userId = auth()->id();

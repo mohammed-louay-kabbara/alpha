@@ -42,7 +42,7 @@ class NotificationController extends Controller
                     ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, started_at, COALESCE(ended_at, NOW())))')
                     ->whereColumn('user_id', 'users.id')
                     ->whereNotNull('started_at')
-            ])->paginate(20);
+            ])->get();
                 $datebirthday_count=User::whereRaw('DAY(datebirthday) = ? AND MONTH(datebirthday) = ?', [
                 now()->day,
                 now()->month

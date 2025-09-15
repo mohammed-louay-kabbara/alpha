@@ -263,10 +263,10 @@ public function verifyResetCode(Request $request)
     if (!$record) {
         return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 401);
     }
-    if ($record->expires_at < now()) {
-        $record->delete();
-        return response()->json(['message' => 'الرمز منتهي الصلاحية'], 401);
-    }
+    // if ($record->expires_at < now()) {
+    //     $record->delete();
+    //     return response()->json(['message' => 'الرمز منتهي الصلاحية'], 401);
+    // }
     $user = User::where('email', $record->email)->first();
     if (!$user) {
         return response()->json(['message' => 'المستخدم غير موجود'], 404);

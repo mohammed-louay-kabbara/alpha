@@ -150,13 +150,6 @@ class AuthController extends Controller
         $request->validate([
             'token' => 'required|string',
         ]);
-
-        // $devicetoken = DeviceToken::where('user_id',Auth::id());
-        // if ($devicetoken) {
-        //     $devicetoken->update([
-        //         'token' => $request->token
-        //     ]);
-        // }
         $user = Auth::user();
         DeviceToken::updateOrCreate(
             ['user_id' => $user->id],
@@ -263,17 +256,28 @@ public function sendVerificationCode(Request $request)
 
 public function verifyResetCode(Request $request)
 {
-    $request->validate([
+  $request->validate([
         'otp_code' => 'required|digits:4',
     ]);
-    
     $record = PasswordResetCustom::where('otp_code', $request->otp_code)->first();
-   
     if (!$record) {
         return response()->json(['message' => 'الرمز غير صالح أو منتهي الصلاحية'], 401);
     }
+    if ($record->expires_at < now()) {
+        $record->delete();
+        return response()->json(['message' => 'الرمز منتهي الصلاحية'], 401);
+    }
+    $user = User::where('email', $record->email)->first();
+    if (!$user) {
+        return response()->json(['message' => 'المستخدم غير موجود'], 404);
+    }
     $record->delete();
-    return response()->json(['message' => 'تم التحقق الرمز بنجاح']);
+    $token = JWTAuth::fromUser($user);
+    return response()->json([
+        'message' => 'تم التحقق من الرمز بنجاح',
+        'token'   => $token,
+        'user'    => $user
+    ]);
 }
 
     public function register(Request $request)

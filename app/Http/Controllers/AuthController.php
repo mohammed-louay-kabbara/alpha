@@ -31,15 +31,16 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        dd($request->email);
         $credentials = request(['email', 'password']);
-        $email = user::where('email',)->first();
-
+        $email = user::where('email',$request->email)->first();
+        if ($email) {
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        return $this->respondWithToken($token); 
+        }
+        return response()->json(['الإيميل غير موجود'], 404);
 
-        return $this->respondWithToken($token);
     }
 
     public function getusers()
